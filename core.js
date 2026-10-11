@@ -5,11 +5,57 @@ for (const id of ['fl-published-hero', 'fl-published-stat']) {
   const counter = document.getElementById(id);
   if (counter) counter.textContent = String(tools.length).padStart(2, '0');
 }
+// Skapa meny och räknare direkt från det automatiskt genererade verktygsregistret.
+function flBuildNavigation(){
+  const sidebar=document.getElementById('sidebar');
+  if(!sidebar)return;
+  const nav=sidebar.querySelector('nav.tool-nav');
+  if(nav){
+    nav.replaceChildren();
+    for(const t of tools){
+      const a=document.createElement('a');
+      a.className='nav-btn';
+      a.dataset.go=t.id;
+      a.href='#'+t.id;
+      const icon=document.createElement('span');
+      icon.className='nav-tool-icon';
+      icon.setAttribute('aria-hidden','true');
+      const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('class','fl-line-icon');
+      const use=document.createElementNS('http://www.w3.org/2000/svg','use');
+      use.setAttribute('href','#fl-icon-'+t.icon);
+      svg.appendChild(use);icon.appendChild(svg);
+      const label=document.createElement('span');
+      label.className='nav-tool-text';
+      label.textContent=t.name;
+      const arrow=document.createElement('span');
+      arrow.className='nav-tool-arrow';
+      arrow.setAttribute('aria-hidden','true');
+      arrow.textContent='›';
+      a.append(icon,label,arrow);
+      nav.appendChild(a);
+    }
+  }
+  const all=sidebar.querySelector('[data-go="verktyg"] .count');
+  if(all)all.textContent=String(tools.length);
+  for(const cat of sidebar.querySelectorAll('[data-cat]')){
+    const badge=cat.querySelector('.count');
+    if(badge)badge.textContent=String(tools.filter(t=>t.category===cat.dataset.cat).length);
+  }
+  for(const id of ['fl-published-hero','fl-published-stat']){
+    const el=document.getElementById(id);
+    if(el)el.textContent=String(tools.length).padStart(2,'0');
+  }
+}
+flBuildNavigation();
 const flIcon=name=>`<svg class="fl-line-icon" aria-hidden="true"><use href="#fl-icon-${name}"/></svg>`;const $=id=>document.getElementById(id);let activeFilter='Alla',favorites=new Set();try{favorites=new Set(JSON.parse(localStorage.getItem('fl-favorites')||'[]'))}catch(e){}function show(view){
 const home=['hem','forslag','om'].includes(view);
 $('home-view').style.display=home?'block':'none';
 $('catalog-view').classList.toggle('visible',['verktyg','favoriter','kategori'].includes(view));
-$('report-view').classList.toggle('visible',view==='report');$('savings-view').classList.toggle('visible',view==='savings');$('period-view').classList.toggle('visible',view==='period');$('anomaly-view').classList.toggle('visible',view==='anomaly');$('calc-view').classList.toggle('visible',view==='kalkylator');$('procent-view').classList.toggle('visible',view==='procent');$('invest-view').classList.toggle('visible',view==='invest');$('peak-view').classList.toggle('visible',view==='peak');if($('sync-view'))$('sync-view').classList.toggle('visible',view==='sync');$('chart-view').classList.toggle('visible',view==='chart');$('time-view').classList.toggle('visible',view==='time');
+tools.forEach(t=>{
+  const panel=$(t.id+'-view');
+  if(panel)panel.classList.toggle('visible',view===t.id);
+});
 if(view==='verktyg'){activeFilter='Alla';$('catalog-title').textContent='Alla funktioner';$('search').value='';render()}
 if(view==='favoriter'){$('catalog-title').textContent='Alla funktioner';activeFilter='Alla';$('search').value='';render()}
 if(view==='kategori')render();
@@ -70,5 +116,5 @@ $('percent-reset').addEventListener('click',()=>setPercentMode(percentMode));
 $('percent-copy').addEventListener('click',async()=>{if(!percentLastResult)return;try{await navigator.clipboard.writeText(percentLastResult);$('percent-copy-status').textContent='Kopierat!'}catch(e){$('percent-copy-status').textContent='Kunde inte kopiera automatiskt.'}});
 setPercentMode('change');
 
-function routeHash(){let route=decodeURIComponent(location.hash.slice(1));route=({'catalog-view':'verktyg','calc-view':'kalkylator','request-section':'forslag','about-section':'om'})[route]||route;if(['hem','verktyg','kalkylator','procent','invest','peak','chart','period','anomaly','report','time','om','forslag','favoriter','kategori'].includes(route))show(route)}
+function routeHash(){let route=decodeURIComponent(location.hash.slice(1));route=({'catalog-view':'verktyg','calc-view':'kalkylator','request-section':'forslag','about-section':'om'})[route]||route;if((['hem','verktyg','om','forslag','favoriter','kategori'].includes(route)||tools.some(t=>t.id===route)))show(route)}
 window.addEventListener('hashchange',routeHash);window.addEventListener('popstate',routeHash);if(location.hash)routeHash();else show('hem');
