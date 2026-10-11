@@ -1,0 +1,8 @@
+{
+  "id": "anomaly",
+  "name": "Hitta avvikelser i min data",
+  "category": "Produktivitet",
+  "description": "Hitta ovanliga värden och se exakt rad, cell och orsak i Excel eller CSV.",
+  "icon": "activity",
+  "keywords": "avvikelse avvikande data excel rad cell statistik gränsvärde analys csv"
+}

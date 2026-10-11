@@ -1,0 +1,34 @@
+<section class="tool-view" id="procent-view">
+<a class="back" data-go="verktyg" href="#verktyg">← Till alla funktioner</a>
+<div class="section-head" style="margin-top:8px"><div>
+<span class="eyebrow" style="color:#118ea9">Ekonomi &amp; beräkningar</span>
+<h2>Procent- och förändringskalkylator</h2>
+<p>Räkna ut procent, förändringar och ursprungliga värden snabbt och enkelt.</p>
+</div><button class="pill" id="percent-favorite-btn" type="button">♡ Spara favorit</button></div>
+<div class="calculator percent-calculator">
+<div aria-label="Välj beräkning" class="percent-tabs" role="group">
+<button aria-pressed="true" class="percent-tab selected" data-percent-mode="change" type="button">Förändring i %</button>
+<button aria-pressed="false" class="percent-tab" data-percent-mode="part" type="button">Procent av ett tal</button>
+<button aria-pressed="false" class="percent-tab" data-percent-mode="share" type="button">Hur många procent?</button>
+<button aria-pressed="false" class="percent-tab" data-percent-mode="reverse" type="button">Räkna baklänges</button>
+</div>
+<div class="calc-grid">
+<div>
+<h3 id="percent-mode-title">Procentuell förändring</h3>
+<p class="percent-help" id="percent-mode-help">Hur mycket har ett värde ökat eller minskat i procent?</p>
+<div class="field"><label for="percent-a" id="percent-label-a">Ursprungligt värde</label>
+<input id="percent-a" inputmode="decimal" step="any" type="number" value="1200"/></div>
+<div class="field"><label for="percent-b" id="percent-label-b">Nytt värde</label>
+<input id="percent-b" inputmode="decimal" step="any" type="number" value="1500"/></div>
+<p aria-live="polite" class="hint" id="percent-error" role="status"></p>
+<button class="copy-btn" id="percent-reset" type="button">Återställ exempelvärden</button>
+</div>
+<div aria-live="polite" class="calc-results">
+<span class="eyebrow" id="percent-result-label" style="color:#0a7f9b">Procentuell förändring</span>
+<div class="big-number" id="percent-result">–</div>
+<div class="calc-pair"><span id="percent-detail-label">Skillnad i värde</span><b id="percent-detail">–</b></div>
+<p class="hint" id="percent-explanation" style="margin-top:22px">Resultatet beräknas direkt i din webbläsare.</p>
+<button class="percent-copy" id="percent-copy" type="button">Kopiera resultat</button>
+<span aria-live="polite" class="hint" id="percent-copy-status" role="status"></span>
+</div>
+</div></div></section>

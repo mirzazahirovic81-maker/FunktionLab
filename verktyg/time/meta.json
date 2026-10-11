@@ -1,0 +1,8 @@
+{
+  "id": "time",
+  "name": "Vad kostar min tid?",
+  "category": "Produktivitet",
+  "description": "Räkna ut tidsåtgång, möjlig tidsbesparing, frigjorda arbetsdagar och tidsvärde.",
+  "icon": "calculator",
+  "keywords": "tid tidsbesparing effektivisering produktivitet automatisering timkostnad arbetsdagar minuter procent"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "savings",
+  "name": "Hitta besparingsmöjligheter",
+  "category": "Energi & fastighet",
+  "description": "Ladda upp energidata, ange energipris och hitta möjliga besparingar vid natt- och helgförbrukning samt höga förbrukningsnivåer.",
+  "icon": "activity",
+  "keywords": "besparing energianvändning natt helg baslast kostnad timdata excel csv kwh"
+}

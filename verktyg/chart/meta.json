@@ -1,0 +1,8 @@
+{
+  "id": "chart",
+  "name": "Visualisera min data",
+  "category": "Produktivitet",
+  "description": "Gör din data begriplig med automatiska insikter, snygga diagram och presentationsklara bilder.",
+  "icon": "chart",
+  "keywords": "diagram graf visualisering excel xlsx csv statistik data stapeldiagram linjediagram cirkeldiagram presentation png svg"
+}
