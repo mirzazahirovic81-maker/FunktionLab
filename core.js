@@ -53,7 +53,7 @@ const home=['hem','forslag','om'].includes(view);
 $('home-view').style.display=home?'block':'none';
 $('catalog-view').classList.toggle('visible',['verktyg','favoriter','kategori'].includes(view));
 tools.forEach(t=>{
-  const panel=$(t.id+'-view');
+  const panel=$(t.id+'-view') || (t.id==='kalkylator' ? $('calc-view') : null);
   if(panel)panel.classList.toggle('visible',view===t.id);
 });
 if(view==='verktyg'){activeFilter='Alla';$('catalog-title').textContent='Alla funktioner';$('search').value='';render()}
