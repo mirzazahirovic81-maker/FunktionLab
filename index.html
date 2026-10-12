@@ -70,7 +70,7 @@ body.fl-modal-open{overflow:hidden}
 @media(max-width:1050px){.fl-hero-grid{grid-template-columns:1fr}.fl-hero-copy{padding:47px 38px 36px}.fl-hero-art{min-height:370px}.fl-art-card{max-width:330px;left:24%}.fl-card-function{left:34%;top:54%}.fl-card-need{top:16%}.fl-label-top{top:22px}.fl-label-bottom{bottom:25px}.fl-loop{grid-template-columns:1fr}}
 @media(max-width:760px){.fl-hero-copy{padding:36px 25px 31px}.fl-hero-copy h1{font-size:clamp(42px,11vw,61px);margin:28px 0 22px}.fl-hero-copy .fl-lead{font-size:19px}.fl-hero-copy .fl-detail{font-size:13px}.fl-hero-foot{flex-wrap:wrap;margin-top:27px}.fl-hero-art{min-height:345px}.fl-art-card{left:12%;width:72%;padding:18px}.fl-card-function{left:22%;top:53%}.fl-art-card span:not(.fl-card-icon){font-size:16px}.fl-label-top{left:9%}.fl-label-bottom{left:9%}.fl-loop{padding:24px}.fl-loop-steps{grid-template-columns:repeat(2,1fr);row-gap:22px}}
 @media(prefers-reduced-motion:reduce){.fl-live-dot{animation:none}}
-</style><style>/* Tydligare funktionsmeny och gratisversion utan favoriter */
+</style><style>/* Tydligare funktionsmeny */
 .sidebar .tool-nav{display:grid;gap:8px;margin:3px 0 12px}
 .sidebar .tool-nav .nav-btn{display:flex;align-items:center;gap:11px;min-height:59px;padding:10px 11px;border:1px solid #e3edf3;border-radius:13px;background:#f8fbfd;color:#263c58;font-size:13px;font-weight:750;line-height:1.35;transition:background .15s,border-color .15s,transform .15s}
 .sidebar .tool-nav .nav-btn:hover,.sidebar .tool-nav .nav-btn:focus-visible{background:#eaf8fa;border-color:#9bdde5;transform:translateX(2px)}
@@ -78,7 +78,6 @@ body.fl-modal-open{overflow:hidden}
 .sidebar .tool-nav .nav-tool-icon{flex:0 0 34px;width:34px;height:34px;display:grid;place-items:center;background:#e0f5f7;border-radius:10px;color:#087e9b;font-size:18px;font-weight:850}
 .sidebar .tool-nav .nav-tool-text{flex:1;min-width:0;overflow-wrap:anywhere}
 .sidebar .tool-nav .nav-tool-arrow{font-size:22px;color:#8aa2b4;font-weight:400}
-#favorite-btn,#percent-favorite-btn,#invest-favorite,#peak-favorite{display:none!important}
 @media(max-width:760px){.sidebar .tool-nav{gap:9px}.sidebar .tool-nav .nav-btn{min-height:64px;font-size:14px;padding:11px 12px}.sidebar .tool-nav .nav-tool-icon{width:38px;height:38px;flex-basis:38px}}
 </style><style id="fl-compact-tool-cards">
 /* Kompaktare funktionskort utan att påverka verktygens innehåll. */
@@ -435,14 +434,14 @@ body.fl-modal-open{overflow:hidden}
 <p aria-live="polite" class="flchart-hint" id="flpres-status" role="status">Presentationsbilden skapas lokalt i webbläsaren. Rubrikförslag bygger på matematiska jämförelser, inte AI-tolkning.</p>
 </div></div></section>
 
-<section class="tool-view" id="peak-view"><a class="back" data-go="verktyg" href="#verktyg">← Till alla funktioner</a><div class="section-head" style="margin-top:8px"><div><span class="eyebrow" style="color:#118ea9">Energi &amp; fastighet</span><h2>Hitta toppeffekter</h2><p>Analysera när effektuttaget är som högst och vilka timmar eller kvartal som driver topparna.</p></div><button class="pill" id="peak-favorite" type="button">♡ Spara favorit</button></div><div class="peak-layout">
+<section class="tool-view" id="peak-view"><a class="back" data-go="verktyg" href="#verktyg">← Till alla funktioner</a><div class="section-head" style="margin-top:8px"><div><span class="eyebrow" style="color:#118ea9">Energi &amp; fastighet</span><h2>Hitta toppeffekter</h2><p>Analysera när effektuttaget är som högst och vilka timmar eller kvartal som driver topparna.</p></div></div><div class="peak-layout">
 <div class="peak-panel"><h3>1. Förbered dina mätdata</h3><p>Exportera en tidsserie från ditt energisystem till <strong>CSV</strong> (eller kopiera två kolumner från Excel). Första raden ska innehålla kolumnrubrikerna nedan.</p><div class="peak-example"><strong>Alternativ A: uppmätt medeleffekt</strong><code>DatumTid;Effekt_kW<br/>2026-01-01 00:00;38,5<br/>2026-01-01 00:15;41,2</code><strong>Alternativ B: energi per mätintervall</strong><code>DatumTid;Energi_kWh<br/>2026-01-01 00:00;9,625<br/>2026-01-01 00:15;10,3</code></div><div aria-label="Så ordnar du kolumnerna i Excel" class="peak-excel-guide"><h4>Så ska kolumnerna se ut i Excel</h4><p>Skriv rubrikerna på <strong>rad 1</strong>. Använd <strong>kolumn A</strong> för datum och tid och <strong>kolumn B</strong> för mätvärdet:</p><div class="peak-excel-scroll"><table class="peak-excel-table"><thead><tr><th scope="col">Rad</th><th scope="col">A · DatumTid</th><th scope="col">B · Effekt_kW</th></tr></thead><tbody><tr><th scope="row">1</th><td><strong>DatumTid</strong></td><td><strong>Effekt_kW</strong></td></tr><tr><th scope="row">2</th><td>2026-01-01 00:00</td><td>38,5</td></tr><tr><th scope="row">3</th><td>2026-01-01 00:15</td><td>41,2</td></tr><tr><th scope="row">4</th><td>2026-01-01 00:30</td><td>56,8</td></tr></tbody></table></div><p class="peak-help">Har du energi per mätintervall i stället? Byt rubriken i <strong>B1</strong> till <strong>Energi_kWh</strong> och ange rätt mätintervall i steg 2. Skriv endast siffror i kolumn B, utan enhet.</p><ol class="peak-excel-steps"><li>Fyll på med en mätning per rad. Använd formatet <strong>ÅÅÅÅ-MM-DD TT:MM</strong> i kolumn A.</li><li><strong>Alternativ 1:</strong> Markera kolumnerna A och B inklusive rubriker, kopiera och klistra in i rutan nedan.</li><li><strong>Alternativ 2:</strong> Välj <strong>Arkiv → Spara som → CSV UTF-8</strong> i Excel och ladda upp CSV-filen nedan. Svensk Excel använder ofta semikolon mellan kolumnerna.</li></ol><p class="peak-help">Du behöver alltså inte skriva semikolon i Excel-cellerna. Semikolon används bara som avgränsare i vissa CSV-filer.</p></div><p class="peak-help">Använd <strong>DatumTid</strong> och exakt en av <strong>Effekt_kW</strong> eller <strong>Energi_kWh</strong>. Datumformat: ÅÅÅÅ-MM-DD TT:MM (även ISO-format fungerar). Semikolon, tabbar eller komma som avgränsare stöds. Decimaler kan skrivas med komma eller punkt. En rad per tidsintervall, sorterad eller osorterad.</p><p class="peak-help">Om du använder <strong>Energi_kWh</strong> beräknas medeleffekten som kWh ÷ intervalltid i timmar. Tidsstämpeln antas avse intervallets start. Använd en konsekvent intervallängd och kontrollera hur ditt mätsystem tidsstämplar värden.</p><div class="peak-actions"><button class="inv-btn" id="peak-template" type="button">↓ Ladda ner CSV-mall</button><label class="inv-btn primary" for="peak-file">↑ Välj CSV-fil</label><input accept=".csv,.txt,text/csv,text/plain" id="peak-file" style="max-width:240px" type="file"/></div><label class="peak-label" for="peak-paste">Eller klistra in tabell från Excel</label><textarea id="peak-paste" placeholder="DatumTid	Effekt_kW
 2026-01-01 00:00	38,5" rows="4"></textarea><div class="peak-actions"><button class="inv-btn primary" id="peak-analyze" type="button">Analysera data →</button><button class="inv-btn" id="peak-demo" type="button">Prova med exempeldata</button></div><p aria-live="polite" class="inv-error" id="peak-error" role="alert"></p><p class="peak-help">Dina mätvärden behandlas lokalt i webbläsaren och skickas inte till FunktionLab. För Excel-filer (.xlsx), exportera först som CSV eller kopiera tabellen.</p></div>
 <div class="peak-panel"><h3>2. Analysinställningar</h3><div class="peak-settings"><div><label for="peak-interval">Mätintervall (minuter)</label><select id="peak-interval"><option value="15">15 minuter</option><option value="60">60 minuter</option><option value="30">30 minuter</option><option value="5">5 minuter</option><option value="10">10 minuter</option><option value="auto">Identifiera från tidsstämplar</option></select></div><div><label for="peak-count">Antal topptillfällen</label><select id="peak-count"><option value="10">10</option><option value="5">5</option><option value="20">20</option></select></div><div><label for="peak-price">Effektpris (kr/kW), frivilligt</label><input id="peak-price" min="0" placeholder="Exempel: 85" step="any" type="number"/></div></div><p class="peak-help">Effektpriset används endast för ett <strong>illustrativt</strong> belopp (högsta uppmätta kW × kr/kW). Verkliga nättariffer kan utgå från exempelvis flera månadstoppar, särskilda tider och andra villkor.</p></div>
 <div class="peak-panel" hidden="" id="peak-results"><h3>3. Resultat</h3><div aria-live="polite" class="peak-summary" id="peak-summary"></div><h3>Högsta effekttillfällena</h3><div class="inv-table-wrap"><table class="inv-table"><thead><tr><th>Placering</th><th>Datum och tid</th><th>Effekt (kW)</th></tr></thead><tbody id="peak-rows"></tbody></table></div><h3 style="margin-top:22px">Topp 10 dagar</h3><div class="peak-bars" id="peak-bars"></div><p class="peak-help" id="peak-quality"></p><div class="peak-actions"><button class="inv-btn primary" id="peak-export" type="button">↓ Exportera topplista (CSV)</button><button class="inv-btn" id="peak-print" type="button">Skriv ut / spara som PDF</button></div></div>
 </div></section>
 
-<section class="tool-view" id="invest-view"><a class="back" data-go="verktyg" href="#verktyg">← Till alla funktioner</a><div class="section-head" style="margin-top:8px"><div><span class="eyebrow" style="color:#118ea9">Ekonomi &amp; beslutsstöd</span><h2>Jämför investeringar</h2><p>Jämför flera alternativ, förstå lönsamheten och få ett tydligt beslutsunderlag.</p></div><button class="pill" id="invest-favorite" type="button">♡ Spara favorit</button></div>
+<section class="tool-view" id="invest-view"><a class="back" data-go="verktyg" href="#verktyg">← Till alla funktioner</a><div class="section-head" style="margin-top:8px"><div><span class="eyebrow" style="color:#118ea9">Ekonomi &amp; beslutsstöd</span><h2>Jämför investeringar</h2><p>Jämför flera alternativ, förstå lönsamheten och få ett tydligt beslutsunderlag.</p></div></div>
 <div class="inv-shell">
 <div class="inv-panel"><h3>1. Gemensamma förutsättningar</h3><p class="inv-intro">Använd samma kalkylperiod och ränta för alla alternativ. Belopp anges i kronor, i samma prisnivå och exklusive eventuell moms om den är avdragsgill.</p><div class="inv-settings"><div class="inv-field"><label for="inv-years">Kalkylperiod (år)</label><input id="inv-years" max="100" min="1" step="1" type="number" value="15"/></div><div class="inv-field"><label for="inv-rate">Kalkylränta (%)</label><input id="inv-rate" max="100" min="0" step="0.1" type="number" value="4"/></div><div class="inv-field"><label for="inv-energy-change">Ändring av årlig besparing (%)</label><input id="inv-energy-change" max="1000" min="-100" step="1" type="number" value="0"/></div></div><p class="inv-note">Ändringen av årlig besparing är en enkel känslighetsanalys som påverkar samtliga alternativ. Alla årliga kassaflöden antas uppstå vid årets slut.</p></div>
 <div class="inv-panel"><h3>2. Investeringsalternativ</h3><p class="inv-intro">Årlig besparing är positiv nytta jämfört med nuläget. Årlig merkostnad omfattar exempelvis drift och underhåll. Restvärdet gäller vid kalkylperiodens slut.</p><div class="inv-options" id="inv-options"></div><div class="inv-actions" style="margin-top:16px"><button class="inv-btn primary" id="inv-add" type="button">＋ Lägg till alternativ</button><button class="inv-btn" id="inv-example" type="button">Återställ exempel</button><button class="inv-btn" id="inv-clear" type="button">Töm värden</button></div><div class="inv-actions" style="margin-top:14px"><label class="inv-btn inv-upload" for="inv-file">Importera CSV</label><input accept=".csv,text/csv" id="inv-file" style="max-width:230px" type="file"/><button class="inv-btn" id="inv-template" type="button">Hämta CSV-mall</button></div><p class="inv-note">Du kan också kopiera rader från Excel och klistra in dem i rutan nedan. För en Excel-fil (.xlsx), välj ”Spara som CSV” i Excel först.</p><div class="inv-field"><label for="inv-paste">Klistra in tabell från Excel (med rubrikrad)</label><textarea id="inv-paste" placeholder="Namn[TAB]Investering[TAB]Årlig besparing[TAB]Årlig merkostnad[TAB]Restvärde" rows="3"></textarea></div><button class="inv-btn" id="inv-import-paste" style="margin-top:9px" type="button">Importera inklistrad tabell</button><p aria-live="polite" class="inv-error" id="inv-import-error" role="alert"></p></div>
@@ -569,76 +568,60 @@ function flBuildNavigation(){
   }
 }
 flBuildNavigation();
-const flIcon=name=>`<svg class="fl-line-icon" aria-hidden="true"><use href="#fl-icon-${name}"/></svg>`;const $=id=>document.getElementById(id);let activeFilter='Alla',favorites=new Set();try{favorites=new Set(JSON.parse(localStorage.getItem('fl-favorites')||'[]'))}catch(e){}function show(view){
-const home=['hem','forslag','om'].includes(view);
-$('home-view').style.display=home?'block':'none';
-$('catalog-view').classList.toggle('visible',['verktyg','favoriter','kategori'].includes(view));
-tools.forEach(t=>{
-  const panel=$(t.id+'-view');
-  if(panel)panel.classList.toggle('visible',view===t.id);
+// P1: Navigation och sökning utan föråldrade kalkylatorer eller favoritlagring.
+const flIcon=name=>`<svg class="fl-line-icon" aria-hidden="true"><use href="#fl-icon-${name}"/></svg>`;
+const $=id=>document.getElementById(id);
+let activeFilter='Alla';
+const routes=new Set(['hem','verktyg','om','forslag','kategori',...tools.map(t=>t.id)]);
+function render(){
+  document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('selected',b.dataset.filter===activeFilter));
+  const q=($('search')?.value||'').toLocaleLowerCase('sv-SE').trim();
+  const found=tools.filter(t=>(activeFilter==='Alla'||t.category===activeFilter||(activeFilter==='Ekonomi & beslut'&&t.category==='Ekonomi'))&&[t.name,t.category,t.description,t.keywords].join(' ').toLocaleLowerCase('sv-SE').includes(q));
+  $('catalog-results').innerHTML=found.map(t=>`<article class="tool-card"><div class="tool-icon">${flIcon(t.icon)}</div><h3>${t.name}</h3><p>${t.description}</p><div class="card-foot"><span class="tag">● Gratis</span><a class="open-tool" data-go="${t.id}" href="#${t.id}">Öppna ↗</a></div></article>`).join('')||'<div class="empty">Inga publicerade verktyg matchar urvalet ännu. Föreslå gärna en funktion som saknas.</div>';
+}
+function closeMenu(){
+  $('sidebar')?.classList.remove('open');$('overlay')?.classList.remove('on');
+  $('menu')?.setAttribute('aria-expanded','false');
+  const toggle=$('mobile-nav-toggle');if(toggle)toggle.checked=false;
+}
+function show(view){
+  if(!routes.has(view))view='hem';
+  const home=['hem','forslag','om'].includes(view);
+  $('home-view').style.display=home?'block':'none';
+  $('catalog-view').classList.toggle('visible',['verktyg','kategori'].includes(view));
+  tools.forEach(t=>$(t.id+'-view')?.classList.toggle('visible',view===t.id));
+  if(view==='verktyg'){activeFilter='Alla';$('catalog-title').textContent='Alla funktioner';$('search').value='';render()}
+  if(view==='kategori')render();
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.go===view||(view==='kategori'&&b.dataset.cat===activeFilter)));
+  closeMenu();
+  if(view==='forslag'||view==='om'){
+    requestAnimationFrame(()=>$(view==='forslag'?'request-section':'about-section')?.scrollIntoView({behavior:'smooth',block:'start'}));
+  }else window.scrollTo(0,0);
+}
+function routeHash(){
+  let route;try{route=decodeURIComponent(location.hash.slice(1))}catch(e){route='hem'}
+  route=({'catalog-view':'verktyg','request-section':'forslag','about-section':'om'})[route]||route;
+  show(routes.has(route)?route:'hem');
+}
+document.addEventListener('click',e=>{
+  const go=e.target.closest('[data-go]');
+  if(go){e.preventDefault();const view=go.dataset.go;history.pushState(null,'','#'+view);show(view);return}
+  const cat=e.target.closest('[data-cat]');
+  if(cat){e.preventDefault();activeFilter=cat.dataset.cat;$('catalog-title').textContent=activeFilter;$('search').value='';history.pushState(null,'','#kategori');show('kategori');return}
+  const filter=e.target.closest('[data-filter]');
+  if(filter){activeFilter=filter.dataset.filter;render()}
 });
-if(view==='verktyg'){activeFilter='Alla';$('catalog-title').textContent='Alla funktioner';$('search').value='';render()}
-if(view==='favoriter'){$('catalog-title').textContent='Alla funktioner';activeFilter='Alla';$('search').value='';render()}
-if(view==='kategori')render();
-document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.go===view||(view==='kategori'&&b.dataset.cat===activeFilter)));
-$('sidebar').classList.remove('open');$('overlay').classList.remove('on');if($('mobile-nav-toggle'))$('mobile-nav-toggle').checked=false;$('menu').setAttribute('aria-expanded','false');
-if(view==='time')timeFavoriteLabel();if(view==='kalkylator')updateFavorite();if(view==='procent')updatePercentFavorite();if(view==='invest')invFavoriteLabel();if(view==='peak')peakFavoriteLabel();
-if(view==='forslag'||view==='om'){requestAnimationFrame(()=>$(view==='forslag'?'request-section':'about-section').scrollIntoView({behavior:'smooth',block:'start'}))}else window.scrollTo(0,0);
-}
-function render(onlyFav=false){document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('selected',b.dataset.filter===activeFilter));const q=$('search').value.toLocaleLowerCase('sv-SE').trim();const found=tools.filter(t=>(activeFilter==='Alla'||(t.category===activeFilter||(activeFilter==='Ekonomi & beslut'&&t.category==='Ekonomi')))&&(!onlyFav||favorites.has(t.id))&&[t.name,t.category,t.description,t.keywords].join(' ').toLocaleLowerCase('sv-SE').includes(q));$('catalog-results').innerHTML=found.map(t=>`<article class="tool-card"><div class="tool-icon">${flIcon(t.icon)}</div><h3>${t.name}</h3><p>${t.description}</p><div class="card-foot"><span class="tag">● Gratis</span><a class="open-tool" type="button" data-go="${t.id}" href="#${t.id}">Öppna ↗</a></div></article>`).join('')||'<div class="empty">Inga publicerade verktyg matchar urvalet ännu. Föreslå gärna en funktion som saknas.</div>'}
-document.addEventListener('click',e=>{const go=e.target.closest('[data-go]');if(go){if($('mobile-nav-toggle'))$('mobile-nav-toggle').checked=false;e.preventDefault();history.pushState(null,'','#'+go.dataset.go);show(go.dataset.go);return}const cat=e.target.closest('[data-cat]');if(cat){e.preventDefault();if($('mobile-nav-toggle'))$('mobile-nav-toggle').checked=false;activeFilter=cat.dataset.cat;$('catalog-title').textContent=activeFilter;$('search').value='';history.pushState(null,'','#kategori');show('kategori');return}const filter=e.target.closest('[data-filter]');if(filter){activeFilter=filter.dataset.filter;render()}});$('search').addEventListener('input',()=>render($('catalog-title').textContent==='Mina favoriter'));$('menu').addEventListener('click',()=>{$('sidebar').classList.toggle('open');$('overlay').classList.toggle('on');$('menu').setAttribute('aria-expanded',$('sidebar').classList.contains('open'))});$('overlay').addEventListener('click',()=>{$('sidebar').classList.remove('open');$('overlay').classList.remove('on');$('menu').setAttribute('aria-expanded','false');if($('mobile-nav-toggle'))$('mobile-nav-toggle').checked=false});$('year').textContent=new Date().getFullYear();function updateFavorite(){$('favorite-btn').textContent=favorites.has('kalkylator')?'♥ Sparad favorit':'♡ Spara favorit'}$('favorite-btn').addEventListener('click',()=>{favorites.has('kalkylator')?favorites.delete('kalkylator'):favorites.add('kalkylator');try{localStorage.setItem('fl-favorites',JSON.stringify([...favorites]))}catch(e){}updateFavorite()});
-const ids=['power','hours','days','price','reduce'];const fmt=n=>new Intl.NumberFormat('sv-SE',{maximumFractionDigits:1}).format(n);function calc(){const v=ids.map(id=>Number($(id).value));const [p,h,d,price,r]=v;const invalid=ids.some(id=>$(id).value.trim()==='')||v.some(n=>!Number.isFinite(n)||n<0)||h>24||d>365||r>h;$('calc-error').textContent=invalid?'Kontrollera värdena. Minskad drifttid får inte överstiga nuvarande drifttid.':'';if(invalid){['savings','energy','cost','savedenergy','after','percent'].forEach(id=>$(id).textContent='–');return}const energy=p*h*d,saved=p*r*d;$('savings').textContent=fmt(saved*price)+' kr';$('energy').textContent=fmt(energy)+' kWh';$('cost').textContent=fmt(energy*price)+' kr';$('savedenergy').textContent=fmt(saved)+' kWh';$('after').textContent=fmt((energy-saved)*price)+' kr';$('percent').textContent=fmt(h?100*r/h:0)+' %'}ids.forEach(id=>$(id).addEventListener('input',calc));$('reset').addEventListener('click',()=>{[5,12,250,1.5,3].forEach((v,i)=>$(ids[i]).value=v);calc()});calc();
+$('search')?.addEventListener('input',render);
+$('menu')?.addEventListener('click',()=>{
+  const opened=$('sidebar').classList.toggle('open');$('overlay')?.classList.toggle('on',opened);
+  $('menu').setAttribute('aria-expanded',String(opened));
+});
+$('overlay')?.addEventListener('click',closeMenu);
+if($('year'))$('year').textContent=new Date().getFullYear();
+window.addEventListener('hashchange',routeHash);
+window.addEventListener('popstate',routeHash);
+routeHash();
 
-const percentModes={
-change:{title:'Procentuell förändring',help:'Hur mycket har ett värde ökat eller minskat i procent?',a:'Ursprungligt värde',b:'Nytt värde',values:['1200','1500'],result:'Procentuell förändring',detail:'Skillnad i värde'},
-part:{title:'Procent av ett tal',help:'Vad är exempelvis 25 % av 800?',a:'Procent (%)',b:'Tal',values:['25','800'],result:'Resultat',detail:'Andel av talet'},
-share:{title:'Hur många procent?',help:'Hur stor procentandel utgör en del av helheten?',a:'Del',b:'Helhet',values:['30','120'],result:'Andel i procent',detail:'Återstående del'},
-reverse:{title:'Räkna baklänges',help:'Vad var ursprungsvärdet före en procentuell ökning eller minskning?',a:'Nytt värde',b:'Förändring (%) – använd minus vid minskning',values:['1250','25'],result:'Ursprungligt värde',detail:'Förändring i värde'}
-};
-let percentMode='change',percentLastResult='';
-const percentFormat=n=>new Intl.NumberFormat('sv-SE',{maximumFractionDigits:4}).format(n);
-function updatePercentFavorite(){$('percent-favorite-btn').textContent=favorites.has('procent')?'♥ Sparad favorit':'♡ Spara favorit'}
-$('percent-favorite-btn').addEventListener('click',()=>{favorites.has('procent')?favorites.delete('procent'):favorites.add('procent');try{localStorage.setItem('fl-favorites',JSON.stringify([...favorites]))}catch(e){}updatePercentFavorite()});
-function percentCalc(){
- const mode=percentModes[percentMode],av=$('percent-a').value,bv=$('percent-b').value;
- const a=Number(av),b=Number(bv),valid=av.trim()!==''&&bv.trim()!==''&&Number.isFinite(a)&&Number.isFinite(b);
- let result,detail,explain='',error='';
- if(!valid){error='Fyll i båda fälten med giltiga tal.'}
- else if(percentMode==='change'){
-  if(a===0)error='Ursprungsvärdet måste vara skilt från noll.';
-  else{result=(b-a)/Math.abs(a)*100;detail=b-a;explain='Förändringen beräknas som (nytt värde − ursprungligt värde) / |ursprungligt värde| × 100.'}
- }else if(percentMode==='part'){result=a/100*b;detail=result;explain='Procentvärdet multipliceras med talet och divideras med 100.'}
- else if(percentMode==='share'){
-  if(b===0)error='Helheten måste vara skild från noll.';
-  else{result=a/b*100;detail=b-a;explain='Delen divideras med helheten och multipliceras med 100.'}
- }else{
-  if(b===-100)error='En minskning med 100 % kan inte räknas baklänges till ett entydigt ursprungsvärde.';
-  else{result=a/(1+b/100);detail=a-result;explain='Ursprungsvärdet beräknas som nytt värde / (1 + förändring / 100).'}
- }
- $('percent-error').textContent=error;
- $('percent-result').textContent=error?'–':(percentMode==='change'&&result>0?'+':'')+percentFormat(result)+(percentMode==='change'||percentMode==='share'?' %':'');
- $('percent-detail').textContent=error?'–':percentFormat(detail);
- $('percent-explanation').textContent=error?'Ange giltiga värden för att se resultatet.':explain;
- percentLastResult=error?'':$('percent-result').textContent;
- $('percent-copy-status').textContent='';
-}
-function setPercentMode(mode){
- percentMode=mode;const d=percentModes[mode];
- $('percent-mode-title').textContent=d.title;$('percent-mode-help').textContent=d.help;
- $('percent-label-a').textContent=d.a;$('percent-label-b').textContent=d.b;
- $('percent-result-label').textContent=d.result;$('percent-detail-label').textContent=d.detail;
- $('percent-a').value=d.values[0];$('percent-b').value=d.values[1];
- document.querySelectorAll('[data-percent-mode]').forEach(el=>{const on=el.dataset.percentMode===mode;el.classList.toggle('selected',on);el.setAttribute('aria-pressed',String(on))});
- percentCalc();
-}
-document.querySelectorAll('[data-percent-mode]').forEach(el=>el.addEventListener('click',()=>setPercentMode(el.dataset.percentMode)));
-['percent-a','percent-b'].forEach(id=>$(id).addEventListener('input',percentCalc));
-$('percent-reset').addEventListener('click',()=>setPercentMode(percentMode));
-$('percent-copy').addEventListener('click',async()=>{if(!percentLastResult)return;try{await navigator.clipboard.writeText(percentLastResult);$('percent-copy-status').textContent='Kopierat!'}catch(e){$('percent-copy-status').textContent='Kunde inte kopiera automatiskt.'}});
-setPercentMode('change');
-
-function routeHash(){let route=decodeURIComponent(location.hash.slice(1));route=({'catalog-view':'verktyg','calc-view':'kalkylator','request-section':'forslag','about-section':'om'})[route]||route;if((['hem','verktyg','om','forslag','favoriter','kategori'].includes(route)||tools.some(t=>t.id===route)))show(route)}
-window.addEventListener('hashchange',routeHash);window.addEventListener('popstate',routeHash);if(location.hash)routeHash();else show('hem');
 </script><div aria-hidden="true" class="fl-thanks-backdrop" id="fl-thanks-backdrop">
 <div aria-describedby="fl-thanks-desc" aria-labelledby="fl-thanks-title" aria-modal="true" class="fl-thanks-dialog" role="dialog">
 <button aria-label="Stäng bekräftelsen" class="fl-thanks-close" id="fl-thanks-x" type="button">×</button>
@@ -946,7 +929,6 @@ function split(line,sep){if(sep==='\t')return line.split('\t').map(v=>v.replace(
 function analyze(){try{$('peak-error').textContent='';const input=$('peak-paste').value.replace(/^\ufeff/,'').trim();if(!input)throw Error('Ladda upp en CSV-fil eller klistra in mätdata först.');const lines=input.split(/\r?\n/).filter(x=>x.trim());if(lines.length<3)throw Error('Ange en rubrikrad och minst två mätvärden.');if(lines.length>100002)throw Error('Högst 100 000 mätvärden per analys.');const header=lines[0];const sep=header.includes('\t')?'\t':header.includes(';')?';':',';const names=split(header,sep).map(v=>v.toLowerCase().replace(/[^a-z0-9åäö]/g,''));const ti=names.indexOf('datumtid'),pi=names.indexOf('effektkw'),ei=names.indexOf('energikwh');if(ti<0||((pi<0)===(ei<0)))throw Error('Kolumnerna måste heta DatumTid och exakt en av Effekt_kW eller Energi_kWh.');const useEnergy=ei>=0;let data=lines.slice(1).map((line,i)=>{const parts=split(line,sep);const date=parseDate(parts[ti]||'');const raw=(parts[useEnergy?ei:pi]||'').replace(/\s/g,'').replace(',','.');if(!/^(?:\d+(?:\.\d+)?|\.\d+)$/.test(raw))throw Error('Ogiltigt mätvärde på rad '+(i+2));return{date,time:date.getTime(),value:Number(raw)}});data.sort((a,b)=>a.time-b.time);let intervals=[];for(let i=1;i<data.length;i++){const diff=(data[i].time-data[i-1].time)/60000;if(diff===0)throw Error('Dubbla tidsstämplar finns. Kontrollera filen.');intervals.push(diff)}const selected=$('peak-interval').value;let interval=selected==='auto'?intervals.slice().sort((a,b)=>a-b)[Math.floor(intervals.length/2)]:Number(selected);if(!Number.isFinite(interval)||interval<=0)throw Error('Kan inte identifiera mätintervallet.');const gaps=intervals.filter(x=>Math.abs(x-interval)>0.01).length;rows=data.map(r=>({...r,kw:useEnergy?r.value*60/interval:r.value}));top=[...rows].sort((a,b)=>b.kw-a.kw).slice(0,Number($('peak-count').value));const max=top[0].kw,mean=rows.reduce((sum,r)=>sum+r.kw,0)/rows.length;const price=$('peak-price').value.trim();if(price&&(!Number.isFinite(+price)||+price<0))throw Error('Effektpriset måste vara ett positivt tal.');const cards=[['Högsta uppmätta effekt',fmt(max)+' kW'],['Medel av mätvärden',fmt(mean)+' kW'],['Analyserade mätvärden',fmt(rows.length)]];if(price)cards.push(['Illustrativt effektbelopp',fmt(max*Number(price))+' kr']);$('peak-summary').innerHTML=cards.map(c=>'<div class="peak-stat"><small>'+c[0]+'</small><strong>'+c[1]+'</strong></div>').join('');const stamp=d=>d.toLocaleString('sv-SE',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});$('peak-rows').innerHTML=top.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+stamp(r.date)+'</td><td>'+fmt(r.kw)+'</td></tr>').join('');const days=new Map();rows.forEach(r=>{const k=`${r.date.getFullYear()}-${String(r.date.getMonth()+1).padStart(2,'0')}-${String(r.date.getDate()).padStart(2,'0')}`;days.set(k,Math.max(days.get(k)||0,r.kw))});$('peak-bars').innerHTML=[...days].sort((a,b)=>b[1]-a[1]).slice(0,10).map(([day,v])=>'<div class="peak-bar-row"><span>'+day+'</span><div class="peak-track"><div class="peak-fill" style="width:'+(100*v/max).toFixed(1)+'%"></div></div><strong>'+fmt(v)+' kW</strong></div>').join('');$('peak-quality').textContent='Datatyp: '+(useEnergy?'Energi per intervall (omräknad till medeleffekt)':'Uppmätt medeleffekt')+'. Antaget intervall: '+fmt(interval)+' minuter. '+(gaps?'Observera: '+gaps+' tidsavstånd avviker från intervallet. Det kan bero på luckor, sommartid eller oregelbunden mätning. Kontrollera underlaget.':'Inga avvikande tidsavstånd hittades.')+' Resultatet visar medeleffekt per mätintervall, inte momentana sekundtoppar. Medelvärdet är ett oviktat medel av inlästa mätvärden.';$('peak-results').hidden=false;$('peak-results').scrollIntoView({behavior:'smooth',block:'start'});
 }catch(err){$('peak-error').textContent=err.message;$('peak-results').hidden=true}}
 $('peak-analyze').onclick=analyze;$('peak-interval').onchange=()=>{if(rows.length)analyze()};$('peak-count').onchange=()=>{if(rows.length)analyze()};$('peak-price').onchange=()=>{if(rows.length)analyze()};$('peak-export').onclick=()=>{if(!top.length)return;csvDownload('funktionlab-toppeffekter.csv','Placering;DatumTid;Effekt_kW\r\n'+top.map((r,i)=>`${i+1};${r.date.getFullYear()}-${String(r.date.getMonth()+1).padStart(2,'0')}-${String(r.date.getDate()).padStart(2,'0')} ${String(r.date.getHours()).padStart(2,'0')}:${String(r.date.getMinutes()).padStart(2,'0')};${r.kw.toFixed(3).replace('.',',')}`).join('\r\n'))};$('peak-print').onclick=()=>window.print();
-window.peakFavoriteLabel=function(){const b=$('peak-favorite');try{const fav=JSON.parse(localStorage.getItem('fl-favorites')||'[]');b.textContent=fav.includes('peak')?'♥ Sparad favorit':'♡ Spara favorit'}catch(e){b.textContent='♡ Spara favorit'}};$('peak-favorite').onclick=()=>{const a=new Set(JSON.parse(localStorage.getItem('fl-favorites')||'[]'));a.has('peak')?a.delete('peak'):a.add('peak');localStorage.setItem('fl-favorites',JSON.stringify([...a]));window.peakFavoriteLabel()};
 })();
 </script>
 <script>
@@ -988,8 +970,6 @@ function split(line){const out=[];let val='',quoted=false;for(let i=0;i<line.len
 const header=split(lines[0]).map(x=>x.toLocaleLowerCase('sv-SE').replace(/[^a-zåäö]/g,''));const aliases=[['namn','alternativ','name'],['investering','grundinvestering','kostnad','cost'],['årligbesparing','besparing','saving'],['årligmerkostnad','merkostnad','driftunderhåll','driftkostnad','annual'],['restvärde','restvarde','residual']];const pos=aliases.map(a=>header.findIndex(h=>a.includes(h)));if(pos.slice(0,3).some(i=>i<0))throw Error('Rubrikerna Namn, Investering och Årlig besparing måste finnas.');if(lines.length>31)throw Error('Max 30 alternativ kan importeras.');const result=lines.slice(1).map(line=>{const row=split(line);const number=k=>{const v=pos[k]<0?'0':(row[pos[k]]||'0').replace(/\s/g,'').replace(',','.');if(!/^\d+(\.\d+)?$/.test(v))throw Error('Kontrollera numeriska värden i importen.');return v};const name=(row[pos[0]]||'').trim();if(!name)throw Error('Ett alternativ saknar namn.');return{name,cost:number(1),saving:number(2),annual:number(3),residual:number(4)}});if(result.length<2)throw Error('Importera minst två alternativ.');return result}
 function importText(text){try{const next=parseRows(text);items=next;el('inv-import-error').textContent='';renderInputs()}catch(e){el('inv-import-error').textContent=e.message}}
 el('inv-import-paste').addEventListener('click',()=>importText(el('inv-paste').value));el('inv-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;if(f.size>1024*1024){el('inv-import-error').textContent='Filen får vara högst 1 MB.';return}importText(await f.text());e.target.value=''});
-window.invFavoriteLabel=()=>{el('invest-favorite').textContent=favorites.has('invest')?'♥ Sparad favorit':'♡ Spara favorit'};
-el('invest-favorite').addEventListener('click',()=>{favorites.has('invest')?favorites.delete('invest'):favorites.add('invest');try{localStorage.setItem('fl-favorites',JSON.stringify([...favorites]))}catch(e){}window.invFavoriteLabel()});
 renderInputs();
 })();
 
