@@ -19,3 +19,17 @@
 .flr-finance-cover{border-bottom:0!important}.flr-finance-eyebrow{font-size:11px;font-weight:850;letter-spacing:2px;color:var(--flr-accent);margin-top:25px}.flr-layout-finance .flr-cover h2{font-size:31px!important;letter-spacing:-.5px}.flr-finance-rule{height:8px;background:repeating-linear-gradient(90deg,var(--flr-accent) 0 35px,transparent 35px 43px);margin:25px 0}.flr-layout-finance .flr-report-meta{border:1px solid #d6e2e8;background:white;border-radius:0}.flr-layout-finance .flr-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.flr-layout-finance .flr-kpi{background:#f5f6f8;border-radius:0;border-bottom:3px solid var(--flr-accent)}.flr-layout-finance .flr-section h3{border-left:0;padding-left:0;border-bottom:2px solid var(--flr-accent);padding-bottom:9px}.flr-layout-finance .flr-table th{background:#e4e9ee}
 .flr-custom-cover{border-bottom:1px solid #cfdce5!important}.flr-layout-custom .flr-cover h2{font-weight:600!important}.flr-layout-custom .flr-section h3{border-left:0;padding-left:0}
 @media(max-width:600px){.flr-project-band{grid-template-columns:1fr}.flr-energy-heading{gap:8px;padding-left:10px}.flr-energy-symbol{font-size:30px}.flr-monthly-date{gap:10px}.flr-energy-intro{flex-wrap:wrap}}
+
+/* Tydliga, rapporttypsspecifika identiteter i både förhandsgranskning och export. */
+.flr-report.flr-layout-project{background:linear-gradient(180deg,#eaf2f8 0 175px,#fff 175px)!important;border-top:10px solid #183b65}
+.flr-report.flr-layout-project .flr-project-label{background:#183b65;color:white;padding:15px 18px;border-radius:6px;font-weight:800;letter-spacing:1px}
+.flr-report.flr-layout-project .flr-project-label span{color:#bfe7ee}
+.flr-report.flr-layout-monthly{background:linear-gradient(90deg,#e8f8f6 0 16px,#fff 16px)!important;border-top:10px solid var(--flr-accent)}
+.flr-report.flr-layout-monthly .flr-monthly-label{font-size:18px;font-weight:900;letter-spacing:2px;color:var(--flr-accent);display:flex;justify-content:space-between;gap:12px}
+.flr-report.flr-layout-monthly .flr-monthly-label span{background:#e8f8f6;padding:8px;border-radius:5px}
+.flr-report.flr-layout-energy{background:linear-gradient(180deg,#e9f8f7 0 235px,#fff 235px)!important;border-top:10px solid #159aa8}
+.flr-report.flr-layout-energy .flr-energy-heading{background:#d4f1ee;border-radius:12px}
+.flr-report.flr-layout-finance{background:#fff!important;border-top:10px solid #29394d}
+.flr-report.flr-layout-finance .flr-finance-eyebrow{background:#29394d;color:#fff;padding:14px 18px}
+.flr-report.flr-layout-finance .flr-finance-rule{height:12px}
+.flr-report.flr-layout-custom{background:#fff!important;border-top:2px solid #cbd7e0}
