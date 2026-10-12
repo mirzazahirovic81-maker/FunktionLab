@@ -1,0 +1,82 @@
+
+.flr-layout{display:grid;grid-template-columns:minmax(270px,340px) minmax(0,1fr);gap:20px;align-items:start}.flr-panel{background:#fff;border:1px solid #dbe6ee;border-radius:18px;padding:22px;min-width:0}.flr-panel h3{margin:0 0 15px}.flr-fields{display:grid;gap:13px;margin:18px 0}.flr-fields label{display:grid;gap:6px;font-size:13px;font-weight:650;color:#213957}.flr-fields input,.flr-fields select,.flr-fields textarea{width:100%;box-sizing:border-box;padding:11px;border:1px solid #cfdae5;border-radius:9px;background:white;color:#10294a;font:inherit}.flr-upload{display:inline-block;padding:11px 15px;background:#e4f9f6;border-radius:9px;color:#0c5767;cursor:pointer;font-weight:700;margin-right:7px}.flr-error{color:#b02e37}.flr-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:16px}.flr-toolbar button{font-size:12px;margin:3px}.flr-report{background:white;color:#142c46;border:1px solid #e3ebf0;border-radius:12px;padding:26px;overflow:hidden}.flr-placeholder{color:#6c7f92;text-align:center;padding:70px 10px}.flr-head{border-bottom:3px solid #31c7b5;padding-bottom:18px;margin-bottom:20px}.flr-brand{font-size:12px;font-weight:800;letter-spacing:1.4px;color:#0a8eab}.flr-head h2{font-size:clamp(22px,3vw,32px);margin:10px 0 4px;color:#092444;overflow-wrap:anywhere}.flr-head p{color:#53697d;margin:0}.flr-meta{color:#61778a;font-size:11px;margin-top:10px}.flr-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0 22px}.flr-kpi{background:#f0f7fa;padding:14px 10px;border-radius:9px;min-width:0}.flr-kpi small{display:block;color:#64788c;font-size:11px}.flr-kpi strong{display:block;color:#073354;font-size:clamp(13px,2vw,20px);overflow-wrap:anywhere}.flr-chart{width:100%;height:auto;display:block;margin:10px 0 18px}.flr-report h3{font-size:17px;margin:20px 0 10px}.flr-table-wrap{overflow:auto}.flr-table{width:100%;border-collapse:collapse;font-size:12px}.flr-table th{text-align:left;background:#e8f5f6;color:#133e53}.flr-table th,.flr-table td{padding:9px;border-bottom:1px solid #e1eaf0}.flr-table td:last-child{text-align:right;font-variant-numeric:tabular-nums}.flr-summary{background:#f2faf9;border-left:4px solid #29c4b0;padding:12px 14px;white-space:pre-wrap;overflow-wrap:anywhere}.flr-footer{font-size:10px;color:#788b9c;border-top:1px solid #e5edf2;margin-top:20px;padding-top:12px}.flr-footnote{font-size:12px;color:#63758a}.flr-report svg text{font-family:Arial,sans-serif}@media(max-width:900px){.flr-layout{grid-template-columns:1fr}.flr-panel{padding:15px}.flr-report{padding:16px}.flr-kpis{gap:6px}.flr-kpi{padding:10px 7px}}@media print{body.flr-print *{visibility:hidden!important}body.flr-print #flr-report,body.flr-print #flr-report *{visibility:visible!important}body.flr-print #flr-report{position:absolute;left:0;top:0;width:100%;box-sizing:border-box;border:0;padding:10mm;overflow:visible}body.flr-print .flr-table-wrap{overflow:visible}body.flr-print{background:white!important}@page{size:A4;margin:8mm}}
+
+
+.flr-report{--flr-accent:#159aa8;background:#fff!important;color:#1d3347!important;min-height:600px}.flr-cover{border-bottom:4px solid var(--flr-accent);padding-bottom:28px;margin-bottom:24px}.flr-cover h2{font-size:34px!important;line-height:1.2;margin:20px 0 8px;color:#142c42!important}.flr-cover p{font-size:16px;color:#536b7b}.flr-topline{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:85px}.flr-topline.center{justify-content:center}.flr-topline.right{justify-content:flex-end}.flr-logo-img{max-height:110px;object-fit:contain;display:block}.flr-kind{font-size:11px;letter-spacing:1.8px;font-weight:800;color:var(--flr-accent)}.flr-report-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;background:#f3f7f9;padding:16px;border-radius:8px;font-size:12px;margin:22px 0}.flr-report-meta strong{display:block;font-size:10px;text-transform:uppercase;color:#607484;margin-bottom:4px}.flr-section{margin:28px 0;break-inside:avoid-page}.flr-section h3{border-left:4px solid var(--flr-accent);padding-left:12px;color:#18364c;font-size:19px!important;margin-bottom:12px}.flr-prose{white-space:pre-wrap;line-height:1.7;color:#33495b}.flr-design-classic{--flr-accent:#183b65}.flr-design-classic .flr-cover{border-bottom-width:2px}.flr-design-warm{--flr-accent:#b57942}.flr-design-warm .flr-report-meta{background:#fbf5ee}.flr-report .flr-chart{width:100%;height:auto;display:block}.flr-report .flr-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.flr-report .flr-kpi{background:#f2f7f9;border-radius:8px;padding:12px}.flr-report .flr-kpi strong{font-size:18px;display:block;overflow-wrap:anywhere}.flr-report .flr-table-wrap{overflow-x:auto}.flr-report .flr-table{width:100%;border-collapse:collapse;font-size:12px}.flr-report .flr-table th,.flr-report .flr-table td{padding:8px;border-bottom:1px solid #dde7ec;text-align:left}.flr-report .flr-table th{background:#edf4f6}.flr-report .flr-footer{margin-top:36px;padding-top:12px;border-top:1px solid #dce7ec;color:#7b8993;font-size:10px}@media print{body.flr-print #flr-report{--flr-accent:#159aa8;box-shadow:none!important;max-width:none!important;width:100%!important;padding:15mm!important}body.flr-print #flr-report .flr-section{break-inside:avoid-page}body.flr-print #flr-report .flr-cover{break-after:avoid-page}}
+
+/* Distinkta rapportlayouter, oberoende av vald färgpalett */
+.flr-layout-project .flr-project-cover{border-bottom:0;padding-bottom:8px}
+.flr-project-label{display:flex;justify-content:space-between;gap:8px;border-bottom:2px solid var(--flr-accent);padding:12px 0;font-size:10px;font-weight:850;letter-spacing:1.5px}
+.flr-project-label span{color:var(--flr-accent)}
+.flr-layout-project .flr-cover h2{font-size:38px!important;margin-top:26px}
+.flr-project-band{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#d9e7ee;border-radius:8px;overflow:hidden;margin:16px 0 26px}
+.flr-project-band>div{background:#f1f6f8;padding:14px 10px}.flr-project-band small{display:block;font-size:9px;color:var(--flr-accent);font-weight:800}.flr-project-band strong{display:block;font-size:12px;margin-top:6px}
+.flr-layout-project .flr-section h3{border-left:0;border-bottom:1px solid #c9dce5;padding:0 0 10px}
+.flr-monthly-cover{border-bottom:0!important}.flr-monthly-label{display:flex;justify-content:space-between;align-items:center;font-weight:850;letter-spacing:2px;font-size:12px;padding:12px 0;border-top:6px solid var(--flr-accent);margin-top:12px}.flr-monthly-label span{font-size:25px;letter-spacing:0;color:var(--flr-accent)}
+.flr-layout-monthly .flr-cover h2{font-size:30px!important}.flr-monthly-date{background:var(--flr-accent);color:#fff;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:1.5px;margin-top:22px}.flr-monthly-date strong{font-size:19px;letter-spacing:0}
+.flr-layout-monthly .flr-section h3{border-left:0;padding-left:0;text-transform:uppercase;letter-spacing:1px;font-size:15px!important;color:var(--flr-accent)}
+.flr-energy-cover{border-bottom:0!important}.flr-energy-heading{display:flex;align-items:center;gap:16px;border-left:7px solid var(--flr-accent);padding:14px 0 14px 18px;margin-top:14px;background:#f0f8f9}.flr-energy-symbol{font-size:48px;font-weight:800;color:var(--flr-accent)}.flr-energy-heading h2{margin:6px 0!important;font-size:30px!important}.flr-energy-intro{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#eaf5f4;color:#17465a;padding:14px 18px;font-weight:850;font-size:12px;letter-spacing:1px;border-radius:7px}.flr-energy-intro span{font-size:11px;font-weight:500;letter-spacing:0}.flr-layout-energy .flr-kpi{border-top:4px solid var(--flr-accent);background:#eef9f8}.flr-layout-energy .flr-section h3{border-left:0;padding-left:0;color:#087c83}
+.flr-finance-cover{border-bottom:0!important}.flr-finance-eyebrow{font-size:11px;font-weight:850;letter-spacing:2px;color:var(--flr-accent);margin-top:25px}.flr-layout-finance .flr-cover h2{font-size:31px!important;letter-spacing:-.5px}.flr-finance-rule{height:8px;background:repeating-linear-gradient(90deg,var(--flr-accent) 0 35px,transparent 35px 43px);margin:25px 0}.flr-layout-finance .flr-report-meta{border:1px solid #d6e2e8;background:white;border-radius:0}.flr-layout-finance .flr-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.flr-layout-finance .flr-kpi{background:#f5f6f8;border-radius:0;border-bottom:3px solid var(--flr-accent)}.flr-layout-finance .flr-section h3{border-left:0;padding-left:0;border-bottom:2px solid var(--flr-accent);padding-bottom:9px}.flr-layout-finance .flr-table th{background:#e4e9ee}
+.flr-custom-cover{border-bottom:1px solid #cfdce5!important}.flr-layout-custom .flr-cover h2{font-weight:600!important}.flr-layout-custom .flr-section h3{border-left:0;padding-left:0}
+@media(max-width:600px){.flr-project-band{grid-template-columns:1fr}.flr-energy-heading{gap:8px;padding-left:10px}.flr-energy-symbol{font-size:30px}.flr-monthly-date{gap:10px}.flr-energy-intro{flex-wrap:wrap}}
+
+/* Tydliga, rapporttypsspecifika identiteter i både förhandsgranskning och export. */
+.flr-report.flr-layout-project{background:linear-gradient(180deg,#eaf2f8 0 175px,#fff 175px)!important;border-top:10px solid #183b65}
+.flr-report.flr-layout-project .flr-project-label{background:#183b65;color:white;padding:15px 18px;border-radius:6px;font-weight:800;letter-spacing:1px}
+.flr-report.flr-layout-project .flr-project-label span{color:#bfe7ee}
+.flr-report.flr-layout-monthly{background:linear-gradient(90deg,#e8f8f6 0 16px,#fff 16px)!important;border-top:10px solid var(--flr-accent)}
+.flr-report.flr-layout-monthly .flr-monthly-label{font-size:18px;font-weight:900;letter-spacing:2px;color:var(--flr-accent);display:flex;justify-content:space-between;gap:12px}
+.flr-report.flr-layout-monthly .flr-monthly-label span{background:#e8f8f6;padding:8px;border-radius:5px}
+.flr-report.flr-layout-energy{background:linear-gradient(180deg,#e9f8f7 0 235px,#fff 235px)!important;border-top:10px solid #159aa8}
+.flr-report.flr-layout-energy .flr-energy-heading{background:#d4f1ee;border-radius:12px}
+.flr-report.flr-layout-finance{background:#fff!important;border-top:10px solid #29394d}
+.flr-report.flr-layout-finance .flr-finance-eyebrow{background:#29394d;color:#fff;padding:14px 18px}
+.flr-report.flr-layout-finance .flr-finance-rule{height:12px}
+.flr-report.flr-layout-custom{background:#fff!important;border-top:2px solid #cbd7e0}
+
+/* Finjustering: avskalade rubriker och diskret periodangivelse */
+.flr-report.flr-layout-project{background:#fff!important;border-top:4px solid var(--flr-accent)}
+.flr-report.flr-layout-project .flr-project-label{background:transparent;color:var(--flr-accent);padding:7px 0 11px;border-radius:0;border-bottom:1px solid #d7e5eb;font-size:11px;letter-spacing:1.4px}
+.flr-report.flr-layout-finance{border-top:4px solid var(--flr-accent)}
+.flr-report.flr-layout-finance .flr-finance-eyebrow{background:transparent;color:var(--flr-accent);padding:0;margin-top:18px;font-size:11px;letter-spacing:1.4px}
+.flr-report.flr-layout-finance .flr-finance-rule{height:2px;background:var(--flr-accent);margin:18px 0}
+.flr-report.flr-layout-monthly .flr-monthly-label{font-size:14px;letter-spacing:1.2px;align-items:center}
+.flr-report.flr-layout-monthly .flr-monthly-label span{font-size:13px;font-weight:700;letter-spacing:0;padding:5px 9px;border-radius:4px}
+
+/* Editorial report system — compact, elegant, distinct without decorative panels */
+.flr-report{min-height:0!important;padding:32px 36px!important;border-radius:8px!important;background:#fff!important;border:1px solid #dce5eb!important;border-top:1px solid #dce5eb!important}
+.flr-report .flr-cover{background:transparent!important;border:0!important;padding:0!important;margin:0 0 24px!important}
+.flr-report .flr-topline{min-height:0!important;margin:0 0 27px!important;display:flex;align-items:center}
+.flr-report .flr-topline .flr-kind{font-size:10px!important;letter-spacing:2px!important;color:#708391!important}
+.flr-report .flr-kicker{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 11px;font-size:10px;font-weight:800;letter-spacing:1.4px;color:var(--flr-accent)}
+.flr-report .flr-kicker-aside{font-size:10px;letter-spacing:.2px;color:#7b8c98;font-weight:500}
+.flr-report .flr-cover h2{font-size:clamp(25px,3vw,34px)!important;line-height:1.17!important;letter-spacing:-.9px!important;margin:0 0 9px!important;color:#172e42!important;font-weight:760!important}
+.flr-report .flr-subtitle{font-size:13px!important;color:#5e7280!important;margin:0 0 12px!important}
+.flr-report .flr-report-meta{background:transparent!important;border:0!important;border-radius:0!important;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px;padding:13px 0 0!important;margin:17px 0 0!important;font-size:11px!important;border-top:1px solid #e1e9ed!important}
+.flr-report .flr-report-meta strong{font-size:9px!important;letter-spacing:.6px;color:#81909a!important}
+.flr-report .flr-section{margin:24px 0!important}
+.flr-report .flr-section h3{font-size:15px!important;letter-spacing:-.2px!important;margin:0 0 9px!important;border:0!important;background:transparent!important;padding:0!important;color:#1a3548!important;text-transform:none!important}
+.flr-report .flr-prose{font-size:12px!important;line-height:1.65!important}
+.flr-report .flr-footer{margin-top:28px!important}
+/* Project: precise left rail and numbered section headers */
+.flr-report.flr-layout-project{border-left:3px solid var(--flr-accent)!important}
+.flr-report.flr-layout-project .flr-kicker{color:var(--flr-accent)}
+.flr-report.flr-layout-project .flr-section h3{border-bottom:1px solid #e1e9ed!important;padding-bottom:8px!important}
+/* Monthly: restrained editorial masthead and small period label */
+.flr-report.flr-layout-monthly .flr-monthly-label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 13px!important;padding:0 0 9px!important;border-top:0!important;border-bottom:2px solid var(--flr-accent)!important;font-size:10px!important;letter-spacing:1.5px!important;font-weight:800!important;color:var(--flr-accent)!important}
+.flr-report.flr-layout-monthly .flr-monthly-label span{font-size:10px!important;background:none!important;padding:0!important;letter-spacing:1.5px!important}
+.flr-report.flr-layout-monthly .flr-monthly-label time{font-size:11px!important;color:#5f7683!important;letter-spacing:0!important;font-weight:650!important;background:transparent!important;padding:0!important}
+.flr-report.flr-layout-monthly .flr-cover h2{font-weight:660!important}
+/* Energy: analytical style, a slim accent rule and restrained figures */
+.flr-report.flr-layout-energy .flr-kicker{border-bottom:2px solid var(--flr-accent);padding-bottom:9px}
+.flr-report.flr-layout-energy .flr-kpi{border:0!important;border-bottom:2px solid var(--flr-accent)!important;background:#f6faf9!important;border-radius:2px!important}
+/* Finance: ledger-inspired typography and rules, no chunky panels */
+.flr-report.flr-layout-finance .flr-kicker{border-bottom:1px solid #cbd6de;padding-bottom:9px;color:#334b60}
+.flr-report.flr-layout-finance .flr-cover h2{font-weight:720!important}
+.flr-report.flr-layout-finance .flr-report-meta{border-top:2px solid #32485c!important}
+.flr-report.flr-layout-finance .flr-section h3{border-bottom:1px solid #cdd8df!important;padding-bottom:8px!important}
+.flr-report.flr-layout-finance .flr-table th{background:#f2f5f7!important}
+/* Custom: classic clean document with extra whitespace */
+.flr-report.flr-layout-custom .flr-kicker{color:#718592}
+.flr-report.flr-layout-custom .flr-cover h2{font-weight:620!important}
+@media(max-width:600px){.flr-report{padding:20px!important}.flr-report .flr-cover h2{font-size:26px!important}.flr-report .flr-report-meta{gap:9px 12px!important}}
