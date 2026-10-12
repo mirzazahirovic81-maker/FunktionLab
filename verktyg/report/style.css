@@ -33,3 +33,12 @@
 .flr-report.flr-layout-finance .flr-finance-eyebrow{background:#29394d;color:#fff;padding:14px 18px}
 .flr-report.flr-layout-finance .flr-finance-rule{height:12px}
 .flr-report.flr-layout-custom{background:#fff!important;border-top:2px solid #cbd7e0}
+
+/* Finjustering: avskalade rubriker och diskret periodangivelse */
+.flr-report.flr-layout-project{background:#fff!important;border-top:4px solid var(--flr-accent)}
+.flr-report.flr-layout-project .flr-project-label{background:transparent;color:var(--flr-accent);padding:7px 0 11px;border-radius:0;border-bottom:1px solid #d7e5eb;font-size:11px;letter-spacing:1.4px}
+.flr-report.flr-layout-finance{border-top:4px solid var(--flr-accent)}
+.flr-report.flr-layout-finance .flr-finance-eyebrow{background:transparent;color:var(--flr-accent);padding:0;margin-top:18px;font-size:11px;letter-spacing:1.4px}
+.flr-report.flr-layout-finance .flr-finance-rule{height:2px;background:var(--flr-accent);margin:18px 0}
+.flr-report.flr-layout-monthly .flr-monthly-label{font-size:14px;letter-spacing:1.2px;align-items:center}
+.flr-report.flr-layout-monthly .flr-monthly-label span{font-size:13px;font-weight:700;letter-spacing:0;padding:5px 9px;border-radius:4px}

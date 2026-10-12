@@ -16,10 +16,10 @@ let meta='<div class="flr-report-meta"><div><strong>Datum</strong>'+esc(date)+'<
 let heading='<div class="flr-kind">'+esc(kind.toUpperCase())+'</div><h2>'+esc(title)+'</h2>'+(subtitle?'<p>'+esc(subtitle)+'</p>':'');
 let top='<div class="flr-topline '+esc($('flr-logo-pos').value)+'">'+logoHtml+'</div>';
 let html='';
-if(layout==='project')html='<div class="flr-cover flr-project-cover">'+top+'<div class="flr-project-label">PROJEKTÖVERSIKT <span>● STATUSRAPPORT</span></div>'+heading+meta+'</div><div class="flr-project-band"><div><small>01 / LÄGESBILD</small><strong>Projektstatus</strong></div><div><small>02 / ANALYS</small><strong>Resultat & nuläge</strong></div><div><small>03 / FRAMÅT</small><strong>Rekommendationer</strong></div></div>';
-else if(layout==='monthly')html='<div class="flr-cover flr-monthly-cover">'+top+'<div class="flr-monthly-label">MÅNADSRAPPORT <span>'+esc(date.slice(0,7))+'</span></div>'+heading+'<div class="flr-monthly-date">PERIODENS UPPFÖLJNING <strong>'+esc(date.slice(0,7))+'</strong></div>'+meta+'</div>';
+if(layout==='project')html='<div class="flr-cover flr-project-cover">'+top+'<div class="flr-project-label">PROJEKTÖVERSIKT</div>'+heading+meta+'</div><div class="flr-project-band"><div><small>01 / LÄGESBILD</small><strong>Projektstatus</strong></div><div><small>02 / ANALYS</small><strong>Resultat & nuläge</strong></div><div><small>03 / FRAMÅT</small><strong>Rekommendationer</strong></div></div>';
+else if(layout==='monthly')html='<div class="flr-cover flr-monthly-cover">'+top+'<div class="flr-monthly-label">MÅNADSRAPPORT <span>'+esc(date.slice(0,7))+'</span></div>'+heading+meta+'</div>';
 else if(layout==='energy')html='<div class="flr-cover flr-energy-cover">'+top+'<div class="flr-energy-heading"><span class="flr-energy-symbol">↗</span><div>'+heading+'</div></div>'+meta+'</div><div class="flr-energy-intro">ENERGI & FÖRBRUKNING <span>Data · trender · analys</span></div>';
-else if(layout==='finance')html='<div class="flr-cover flr-finance-cover">'+top+'<div class="flr-finance-eyebrow">EKONOMI / UPPFÖLJNING</div>'+heading+'<div class="flr-finance-rule"></div>'+meta+'</div>';
+else if(layout==='finance')html='<div class="flr-cover flr-finance-cover">'+top+'<div class="flr-finance-eyebrow">EKONOMISK UPPFÖLJNING</div>'+heading+'<div class="flr-finance-rule"></div>'+meta+'</div>';
 else html='<div class="flr-cover flr-custom-cover">'+top+heading+meta+'</div>';
 let addSection=(label,id)=>{let value=$(id).value.trim();if(value)html+='<section class="flr-section"><h3>'+esc(label)+'</h3><div class="flr-prose">'+esc(value)+'</div></section>'};
 if(layout==='energy'&&rows.length)html+=dataSection();
