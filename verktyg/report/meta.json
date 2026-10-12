@@ -1,8 +1,0 @@
-{
-  "id": "report",
-  "name": "Skapa snygg rapport",
-  "category": "Produktivitet",
-  "description": "Förvandla Excel eller CSV till en professionell rapport med diagram, nyckeltal och tabell. Exportera som PDF eller PNG.",
-  "icon": "chart",
-  "keywords": "rapport excel csv diagram pdf bild png export sammanfattning data"
-}
