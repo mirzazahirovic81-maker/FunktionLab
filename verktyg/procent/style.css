@@ -1,8 +1,0 @@
-
-.percent-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px}
-.percent-tab{border:1px solid #d5e3ee;background:#fff;color:#3c526d;padding:11px 14px;border-radius:10px;font-size:13px;font-weight:750}
-.percent-tab.selected{background:#e5f8fb;border-color:#7ed8df;color:#047e98}
-.percent-help{color:#63738a;font-size:13px;line-height:1.6;margin:-12px 0 20px}
-.percent-copy{display:block;width:100%;margin-top:20px;padding:12px 15px;border:1px solid #a7dfe2;background:white;border-radius:10px;color:#087e9b;font-weight:800}
-.percent-calculator .big-number{margin:18px 0}
-@media(max-width:760px){.percent-tabs{display:grid;grid-template-columns:1fr 1fr}.percent-tab{font-size:12px;padding:11px 8px}}
