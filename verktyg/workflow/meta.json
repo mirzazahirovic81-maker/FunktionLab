@@ -1,1 +1,8 @@
-
+{
+  "id": "workflow",
+  "name": "Visualisera arbetsflöde",
+  "category": "Produktivitet",
+  "description": "Skapa moderna processkartor och flödesscheman direkt medan du redigerar. Lägg till steg, beslut och ansvariga och exportera som PNG, JPG eller SVG.",
+  "icon": "git-branch",
+  "keywords": "arbetsflöde arbetsprocess processkarta flödesschema beslut ja nej roller png jpg svg export visualisera"
+}

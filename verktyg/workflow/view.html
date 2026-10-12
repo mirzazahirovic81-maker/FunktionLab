@@ -1,0 +1,28 @@
+<section class="tool-view" id="workflow-view">
+<a class="back" data-go="verktyg" href="#verktyg">← Till alla funktioner</a>
+<div class="section-head" style="margin-top:8px"><div><span class="eyebrow" style="color:#118ea9">Produktivitet</span><h2>Visualisera arbetsflöde</h2><p>Beskriv din process, ändra ett steg och se diagrammet uppdateras direkt. Exportera en skarp bild till rapporter och presentationer.</p></div></div>
+<div class="wf-layout">
+ <div class="wf-editor">
+  <div class="wf-heading"><strong>Bygg din process</strong><span class="wf-live"><span></span> Liveförhandsvisning</span></div>
+  <label for="wf-title">Processens namn</label><input id="wf-title" type="text" maxlength="90" value="Inköpsprocess" placeholder="Exempel: Hantering av inköp">
+  <label for="wf-subtitle">Kort beskrivning <span class="wf-optional">(valfritt)</span></label><input id="wf-subtitle" type="text" maxlength="130" value="Från behov till genomfört inköp" placeholder="Vad visar processen?">
+  <div class="wf-row-title"><strong>Arbetssteg</strong><span id="wf-step-count">0 steg</span></div>
+  <div id="wf-steps" class="wf-steps"></div>
+  <div class="wf-add"><button id="wf-add-task" type="button">+ Arbetssteg</button><button id="wf-add-decision" type="button">◇ Beslut (Ja/Nej)</button></div>
+  <div class="wf-divider"></div>
+  <strong>Utseende och layout</strong>
+  <div class="wf-options"><label>Layout<select id="wf-direction"><option value="vertical">Vertikal</option><option value="horizontal">Horisontell</option></select></label><label>Design<select id="wf-theme"><option value="modern">Modern</option><option value="technical">Teknisk</option><option value="minimal">Minimalistisk</option></select></label></div>
+  <label class="wf-check"><input type="checkbox" id="wf-show-roles" checked> Visa ansvariga roller</label>
+  <div class="wf-divider"></div>
+  <strong>Prova ett färdigt exempel</strong>
+  <div class="wf-presets"><button type="button" data-wf-preset="purchase">Inköp</button><button type="button" data-wf-preset="incident">Felanmälan</button><button type="button" data-wf-preset="project">Projektbeslut</button></div>
+  <p class="wf-note">Allt sker lokalt i din webbläsare. Ingen data skickas till en server.</p>
+ </div>
+ <div class="wf-preview-col">
+  <div class="wf-preview-head"><div><strong>Förhandsvisning</strong><small>Uppdateras direkt när du skriver eller ändrar val</small></div><span id="wf-status" aria-live="polite">Redo</span></div>
+  <div class="wf-preview-scroll"><svg id="wf-diagram" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arbetsflöde" viewBox="0 0 800 700"></svg></div>
+  <div class="wf-export"><button type="button" id="wf-png">↓ PNG</button><button type="button" id="wf-jpg">↓ JPG</button><button type="button" id="wf-svg">↓ SVG</button></div>
+  <p class="wf-note">PNG och JPG exporteras i hög upplösning. SVG är skalbart utan kvalitetsförlust. Ja/Nej-vägarna återförenas före nästa steg.</p>
+ </div>
+</div>
+</section>
