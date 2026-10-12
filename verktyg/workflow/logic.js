@@ -44,7 +44,6 @@
    svg.appendChild(el('circle',{cx:x-76,cy:y-32,r:12,fill:pal.accent}));txt(svg,x-76,y-28,String(i+1),{size:10,fill:'#fff'});
   });
   if(!steps.length)txt(svg,w/2,h/2,'Lägg till ett arbetssteg för att börja',{size:18,fill:pal.muted});
-  txt(svg,w-24,h-21,'Skapad med FunktionLab',{anchor:'end',size:11,weight:400,fill:pal.muted});
   $('wf-step-count').textContent=n+' '+(n===1?'steg':'steg');$('wf-status').textContent='Uppdaterad direkt';
  };
  const renderSteps=()=>{const host=$('wf-steps');host.replaceChildren();steps.forEach((s,i)=>{
