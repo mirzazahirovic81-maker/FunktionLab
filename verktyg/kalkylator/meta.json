@@ -1,8 +1,0 @@
-{
-  "id": "kalkylator",
-  "name": "Driftkostnadskalkylator",
-  "category": "Energi & fastighet",
-  "description": "Beräkna energikostnad och möjlig besparing när drifttiden minskar.",
-  "icon": "calculator",
-  "keywords": "el drift kwh energi besparing kostnad effekt fastighet"
-}
