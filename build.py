@@ -11,7 +11,7 @@ for d in sorted((root/'verktyg').iterdir()):
  entries.append((m,d))
 if len({m['id'] for m,d in entries})!=len(entries):raise ValueError('Dubblett-ID')
 # Optional order: preserve curated initial order; new tools append.
-order=['report','savings','period','anomaly','time','chart','peak','invest','procent','kalkylator']
+order=['savings','period','anomaly','time','chart','peak','invest','procent','kalkylator']
 entries.sort(key=lambda pair:(order.index(pair[0]['id']) if pair[0]['id'] in order else len(order),pair[0]['name']))
 html=(root/'template.html').read_text();core=(root/'core.js').read_text()
 core=re.sub(r'const tools=\[.*?\];', lambda match:'const tools='+json.dumps([m for m,d in entries],ensure_ascii=False,separators=(',',':'))+';',core,count=1,flags=re.S)
