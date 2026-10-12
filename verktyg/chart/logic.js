@@ -1,84 +1,14 @@
 
-(function(){
-'use strict';
-const get=id=>document.getElementById(id), graphic=get('flchart-graphic'),preview=get('flpres-preview');
-if(!graphic||!preview)return;
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const num=v=>{let x=String(v??'').trim().replace(/\s/g,'');if(x.includes(',')&&x.includes('.'))x=x.replace(/\./g,'').replace(',','.');else x=x.replace(',','.');return Number(x)};
-const fmt=n=>Number(n).toLocaleString('sv-SE',{maximumFractionDigits:1});
-let slide='';
-function insight(){
- const text=get('flchart-insights')?.innerText||'';
- const cards=get('flchart-insights')?.querySelectorAll('.flchart-insight-card')||[];
- const name=get('flchart-series')?.selectedOptions?.[0]?.textContent?.trim()||'Den valda serien';
- const lines=[...get('flchart-insights')?.querySelectorAll('li')||[]].map(n=>n.textContent);
- return {name,text,lines,highest:cards[0]?.querySelector('strong')?.textContent||'',highAt:cards[0]?.querySelector('span')?.textContent||'',lowest:cards[1]?.querySelector('strong')?.textContent||'',lowAt:cards[1]?.querySelector('span')?.textContent||''};
-}
-function suggest(){
- const i=insight(),x=get('flchart-x'),s=get('flchart-series');
- const headline=get('flpres-headline'),conclusion=get('flpres-conclusion');
- let message=`${i.name}: sammanfattning av inlästa värden`;
- let detail=i.lines[0]||'Välj en numerisk serie för att visa resultatet.';
- const chart=get('flchart-graphic')?.querySelector('svg');
- if(chart){
-  const series= s?.selectedOptions?.[0]?.textContent?.trim()||i.name;
-  const raw=get('flchart-paste')?.value||'';
-  const changeLine=i.lines.find(t=>t.includes('Förändring från första'))||'';
-  const match=changeLine.match(/Förändring från första till sista mätpunkten:\s*([+−\-]?[0-9\s,.]+)(?:\s*\(([+\-−]?[0-9\s,.]+)\s*%\))?/);
-  if(match){
-   const delta=num(match[1].replace('−','-'));
-   if(Number.isFinite(delta)){
-    message=delta>0?`${series} ökar under den valda perioden`:delta<0?`${series} minskar under den valda perioden`:`${series} är oförändrad mellan första och sista mätpunkten`;
-    detail=`Förändringen mellan första och sista mätpunkten är ${delta>0?'+':''}${fmt(delta)}${match[2]?` (${match[2].trim()} %)`:''}. ${i.lines[0]||''}`;
-   }
-  }
- }
- headline.value=message;conclusion.value=detail;render();
-}
-function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
-function render(){
- const source=get('flpres-source').value.trim()||'Ej angiven';
- const title=get('flpres-headline').value.trim()||get('flchart-title').value.trim()||'Din data i fokus';
- const conclusion=get('flpres-conclusion').value.trim()||'Välj Föreslå budskap eller skriv din egen slutsats.';
- const style=get('flpres-style').value;
- const schemes={dark:{bg:'#0e2239',fg:'#ffffff',sub:'#bdd1e0',panel:'#19354e',accent:'#5fe1c0'},light:{bg:'#ffffff',fg:'#132943',sub:'#5c6d81',panel:'#edf4f8',accent:'#118e9a'},mint:{bg:'#e9f9f5',fg:'#113a3a',sub:'#416966',panel:'#d3eee7',accent:'#0a8079'}};
- const c=schemes[style]||schemes.dark;
- const chart=graphic.querySelector('svg');
- const serial=new XMLSerializer();
- let chartMarkup='';
- if(chart){
-   const copy=chart.cloneNode(true);
-   copy.removeAttribute('width');copy.removeAttribute('height');
-   copy.setAttribute('x','54');copy.setAttribute('y','190');copy.setAttribute('width','1170');copy.setAttribute('height','380');
-   copy.setAttribute('preserveAspectRatio','xMidYMid meet');
-   // Reuse existing chart without regenerating its data or altering its calculation.
-   chartMarkup=serial.serializeToString(copy).replace(/<svg(?=\s)/,'<svg');
- }
- const line=(str,max=78)=>{const words=String(str).split(/\s+/);let out=[],cur='';for(const word of words){if((cur+' '+word).trim().length>max&&cur){out.push(cur);cur=word}else cur=(cur+' '+word).trim()}if(cur)out.push(cur);return out.slice(0,3)};
- const titleLines=line(title,55),noteLines=line(conclusion,115);
- const t=titleLines.slice(0,2).map((v,i)=>`<text x="54" y="${95+i*38}" font-size="30" font-weight="700" fill="${c.fg}">${esc(v)}</text>`).join('');
- const note=noteLines.slice(0,2).map((v,i)=>`<text x="78" y="${638+i*22}" font-size="16" fill="${c.fg}">${esc(v)}</text>`).join('');
- const i=insight(),highlight=get('flpres-highlight').value;
- const flag=highlight==='max'?`Högsta: ${i.highest} (${i.highAt})`:highlight==='min'?`Lägsta: ${i.lowest} (${i.lowAt})`:'';
- slide=`<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
- <rect width="1280" height="720" fill="${c.bg}"/>
- <text x="54" y="39" fill="${c.accent}" font-size="16" font-family="Arial,sans-serif" font-weight="700" letter-spacing="2">FUNKTIONLAB · DATAINSIKT</text>
- <g font-family="Arial,sans-serif">${t}</g>
- <rect x="40" y="178" width="1200" height="413" rx="15" fill="#fff"/>
- ${chartMarkup}
- ${flag?`<rect x="868" y="179" width="345" height="38" rx="9" fill="${c.accent}"/><text x="881" y="204" font-family="Arial,sans-serif" font-size="17" fill="#102238">${esc(flag.slice(0,42))}</text>`:''}
- <rect x="54" y="605" width="1172" height="80" rx="12" fill="${c.panel}"/>
- <g font-family="Arial,sans-serif">${note}</g>
- <text x="54" y="707" fill="${c.sub}" font-family="Arial,sans-serif" font-size="13">${esc(('Källa: '+source).slice(0,115))}</text>
- </svg>`;
- preview.innerHTML=slide;
- get('flpres-status').textContent=chart?'Förhandsgranskningen är uppdaterad. Kontrollera rubrik, slutsats och källa före export.':'Börja med att läsa in data och skapa ett diagram. Du kan sedan exportera presentationsbilden.';
-}
-get('flpres-suggest').addEventListener('click',suggest);
-get('flpres-copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText([get('flpres-headline').value,get('flpres-conclusion').value,'Källa: '+get('flpres-source').value].join('\n'));get('flpres-status').textContent='Budskapet kopierat.'}catch(e){get('flpres-status').textContent='Kunde inte kopiera. Markera texten manuellt.'}});
-['flpres-headline','flpres-conclusion','flpres-source','flpres-style','flpres-highlight'].forEach(id=>get(id).addEventListener('input',render));
-get('flpres-svg').addEventListener('click',()=>{if(!graphic.querySelector('svg')){get('flpres-status').textContent='Skapa först ett diagram.';return;}render();download(new Blob([slide],{type:'image/svg+xml;charset=utf-8'}),'funktionlab_presentation.svg')});
-get('flpres-png').addEventListener('click',()=>{if(!graphic.querySelector('svg')){get('flpres-status').textContent='Skapa först ett diagram.';return;}render();const img=new Image(),url=URL.createObjectURL(new Blob([slide],{type:'image/svg+xml;charset=utf-8'}));img.onload=()=>{const canvas=document.createElement('canvas');canvas.width=2560;canvas.height=1440;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,2560,1440);canvas.toBlob(b=>{if(b)download(b,'funktionlab_presentation.png');URL.revokeObjectURL(url)},'image/png')};img.onerror=()=>{URL.revokeObjectURL(url);get('flpres-status').textContent='PNG-export misslyckades. Prova SVG.'};img.src=url});
-new MutationObserver(render).observe(graphic,{childList:true});
-setTimeout(()=>{suggest();render()},50);
+(function(){'use strict';const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));let rows=[],headers=[],source='',logo='';const num=v=>{let s=String(v??'').trim().replace(/\s/g,'').replace(/[^0-9,.+\-eE]/g,'');if(s.includes(',')&&s.includes('.'))s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');else s=s.replace(',','.');return s&&Number.isFinite(Number(s))?Number(s):NaN};const fmt=n=>new Intl.NumberFormat('sv-SE',{maximumFractionDigits:1}).format(n);
+function csv(txt){txt=txt.replace(/^\uFEFF/,'');let first=txt.split(/\r?\n/)[0]||'',sep=first.includes('\t')?'\t':first.includes(';')?';':',',result=[],row=[],cell='',q=false;for(let i=0;i<txt.length;i++){let c=txt[i];if(c==='"'){if(q&&txt[i+1]==='"'){cell+='"';i++}else q=!q}else if(c===sep&&!q){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&txt[i+1]==='\n')i++;row.push(cell);if(row.some(v=>String(v).trim()))result.push(row);row=[];cell=''}else cell+=c}row.push(cell);if(row.some(v=>String(v).trim()))result.push(row);return result}
+function load(data,name){if(!Array.isArray(data)||data.length<2)throw Error('Filen måste ha rubrikrad och minst en datarad.');let i=data.findIndex(r=>r.some(v=>String(v??'').trim()));headers=data[i].map((h,j)=>String(h||'Kolumn '+(j+1)).trim());rows=data.slice(i+1).filter(r=>r.some(v=>String(v??'').trim()));if(rows.length>20000)throw Error('Max 20 000 rader stöds.');source=name;let options=headers.map((h,j)=>'<option value="'+j+'">'+esc(h)+'</option>').join('');$('flr-x').innerHTML=$('flr-y').innerHTML=options;$('flr-y').value=String(Math.max(0,headers.findIndex((h,j)=>j>0&&rows.some(r=>Number.isFinite(num(r[j]))))));$('flr-status').textContent=name+' · '+rows.length+' datarader';render()}
+$('flr-file').addEventListener('change',async e=>{let f=e.target.files[0];if(!f)return;try{let data=/\.xlsx$/i.test(f.name)?(await window.flPeriodReadXlsx(f)).rows:csv(await f.text());load(data,f.name);$('flr-error').textContent=''}catch(err){$('flr-error').textContent='Kunde inte läsa datafilen: '+err.message}});
+$('flr-demo').addEventListener('click',()=>{load([['Månad','Energi'],['Jan',12800],['Feb',11300],['Mar',10500],['Apr',9400],['Maj',8300],['Jun',6900],['Jul',6700],['Aug',7200],['Sep',8900],['Okt',10300],['Nov',11700],['Dec',13100]],'Exempeldata');$('flr-title').value='Energirapport 2026';$('flr-kind').value='Energirapport';$('flr-unit').value='kWh';$('flr-summary').value='Denna rapport sammanfattar energianvändningen under året.';$('flr-results').value='Förbrukningen är högre under vintermånaderna än under sommaren.';$('flr-recs').value='Undersök hur drift och utomhustemperatur påverkar variationen.';render()});$('flr-clear-data').addEventListener('click',()=>{rows=[];headers=[];source='';$('flr-file').value='';$('flr-x').innerHTML=$('flr-y').innerHTML='';$('flr-status').textContent='Ingen datafil vald – rapporten kan skapas ändå.';render()});
+$('flr-logo').addEventListener('change',async e=>{let f=e.target.files[0];if(!f)return;if(!['image/png','image/jpeg','image/svg+xml'].includes(f.type)||f.size>2e6){$('flr-error').textContent='Välj PNG, JPG eller SVG, högst 2 MB.';return}try{let raw=await new Promise((resolve,reject)=>{let r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(f)});if(f.type==='image/svg+xml'){let xml=atob(raw.split(',')[1]);if(/<script|onload\s*=|onerror\s*=|<foreignObject|<image\b|href\s*=|url\s*\(/i.test(xml))throw Error('SVG innehåller element som inte stöds. Använd PNG eller JPG.')}logo=raw;$('flr-logo-status').textContent=f.name;$('flr-error').textContent='';render()}catch(err){$('flr-error').textContent=err.message}});$('flr-logo-clear').addEventListener('click',()=>{logo='';$('flr-logo').value='';$('flr-logo-status').textContent='Ingen logotyp vald.';render()});
+function chart(data,type){let w=760,h=320,l=65,r=20,t=25,b=65,max=Math.max(0,...data.map(x=>x.v)),min=Math.min(0,...data.map(x=>x.v)),span=max-min||1,py=v=>t+(max-v)/span*(h-t-b),step=(w-l-r)/data.length,z=py(0),pts=[];let svg='<svg class="flr-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+w+' '+h+'">';for(let i=0;i<=4;i++){let v=min+span*i/4,y=py(v);svg+='<line x1="'+l+'" x2="'+(w-r)+'" y1="'+y+'" y2="'+y+'" stroke="#dbe6ed"/><text x="'+(l-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="#607789">'+esc(fmt(v))+'</text>'}data.forEach((d,i)=>{let x=l+step*(i+.5),y=py(d.v);pts.push(x+','+y);if(type==='bar')svg+='<rect x="'+(x-Math.min(24,step*.34))+'" y="'+Math.min(y,z)+'" width="'+Math.min(48,step*.68)+'" height="'+Math.max(1,Math.abs(z-y))+'" rx="3" fill="#159aa8"/>';if(data.length<=24||i%Math.ceil(data.length/24)===0)svg+='<text x="'+x+'" y="'+(h-35)+'" transform="rotate(-35 '+x+' '+(h-35)+')" text-anchor="end" font-size="11" fill="#536b80">'+esc(d.label.slice(0,11))+'</text>'});if(type==='line')svg+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="#159aa8" stroke-width="3"/>';return svg+'</svg>'}
+function render(){try{let theme=$('flr-theme').value,accent=$('flr-color').value,title=$('flr-title').value.trim()||'Rapport',subtitle=$('flr-subtitle').value.trim(),date=$('flr-date').value||new Date().toISOString().slice(0,10),org=$('flr-org').value.trim(),author=$('flr-author').value.trim();let sections=[['Sammanfattning','flr-summary'],['Resultat och nuläge','flr-results'],['Slutsatser och rekommendationer','flr-recs']];let logoHtml=logo?'<img class="flr-logo-img" style="width:'+Number($('flr-logo-size').value)+'px" src="'+logo+'" alt="Organisationens logotyp"/>':'<span class="flr-kind">'+esc(org||'RAPPORT')+'</span>';let html='<div class="flr-cover"><div class="flr-topline '+esc($('flr-logo-pos').value)+'">'+logoHtml+'</div><div class="flr-kind">'+esc($('flr-kind').value.toUpperCase())+'</div><h2>'+esc(title)+'</h2>'+(subtitle?'<p>'+esc(subtitle)+'</p>':'')+'<div class="flr-report-meta"><div><strong>Datum</strong>'+esc(date)+'</div><div><strong>Organisation</strong>'+esc(org||'–')+'</div><div><strong>Rapportförfattare</strong>'+esc(author||'–')+'</div><div><strong>Underlag</strong>'+esc(source||'Egen rapport')+'</div></div></div>';sections.forEach(([label,id],i)=>{let value=$(id).value.trim();if(value)html+='<section class="flr-section"><h3>'+esc(label)+'</h3><div class="flr-prose">'+esc(value)+'</div></section>';if(i===1&&rows.length)html+=dataSection()});if(!rows.length&&!sections.some(([l,id])=>$(id).value.trim()))html+='<section class="flr-section"><h3>Din rapport börjar här</h3><div class="flr-prose">Fyll i sammanfattning, resultat och rekommendationer till vänster. Du kan även ladda upp en datafil för att lägga till diagram och nyckeltal.</div></section>';if(rows.length&&!$('flr-results').value.trim())html+=dataSection();html+='<div class="flr-footer">'+esc(title)+' · '+esc(date)+'</div>';$('flr-report').className='flr-report flr-design-'+theme;$('flr-report').style.setProperty('--flr-accent',theme==='classic'?'#183b65':theme==='warm'?'#b57942':accent);$('flr-report').innerHTML=html;$('flr-error').textContent=''}catch(err){$('flr-error').textContent=err.message}}
+function dataSection(){let xi=Number($('flr-x').value),yi=Number($('flr-y').value);if(xi===yi)return '<section class="flr-section"><h3>Dataunderlag</h3>Välj olika kolumner för kategorier och värden.</section>';let values=rows.map(r=>({label:String(r[xi]??'').trim(),v:num(r[yi])})).filter(x=>x.label&&Number.isFinite(x.v));if(!values.length)return '';let sum=values.reduce((a,x)=>a+x.v,0),unit=$('flr-unit').value.trim(),data=values.slice(0,Number($('flr-limit').value));return '<section class="flr-section"><h3>Nyckeltal och datavisualisering</h3><div class="flr-kpis"><div class="flr-kpi"><small>Summa</small><strong>'+fmt(sum)+' '+esc(unit)+'</strong></div><div class="flr-kpi"><small>Medelvärde</small><strong>'+fmt(sum/values.length)+' '+esc(unit)+'</strong></div><div class="flr-kpi"><small>Högsta värde</small><strong>'+fmt(Math.max(...values.map(x=>x.v)))+' '+esc(unit)+'</strong></div></div>'+chart(data,$('flr-type').value)+'<div class="flr-table-wrap"><table class="flr-table"><thead><tr><th>'+esc(headers[xi])+'</th><th>'+esc(headers[yi])+'</th></tr></thead><tbody>'+data.map(x=>'<tr><td>'+esc(x.label)+'</td><td>'+fmt(x.v)+'</td></tr>').join('')+'</tbody></table></div>'+(data.length<values.length?'<p>Visar '+data.length+' av '+values.length+' datarader. Nyckeltalen gäller samtliga giltiga rader.</p>':'')+'</section>'}
+['flr-kind','flr-theme','flr-title','flr-subtitle','flr-org','flr-author','flr-date','flr-color','flr-logo-pos','flr-logo-size','flr-summary','flr-results','flr-recs','flr-x','flr-y','flr-type','flr-unit','flr-limit'].forEach(id=>$(id).addEventListener('input',render));$('flr-build').addEventListener('click',render);$('flr-date').value=new Date().toISOString().slice(0,10);render();
+$('flr-pdf').addEventListener('click',()=>{document.body.classList.add('flr-print');window.print()});window.addEventListener('afterprint',()=>document.body.classList.remove('flr-print'));
+$('flr-png').addEventListener('click',async()=>{let el=$('flr-report'),clone=el.cloneNode(true);clone.style.width='900px';clone.style.boxSizing='border-box';clone.style.padding='36px';clone.style.border='0';let css=[...document.styleSheets].filter(x=>{try{return !!x.cssRules}catch(e){return false}}).map(x=>[...x.cssRules].map(r=>r.cssText).join('\n')).join('\n');let doc='<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8"/><style>'+css+'body{margin:0;background:#fff}.flr-report{width:900px!important;overflow:visible!important}.flr-table-wrap{overflow:visible!important}</style></head><body>'+clone.outerHTML+'</body></html>';let height=Math.min(16000,Math.max(600,Math.ceil(el.scrollHeight*900/Math.max(el.clientWidth,1)+120)));let svg='<svg xmlns="http://www.w3.org/2000/svg" width="900" height="'+height+'"><foreignObject width="100%" height="100%">'+doc+'</foreignObject></svg>';try{let blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob),img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url});let canvas=document.createElement('canvas');canvas.width=1800;canvas.height=height*2;let ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.scale(2,2);ctx.drawImage(img,0,0);URL.revokeObjectURL(url);let png=await new Promise(r=>canvas.toBlob(r,'image/png'));if(!png)throw Error();let a=document.createElement('a');a.href=URL.createObjectURL(png);a.download='funktionlab-rapport.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}catch(e){$('flr-error').textContent='PNG-export stöds inte i denna webbläsare. Använd PDF istället.'}});
 })();
