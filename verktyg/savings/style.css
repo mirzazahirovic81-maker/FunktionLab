@@ -41,3 +41,6 @@
 
 /* Objektets namn ska vara tydligt men diskret */
 #savings-view .fls-object-field{grid-column:1/-1}#savings-view .fls-object-field input{width:100%}
+
+/* Tydliga analysflikar, även på mobil */
+#savings-view .fls-tabs{gap:9px;padding:8px;margin:24px 0 20px;background:#edf4f8;border:1px solid #cddfe8;border-radius:15px;scrollbar-width:thin}#savings-view .fls-tab{background:#fff;border:1px solid #bfd3dd;border-radius:10px;color:#17465d;padding:13px 19px;font-weight:750;box-shadow:0 2px 4px #0a30400a}#savings-view .fls-tab:hover{background:#e0f6f5;border-color:#53b8c3}#savings-view .fls-tab.active{background:#08677b;color:#fff;border-color:#08677b;box-shadow:0 3px 9px #08677b30}#savings-view .fls-tab:focus-visible{outline:3px solid #35d9cc;outline-offset:2px}
