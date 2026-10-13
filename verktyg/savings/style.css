@@ -1,1 +1,37 @@
 .fls-wrap{display:grid;gap:20px;max-width:1180px;margin:24px 0}.fls-panel{min-width:0;background:#fff;border:1px solid #dce8ed;border-radius:18px;padding:clamp(18px,3vw,30px);box-shadow:0 7px 25px #08213b08}.fls-panel h3{color:#102f4a;margin:3px 0 8px}.fls-panel h4{color:#173c52;margin:25px 0 12px;font-size:17px}.fls-panel p{line-height:1.6}.fls-heading{display:flex;gap:13px;align-items:flex-start}.fls-step{display:inline-flex;color:#148d9c;background:#e8f6f7;border-radius:8px;padding:5px 9px;font-weight:800;font-size:12px;vertical-align:middle}.fls-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:17px 0}.fls-between{justify-content:space-between}.fls-upload{cursor:pointer;background:#0a3955;color:#fff;border-radius:10px;padding:12px 18px;font-weight:700}.fls-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;margin:20px 0}.fls-fields label{font-weight:650;color:#19364b;font-size:14px;display:grid;gap:7px}.fls-fields input,.fls-fields select{width:100%;min-width:0;border:1px solid #bdced9;border-radius:10px;padding:11px;background:#fff;color:#17334b;font:inherit}.fls-error{color:#a02037;font-weight:650}.fls-hidden{display:none!important}.fls-muted,.fls-hint{color:#607480;font-size:13px}.fls-hint{background:#f6f9fa;padding:11px 13px;border-radius:9px}.fls-tag{font-size:11px;letter-spacing:.06em;color:#096c75;background:#d9f3f0;padding:5px 8px;border-radius:6px}.fls-quality{font-size:13px;background:#f3f8fa;border-left:3px solid #1594a1;padding:12px 14px;margin:15px 0;color:#28485a}.fls-quality.fls-warning{border-left-color:#c4842e;background:#fff9ed}.fls-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px;margin:18px 0}.fls-kpi{background:#f1f8f9;border:1px solid #d8e9ec;padding:16px;border-radius:12px}.fls-kpi small{display:block;color:#55707d;margin-bottom:8px}.fls-kpi strong{display:block;color:#0d4560;font-size:clamp(18px,2.5vw,25px);overflow-wrap:anywhere}.fls-summary{border:1px solid #d6e8e9;border-radius:13px;padding:17px 20px;background:#fbfefe}.fls-summary h4{margin:0 0 8px}.fls-summary p{margin:7px 0}.fls-tabs{display:flex;gap:7px;overflow-x:auto;border-bottom:1px solid #dbe7eb;margin:24px 0 16px;padding-bottom:8px}.fls-tab{white-space:nowrap;padding:10px 13px;border-radius:9px;border:1px solid transparent;background:transparent;color:#335466;cursor:pointer;font:inherit;font-weight:650}.fls-tab.active{background:#e6f5f5;color:#086877;border-color:#b7dfe0}.fls-chart{overflow:hidden;border:1px solid #e2ebef;border-radius:12px;padding:13px;margin:12px 0}.fls-chart svg{width:100%;height:auto;display:block}.fls-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}.fls-finding{border:1px solid #d8e7eb;border-radius:12px;padding:16px;margin:11px 0}.fls-finding h4{margin:0 0 6px}.fls-finding p{margin:5px 0}.fls-finding small{color:#627986}.fls-scroll{overflow-x:auto}.fls-table{width:100%;border-collapse:collapse;min-width:600px}.fls-table th,.fls-table td{text-align:left;padding:12px;border-bottom:1px solid #dbe6ea}.fls-table th{background:#edf5f7;color:#193a4e}.fls-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.fls-metric{padding:13px;background:#f6f9fa;border-radius:10px}.fls-metric b{display:block;font-size:19px;color:#123f58}.fls-metric span{font-size:12px;color:#627986}.fls-outlier{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #e3ecee;padding:10px 0}.fls-outlier span{font-size:13px;color:#4c6675}@media(max-width:650px){.fls-tab{font-size:13px;padding:9px}.fls-panel{border-radius:13px}.fls-heading{display:block}.fls-step{margin-bottom:8px}}
+
+/* Primär analysknapp – FunktionLabs tydliga huvudåtgärd */
+#savings-view #fls-run{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;min-height:62px;padding:16px 22px;
+  border:1px solid #0d5671;border-radius:14px;
+  background:linear-gradient(110deg,#092d4b 0%,#075a78 64%,#0a9ca5 100%);
+  color:#fff;font-size:clamp(16px,2.4vw,19px);font-weight:800;
+  line-height:1.35;letter-spacing:.005em;text-align:center;
+  box-shadow:0 7px 18px rgba(5,65,91,.19);
+  cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+}
+#savings-view #fls-run:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(5,65,91,.26);filter:brightness(1.07)}
+#savings-view #fls-run:active{transform:translateY(0);box-shadow:0 4px 12px rgba(5,65,91,.18)}
+#savings-view #fls-run:focus-visible{outline:3px solid #25bfc8;outline-offset:4px}
+#savings-view #fls-run:disabled{opacity:.6;cursor:wait;transform:none}
+@media(max-width:650px){#savings-view #fls-run{min-height:62px;padding:15px 14px;font-size:16px}}
+@media(prefers-reduced-motion:reduce){#savings-view #fls-run{transition:none}}
+
+/* Savings import instructions: compact and accessible on mobile */
+.fls-import-guide{margin:15px 0;border:1px solid #cbdfe6;border-radius:12px;background:#fbfdfd;overflow:hidden;color:#183c50}
+.fls-import-guide summary{display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;padding:15px 17px;font-weight:750;list-style:none}
+.fls-import-guide summary::-webkit-details-marker{display:none}
+.fls-import-guide[open] summary{border-bottom:1px solid #dce9ed;background:#f2f9fa}
+.fls-import-guide summary span{color:#188b9b;font-size:20px}
+.fls-guide-content{padding:3px 17px 17px;font-size:14px;line-height:1.65}
+.fls-guide-content p{margin:12px 0}
+.fls-guide-content code{font-size:12px;background:#eef4f7;padding:2px 4px;border-radius:4px}
+.fls-guide-table{width:100%;min-width:275px;border-collapse:collapse;font-size:13px}
+.fls-guide-table th,.fls-guide-table td{padding:9px 10px;border-bottom:1px solid #e1ebef;text-align:left}
+.fls-guide-table th{background:#eaf5f6;color:#153d52}
+.fls-one-click{border-left:3px solid #1798a2;background:#f1f8f9;border-radius:0 9px 9px 0;padding:12px 14px;color:#234b5d;font-size:14px}
+.fls-one-click strong{color:#0a405d}
+
+/* Observationsmotor v2: evidence and assessment */
+.fls-finding-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.fls-confidence{font-size:11px;font-weight:700;color:#24677b;background:#eaf5f7;border-radius:20px;padding:4px 9px}.fls-evidence{background:#f4f8fa;border-radius:8px;padding:9px 11px;font-size:13px;color:#38556a}.fls-finding-important{border-left:4px solid #168d9d}.fls-finding-normal{border-left:3px solid #c7dfe5}
