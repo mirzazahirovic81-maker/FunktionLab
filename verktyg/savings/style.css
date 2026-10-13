@@ -35,3 +35,6 @@
 
 /* Observationsmotor v2: evidence and assessment */
 .fls-finding-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.fls-confidence{font-size:11px;font-weight:700;color:#24677b;background:#eaf5f7;border-radius:20px;padding:4px 9px}.fls-evidence{background:#f4f8fa;border-radius:8px;padding:9px 11px;font-size:13px;color:#38556a}.fls-finding-important{border-left:4px solid #168d9d}.fls-finding-normal{border-left:3px solid #c7dfe5}
+
+/* Tre likvärdiga, begripliga exportval */
+.fls-export-box{margin:16px 0 20px;padding:16px;border:1px solid #d5e6ea;border-radius:14px;background:#f8fcfc}.fls-export-box h4{margin:0 0 12px!important;font-size:16px}.fls-export-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.fls-export-option{min-width:0;background:#fff;border:1px solid #dfebef;border-radius:11px;padding:12px}.fls-export-option button{width:100%;min-height:45px;padding:10px 8px;font-size:13px;font-weight:750;white-space:normal;line-height:1.35}.fls-export-option p{font-size:12px;color:#58707d;line-height:1.5;margin:9px 2px 0}.fls-export-note{font-size:11px;color:#687d86;margin:12px 0 0!important}@media(max-width:700px){.fls-export-grid{grid-template-columns:1fr}.fls-export-option{display:grid;grid-template-columns:minmax(0,1fr);gap:4px}.fls-export-option p{margin:0 2px}}
