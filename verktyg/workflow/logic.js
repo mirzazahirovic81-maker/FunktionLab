@@ -69,6 +69,6 @@
  $('wf-add-task').addEventListener('click',()=>{steps.push(newStep('task','Nytt arbetssteg',''));renderSteps();draw()});
  $('wf-add-decision').addEventListener('click',()=>{steps.push(newStep('decision','Är villkoret uppfyllt?',''));renderSteps();draw()});
  ['wf-title','wf-subtitle','wf-direction','wf-theme','wf-show-roles'].forEach(id=>$(id).addEventListener(id==='wf-title'||id==='wf-subtitle'?'input':'change',draw));
- root.querySelectorAll('[data-wf-preset]').forEach(b=>b.addEventListener('click',()=>preset(b.dataset.wfPreset)));
+ 
  preset('purchase');
 })();

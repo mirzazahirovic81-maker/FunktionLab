@@ -22,3 +22,6 @@
 @media(max-width:1040px){.wf-layout{grid-template-columns:1fr}.wf-preview-col{order:-1}}
 @media(max-width:600px){.wf-editor,.wf-preview-col{padding:14px}.wf-step-grid{grid-template-columns:1fr}.wf-options{grid-template-columns:1fr}.wf-preview-col{order:0}}
 @media print{#workflow-view .wf-editor,#workflow-view .wf-export{display:none}#workflow-view .wf-layout{display:block}#workflow-view .wf-preview-col{border:0;box-shadow:none}}
+
+/* Läsbar förhandsvisning: behåll full upplösning och tillåt sidledes panorering. */
+.wf-layout{grid-template-columns:minmax(310px,.8fr) minmax(0,1.2fr)}.wf-preview-scroll{background:#f7fbfc;max-height:none;padding:14px}#wf-diagram{width:max(100%,850px);max-width:none;height:auto;min-width:850px}.wf-preview-head{font-size:1.12rem}.wf-preview-head small{font-size:.95rem}@media(max-width:1040px){.wf-layout{grid-template-columns:1fr}}
