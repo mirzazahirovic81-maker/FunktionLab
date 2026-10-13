@@ -31,3 +31,5 @@
 @media(max-width:980px){.ab-shell{grid-template-columns:1fr}}
 @media(max-width:540px){.ab-panel{padding:14px}.ab-fields{grid-template-columns:1fr}.ab-kpis{grid-template-columns:1fr}}
 @media print{body *{visibility:hidden!important}#aterbruk-view,#aterbruk-view *{visibility:visible!important}#aterbruk-view{position:absolute;top:0;left:0;width:100%;background:white}#aterbruk-view .ab-shell{display:block}#aterbruk-view .ab-panel:first-child,#aterbruk-view .ab-controls,#aterbruk-view .back{display:none!important}#aterbruk-view .ab-panel{border:0;box-shadow:none}}
+
+.ab-advanced{flex-basis:100%;border:1px solid #d8e7ed;border-radius:12px;padding:12px;background:#f8fbfc}.ab-advanced summary{cursor:pointer;font-weight:700;color:#17445a}.ab-advanced button,.ab-advanced .ab-upload{display:inline-flex;margin:12px 8px 0 0}

@@ -8,7 +8,7 @@
  <div class="ab-two"><label>Analysperiod (år)<input id="ab-years" type="number" min="1" max="50" step="1" value="10"></label><label>Kalkylränta (%)<input id="ab-rate" type="number" min="0" max="30" step=".5" value="3"></label></div>
  <p class="ab-hint">Samma funktion och användningsperiod för alla alternativ. Belopp anges i kronor, klimatpåverkan i kg CO₂e. Ange 0 där påverkan saknas, men skilj mellan verkligt nollvärde och okänd uppgift.</p>
  <div id="ab-alternatives"></div>
- <div class="ab-controls"><button type="button" id="ab-example">Återställ exempel</button><button type="button" id="ab-save">Spara indata (JSON)</button><label class="ab-upload">Läs in sparad JSON<input type="file" id="ab-load" accept=".json,application/json" hidden></label></div>
+ <div class="ab-controls"><button type="button" id="ab-example">Återställ standardvärden</button><details class="ab-advanced"><summary>Avancerat: spara eller återställ indata</summary><p class="ab-hint">JSON kan användas för att fortsätta med samma indata senare. Resultatet uppdateras redan direkt.</p><button type="button" id="ab-save">Spara indata (JSON)</button><label class="ab-upload">Läs in sparad JSON<input type="file" id="ab-load" accept=".json,application/json" hidden></label></details></div>
  </div>
  <div class="ab-panel ab-results">
  <div class="ab-resulthead"><div><h3>2. Resultat i realtid</h3><small id="ab-update" aria-live="polite">Uppdateras automatiskt</small></div><span class="ab-dot">● LIVE</span></div>
@@ -22,4 +22,4 @@
  <p class="ab-hint"><strong>Metod:</strong> Förenklad jämförande livscykelbedömning, inte certifierad LCA. Nuvärde av kostnader med kalkylränta. Klimat summeras utan diskontering. Produktion/anskaffning, transport, installation, drift, underhåll, ersättningsköp och slutskede ingår enligt dina indata. Redovisa systemgränser och källor innan slutsatser används som miljöpåståenden.</p>
  </div>
 </div>
-</section>
+<div class="fl-common-excel-actions"><button type="button" class="fl-common-excel" data-export-table="#aterbruk-view .ab-table" data-export-name="aterbruk-analys">↓ Ladda ner Excel (.xlsx)</button></div></section>
