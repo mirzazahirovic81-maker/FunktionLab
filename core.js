@@ -1,5 +1,5 @@
 
-const tools=[{id:'savings',name:'Hitta energibesparingar',category:'Energi & fastighet',description:'Analysera baslast, dygns- och veckoprofiler, drifttider, avvikelser och möjliga energibesparingar från Excel eller CSV.',icon:'activity',keywords:'energibesparing energi kwh baslast dygnsprofil veckoprofil drifttid natt helg avvikelser kostnad excel csv'},{id:'period',name:'Jämför energianvändning',category:'Energi & fastighet',description:'Jämför årets energianvändning med föregående år eller ett valfritt referensår. Ladda upp Excel/CSV och se diagram, månadsvisa differenser och helårsskillnad i kWh och procent.',icon:'chart',keywords:'jämför två dataperioder energianvändning referensår år månad excel csv stapeldiagram procent förändring pdf png'},{id:'anomaly',name:'Hitta avvikelser i min data',category:'Produktivitet',description:'Hitta ovanliga värden och se exakt rad, cell och orsak i Excel eller CSV.',icon:'activity',keywords:'avvikelse avvikande data excel rad cell statistik gränsvärde analys csv'},{id:'time',name:'Vad kostar min tid?',category:'Produktivitet',description:'Räkna ut tidsåtgång, möjlig tidsbesparing, frigjorda arbetsdagar och tidsvärde.',icon:'calculator',keywords:'tid tidsbesparing effektivisering produktivitet automatisering timkostnad arbetsdagar minuter procent'},{id:'chart',name:'Visualisera min data',category:'Produktivitet',description:'Gör din data begriplig med automatiska insikter, snygga diagram och presentationsklara bilder.',icon:'chart',keywords:'diagram graf visualisering excel xlsx csv statistik data stapeldiagram linjediagram cirkeldiagram presentation png svg'},{id:'peak',name:'Hitta toppeffekter',category:'Energi & fastighet',description:'Ladda upp tidsserier och hitta effekttoppar, tidpunkter och möjliga kostnader.',icon:'activity',keywords:'toppeffekt effekttopp maxeffekt effektuttag el energi kW kWh kvart timme mätdata csv excel lastprofil effekttariff'},{id:'invest',name:'Jämför investeringar',category:'Ekonomi',description:'Jämför flera investeringar med nettonuvärde, återbetalningstid, LCC och känslighetsanalys.',icon:'compare',keywords:'investering investeringsunderlag lönsamhet kalkyl ränta nuvärde NPV återbetalningstid livscykelkostnad LCC jämföra alternativ excel csv beslutsunderlag'},{id:'procent',name:'Procent- och förändringskalkylator',category:'Ekonomi',description:'Beräkna procentuell förändring, procent av ett tal och räkna baklänges.',icon:'percent',keywords:'procent procentuell ökning minskning förändring skillnad andel baklänges ekonomi'},{id:'kalkylator',name:'Driftkostnadskalkylator',category:'Energi & fastighet',description:'Beräkna energikostnad och möjlig besparing när drifttiden minskar.',icon:'calculator',keywords:'el drift kwh energi besparing kostnad effekt fastighet'}];
+const tools=[{"id":"savings","name":"Hitta energibesparingar","category":"Energi & fastighet","description":"Analysera baslast, dygns- och veckoprofiler, drifttider, avvikelser och möjliga energibesparingar från Excel eller CSV.","icon":"activity","keywords":"energibesparing energi kwh baslast dygnsprofil veckoprofil drifttid natt helg avvikelser kostnad excel csv"},{"id":"period","name":"Jämför energianvändning","category":"Energi & fastighet","description":"Jämför årets energianvändning med föregående år eller ett valfritt referensår. Ladda upp Excel/CSV och se diagram, månadsvisa differenser och helårsskillnad i kWh och procent.","icon":"chart","keywords":"jämför två dataperioder energianvändning referensår år månad excel csv stapeldiagram procent förändring pdf png"},{"id":"anomaly","name":"Hitta avvikelser i min data","category":"Produktivitet","description":"Hitta ovanliga värden och se exakt rad, cell och orsak i Excel eller CSV.","icon":"activity","keywords":"avvikelse avvikande data excel rad cell statistik gränsvärde analys csv"},{"id":"chart","name":"Visualisera min data","category":"Produktivitet","description":"Gör din data begriplig med automatiska insikter, snygga diagram och presentationsklara bilder.","icon":"chart","keywords":"diagram graf visualisering excel xlsx csv statistik data stapeldiagram linjediagram cirkeldiagram presentation png svg"},{"id":"peak","name":"Hitta toppeffekter","category":"Energi & fastighet","description":"Ladda upp tidsserier och hitta effekttoppar, tidpunkter och möjliga kostnader.","icon":"activity","keywords":"toppeffekt effekttopp maxeffekt effektuttag el energi kW kWh kvart timme mätdata csv excel lastprofil  effekttaxa effektavgift elnätsavgift belastning högsta effekt dyra toppar"},{"id":"invest","name":"Jämför investeringar","category":"Ekonomi","description":"Jämför flera investeringar med nettonuvärde, återbetalningstid, LCC och känslighetsanalys.","icon":"compare","keywords":"investering investeringsunderlag lönsamhet kalkyl ränta nuvärde NPV återbetalningstid livscykelkostnad LCC jämföra alternativ excel csv beslutsunderlag"},{"id":"scenario","name":"Vad händer om…?","category":"Ekonomi & beslut","description":"Jämför nuläge och scenario för inköp, kapacitet eller investering. Se effekt, antaganden och beslutsunderlag direkt.","icon":"sliders-horizontal","keywords":"scenario inköp pris volym rabatt kapacitet arbetstid investering återbetalning känslighet beslut ingenjör inköpschef"},{"id":"workflow","name":"Visualisera arbetsflöde","category":"Produktivitet","description":"Skapa moderna processkartor och flödesscheman direkt medan du redigerar. Lägg till steg, beslut och ansvariga och exportera som PNG, JPG eller SVG.","icon":"git-branch","keywords":"arbetsflöde arbetsprocess processkarta flödesschema beslut ja nej roller png jpg svg export visualisera"},{"id":"aterbruk","name":"Återbruksval","category":"Miljö & hållbarhet","description":"Jämför reparation, återbruk och nyinköp över hela livscykeln med liveuppdaterade kostnader och klimatdata.","icon":"recycle"}];
 // Håll båda räknarna på startsidan synkroniserade med den faktiska verktygslistan.
 for (const id of ['fl-published-hero', 'fl-published-stat']) {
   const counter = document.getElementById(id);
@@ -12,28 +12,33 @@ function flBuildNavigation(){
   const nav=sidebar.querySelector('nav.tool-nav');
   if(nav){
     nav.replaceChildren();
+    const groups=new Map();
     for(const t of tools){
-      const a=document.createElement('a');
-      a.className='nav-btn';
-      a.dataset.go=t.id;
-      a.href='#'+t.id;
-      const icon=document.createElement('span');
-      icon.className='nav-tool-icon';
-      icon.setAttribute('aria-hidden','true');
-      const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-      svg.setAttribute('class','fl-line-icon');
-      const use=document.createElementNS('http://www.w3.org/2000/svg','use');
-      use.setAttribute('href','#fl-icon-'+t.icon);
-      svg.appendChild(use);icon.appendChild(svg);
-      const label=document.createElement('span');
-      label.className='nav-tool-text';
-      label.textContent=t.name;
-      const arrow=document.createElement('span');
-      arrow.className='nav-tool-arrow';
-      arrow.setAttribute('aria-hidden','true');
-      arrow.textContent='›';
-      a.append(icon,label,arrow);
-      nav.appendChild(a);
+      const category=t.category==='Ekonomi'?'Ekonomi & beslut':(t.category||'Övrigt');
+      if(!groups.has(category))groups.set(category,[]);
+      groups.get(category).push(t);
+    }
+    for(const [category,items] of groups){
+      const group=document.createElement('div');
+      group.className='fl-tool-group';
+      const heading=document.createElement('div');
+      heading.className='fl-tool-group-title';
+      const name=document.createElement('span');name.textContent=category;
+      const count=document.createElement('span');count.className='fl-tool-group-count';count.textContent=String(items.length);
+      heading.append(name,count);
+      const links=document.createElement('div');links.className='fl-tool-group-items';
+      for(const t of items){
+        const a=document.createElement('a');
+        a.className='nav-btn';a.dataset.go=t.id;a.href='#'+t.id;
+        const icon=document.createElement('span');icon.className='nav-tool-icon';icon.setAttribute('aria-hidden','true');
+        const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('class','fl-line-icon');
+        const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href','#fl-icon-'+t.icon);
+        svg.appendChild(use);icon.appendChild(svg);
+        const label=document.createElement('span');label.className='nav-tool-text';label.textContent=t.name;
+        const arrow=document.createElement('span');arrow.className='nav-tool-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='›';
+        a.append(icon,label,arrow);links.appendChild(a);
+      }
+      group.append(heading,links);nav.appendChild(group);
     }
   }
   const all=sidebar.querySelector('[data-go="verktyg"] .count');
