@@ -1,6 +1,17 @@
 from pathlib import Path
 import json,re,sys
 root=Path(__file__).resolve().parent
+# A published standalone template is already fully assembled. In that case,
+# do not attempt to insert module fragments using markers that are absent.
+template=(root/'template.html').read_text(encoding='utf-8')
+markers=('<!-- TOOL_VIEWS -->','<!-- TOOL_STYLES -->','<!-- CORE_SCRIPT -->','<!-- TOOL_SCRIPTS -->')
+counts=[template.count(marker) for marker in markers]
+if counts==[0,0,0,0]:
+    (root/'index.html').write_text(template,encoding='utf-8')
+    print('Publicerade färdigbyggd template.html som index.html')
+    sys.exit(0)
+if counts!=[1,1,1,1]:
+    raise ValueError('Ofullständig mall: samtliga fyra byggmarkörer måste finnas exakt en gång, eller saknas helt i en färdigbyggd sida.')
 entries=[]
 for d in sorted((root/'verktyg').iterdir()):
  if not d.is_dir() or not (d/'meta.json').exists():continue
