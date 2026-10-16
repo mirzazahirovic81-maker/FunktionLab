@@ -80,3 +80,24 @@
 .flr-report.flr-layout-custom .flr-kicker{color:#718592}
 .flr-report.flr-layout-custom .flr-cover h2{font-weight:620!important}
 @media(max-width:600px){.flr-report{padding:20px!important}.flr-report .flr-cover h2{font-size:26px!important}.flr-report .flr-report-meta{gap:9px 12px!important}}
+
+
+/* FunktionLab – gemensam introduktion för alla verktyg */
+.fl-tool-intro{position:relative;overflow:hidden;margin:16px 0 30px;border:1px solid #d6e4ec;border-radius:24px;background:linear-gradient(115deg,#fff 0%,#f7fcfd 64%,#e9f8f9 100%);box-shadow:0 12px 36px rgba(14,52,75,.055);color:#102842}
+.fl-tool-intro:before{content:"";position:absolute;right:-92px;top:-125px;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(38,205,199,.13),transparent 69%);pointer-events:none}
+.fl-intro-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:24px 30px 0}
+.fl-intro-kicker{font-size:11px;letter-spacing:.17em;font-weight:800;color:#087e94;text-transform:uppercase}
+.fl-intro-kicker span{color:#9cbbc5;padding:0 7px}.fl-intro-test{display:inline-block;letter-spacing:.05em;margin-left:10px;color:#667b8a;font-size:10px}
+.fl-intro-id{font-size:12px;font-weight:800;letter-spacing:.14em;color:#82a7b4}
+.fl-intro-main{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:17px 30px 27px}
+.fl-intro-copy{max-width:760px;position:relative;z-index:1}.fl-intro-copy h2{font-size:clamp(30px,3.3vw,48px);line-height:1.13;letter-spacing:-.045em;margin:0 0 13px;color:#0c2944}
+.fl-intro-promise{font-size:clamp(18px,1.8vw,24px);line-height:1.35;font-weight:750;letter-spacing:-.025em;color:#087f92;margin:0 0 10px}
+.fl-intro-desc{font-size:clamp(14px,1.2vw,17px);line-height:1.6;color:#506779;margin:0;max-width:680px}
+.fl-intro-symbol{width:92px;height:92px;flex:none;border-radius:23px;display:flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(145deg,#123b65,#087d9d);box-shadow:0 13px 25px rgba(11,96,121,.19);transform:rotate(-6deg)}
+.fl-intro-symbol span{display:block;width:9px;border-radius:10px;background:linear-gradient(#74ffe0,#3ebbe9)}.fl-intro-symbol span:nth-child(1){height:23px}.fl-intro-symbol span:nth-child(2){height:42px}.fl-intro-symbol span:nth-child(3){height:31px}
+.fl-intro-steps{display:flex;flex-wrap:wrap;align-items:center;gap:0;border-top:1px solid #dce9ee;background:linear-gradient(90deg,#0a2d49,#075769);color:#e8fafc;padding:14px 30px}
+.fl-intro-steps span{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:750;letter-spacing:.075em;white-space:nowrap}
+.fl-intro-steps span:not(:last-child):after{content:'→';color:#66cfd4;margin:0 24px;font-size:17px;font-weight:400}
+.fl-intro-steps b{color:#6de1cf;font-size:12px}
+@media(max-width:760px){.fl-tool-intro{border-radius:18px;margin:12px 0 22px}.fl-intro-top{padding:20px 20px 0}.fl-intro-main{padding:15px 20px 22px}.fl-intro-symbol{width:55px;height:55px;border-radius:15px;gap:4px}.fl-intro-symbol span{width:6px}.fl-intro-symbol span:nth-child(1){height:15px}.fl-intro-symbol span:nth-child(2){height:27px}.fl-intro-symbol span:nth-child(3){height:19px}.fl-intro-copy h2{font-size:clamp(27px,6vw,36px)}.fl-intro-promise{font-size:18px}.fl-intro-desc{font-size:14px}.fl-intro-steps{padding:12px 20px;gap:9px 0}.fl-intro-steps span{font-size:10px}.fl-intro-steps span:not(:last-child):after{margin:0 10px}}
+@media(max-width:420px){.fl-intro-symbol{display:none}.fl-intro-steps span:not(:last-child):after{margin:0 7px}.fl-intro-kicker{font-size:10px;letter-spacing:.09em}}
