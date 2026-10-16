@@ -1,8 +1,8 @@
 {
   "id": "anomaly",
-  "name": "Hitta avvikelser i min data",
+  "name": "Hitta avvikelser i data",
   "category": "Produktivitet",
   "description": "Hitta ovanliga värden och se exakt rad, cell och orsak i Excel eller CSV.",
   "icon": "activity",
-  "keywords": "avvikelse avvikande data excel rad cell statistik gränsvärde analys csv  hitta fel upptäcka orimliga värden extremvärde outlier datakvalitet kontrollera datamängd"
+  "keywords": "avvikelse avvikande data excel rad cell statistik gränsvärde analys csv  hitta fel upptäcka orimliga värden extremvärde outlier datakvalitet kontrollera datamängd hitta avvikelser i min data"
 }
