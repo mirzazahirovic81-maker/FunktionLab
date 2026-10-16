@@ -1,8 +1,8 @@
 {
-  "id": "savings",
-  "name": "Hitta energibesparingar",
-  "category": "Energi & fastighet",
-  "description": "Analysera baslast, dygns- och veckoprofiler, drifttider, avvikelser och möjliga energibesparingar från Excel eller CSV.",
-  "icon": "activity",
-  "keywords": "energibesparing energi kwh baslast dygnsprofil veckoprofil drifttid natt helg avvikelser kostnad excel csv  äldreboende vårdboende skola förskola bostad kontor nattförbrukning helgförbrukning drifttider baslast energislöseri analysera mätvärden"
+  "id": "scenario",
+  "name": "Vad händer om…?",
+  "category": "Ekonomi & beslut",
+  "description": "Jämför nuläge och scenario för inköp, kapacitet eller investering. Se effekt, antaganden och beslutsunderlag direkt.",
+  "icon": "sliders-horizontal",
+  "keywords": "scenario inköp pris volym rabatt kapacitet arbetstid investering återbetalning känslighet beslut ingenjör inköpschef  vad händer om kalkyl simulera alternativ förändrad kostnad påverkan beslut"
 }
