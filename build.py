@@ -25,6 +25,18 @@ core,n=re.subn(r'const tools=\[.*?\];',lambda m:new_registry,core,count=1,flags=
 if n!=1:raise ValueError('Kan inte hitta verktygsregistret i core.js')
 if template.count('<!-- FL_CORE -->')!=1:raise ValueError('Saknar kärnmarkör')
 html=template.replace('<!-- FL_CORE -->','<script>\n'+core.replace('</script','<\\/script')+'\n</script>')
+
+# Include the shared stylesheet in the built, self-contained index.html.
+# This covers the common introduction design used across tools.
+shared_css_file = root / 'style.css'
+if shared_css_file.is_file():
+    shared_css = shared_css_file.read_text(encoding='utf-8')
+    if '</style' in shared_css.lower():
+        raise ValueError('style.css contains an unexpected closing style tag')
+    if html.count('</head>') != 1:
+        raise ValueError('Cannot find a unique </head> in template.html')
+    html = html.replace('</head>', '<style id="fl-shared-css">\n' + shared_css + '\n</style>\n</head>', 1)
+
 for kind,filename in [('VIEW','view.html'),('STYLE','style.css'),('SCRIPT','logic.js')]:
     for meta,folder in entries:
         marker=f'<!-- FL_{kind}_{meta["id"]} -->'
