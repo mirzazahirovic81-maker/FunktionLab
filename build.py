@@ -37,12 +37,28 @@ for kind,filename in [('VIEW','view.html'),('STYLE','style.css'),('SCRIPT','logi
         if kind=='SCRIPT':value='<script>\n'+value.replace('</script','<\\/script')+'\n</script>'
         if marker in html:
             if html.count(marker)!=1:raise ValueError(f'Dubblettmarkör: {marker}')
-            html=html.replace(marker,value)
+            if kind=='VIEW' and html.find(marker)>html.find('</main>'):
+                # Repair legacy templates with view markers misplaced after </main>.
+                html=html.replace(marker,'')
+                home_marker='<div id="home-view"'
+                if html.count(home_marker)!=1:
+                    raise ValueError('Kan inte hitta unik plats före startsidan')
+                html=html.replace(home_marker,value+'\n'+home_marker,1)
+            else:
+                html=html.replace(marker,value)
         else:
             # Newly added tools are inserted alongside existing tool views/styles/scripts.
             anchor=f'<!-- FL_NEW_{kind} -->'
             if html.count(anchor)!=1:raise ValueError(f'Saknar plats för nytt verktyg: {anchor}')
-            html=html.replace(anchor,value+'\n'+anchor)
+            if kind=='VIEW':
+                # New tool views must live inside <main class="content">,
+                # alongside the existing tool views, not at the end of <body>.
+                home_marker='<div id="home-view"'
+                if html.count(home_marker)!=1:
+                    raise ValueError('Kan inte hitta unik plats före startsidan')
+                html=html.replace(home_marker,value+'\n'+home_marker,1)
+            else:
+                html=html.replace(anchor,value+'\n'+anchor)
 for kind in ('VIEW','STYLE','SCRIPT'):
     html=html.replace(f'<!-- FL_NEW_{kind} -->','')
 # Counters in the homepage and sidebar are also updated at runtime by core.js.
