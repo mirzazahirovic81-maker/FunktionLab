@@ -1,99 +1,11 @@
-(()=>{
-const root=document.getElementById('aterbruk-view');
-if(!root || root.dataset.abInit)return;
-root.dataset.abInit='1';
-const $=id=>root.querySelector('#'+id);
-const specs=[
- {key:'repair',name:'Reparera befintligt',life:4,price:2200,production:18,transport:350,transportCo2:9,install:450,installCo2:2,energy:150,energyCo2:8,maintenance:250,maintenanceCo2:3,disposal:250,disposalCo2:12,residual:0},
- {key:'reuse',name:'Köpa återbrukat',life:6,price:4800,production:25,transport:650,transportCo2:24,install:400,installCo2:2,energy:120,energyCo2:7,maintenance:180,maintenanceCo2:3,disposal:300,disposalCo2:12,residual:300},
- {key:'new',name:'Köpa nytt',life:10,price:8500,production:190,transport:400,transportCo2:18,install:400,installCo2:2,energy:100,energyCo2:6,maintenance:120,maintenanceCo2:2,disposal:350,disposalCo2:15,residual:500}
-];
-const fields=[
- ['life','Förväntad livslängd','år',1],['price','Anskaffning / reparation','kr',0],
- ['production','Tillverkning / material','kg CO₂e',0],
- ['transport','Transport och hämtning','kr',0],['transportCo2','Transport och hämtning','kg CO₂e',0],
- ['install','Installation / arbete','kr',0],['installCo2','Installation / arbete','kg CO₂e',0],
- ['energy','Drift / energi / förbrukning','kr/år',0],['energyCo2','Drift / energi / förbrukning','kg CO₂e/år',0],
- ['maintenance','Underhåll / service','kr/år',0],['maintenanceCo2','Underhåll / service','kg CO₂e/år',0],
- ['disposal','Sluthantering / avfall','kr',0],['disposalCo2','Sluthantering / avfall','kg CO₂e',0],
- ['residual','Restvärde vid sluthantering','kr',0]
-];
-const colors=['#0d9488','#447db2','#8b76b9'];
-let data=specs.map(s=>({...s}));let last=[];
-const num=v=>{const n=Number(String(v).replace(',','.'));return Number.isFinite(n)?n:NaN};
-const fmt=(n,d=0)=>Number.isFinite(n)?n.toLocaleString('sv-SE',{maximumFractionDigits:d,minimumFractionDigits:d}):'–';
-const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function renderInputs(){
- $('ab-alternatives').innerHTML=data.map((a,i)=>`<fieldset class="ab-alt" style="--ab-accent:${colors[i]}"><legend><span class="ab-num">${i+1}</span> ${escape(a.name)}</legend><div class="ab-fields">${fields.map(([key,label,unit,min])=>`<label>${label} <small>(${unit})</small><input type="number" inputmode="decimal" min="${min}" step="${key==='life'?'1':'any'}" data-alt="${i}" data-field="${key}" value="${a[key]}"></label>`).join('')}</div><label class="ab-source">Källa / antagande för klimatdata<input type="text" maxlength="250" data-alt="${i}" data-field="source" value="${escape(a.source||'')}" placeholder="Ex. EPD, leverantörsdata eller egen uppskattning"></label></fieldset>`).join('');
-}
-function calculate(a,years,rate){
- const events=[];let total=0,carbon=0,cycles=0;
- const discount=(value,t)=>value/Math.pow(1+rate,t);
- for(let t=0;t<years;t+=a.life){
-   cycles++;
-   const start=a.price+a.transport+a.install;
-   const impact=a.production+a.transportCo2+a.installCo2;
-   total+=discount(start,t);carbon+=impact;
-   events.push({t,type:'anskaffning',cost:start,carbon:impact});
-   const end=Math.min(years,t+a.life);
-   for(let y=t+1;y<=end;y++){
-     const yearly=a.energy+a.maintenance;
-     const yearlyCo2=a.energyCo2+a.maintenanceCo2;
-     total+=discount(yearly,y);carbon+=yearlyCo2;
-     events.push({t:y,type:'drift',cost:yearly,carbon:yearlyCo2});
-   }
-   total+=discount(a.disposal,end);carbon+=a.disposalCo2;
-   events.push({t:end,type:'sluthantering',cost:a.disposal,carbon:a.disposalCo2});
-   if(end===years){
-     // Restvärde vid horisont, proportionerat efter återstående livslängd.
-     const remaining=Math.max(0,(a.life-(years-t))/a.life);
-     const credit=a.residual*remaining;
-     total-=discount(credit,years);
-     events.push({t:years,type:'restvärde',cost:-credit,carbon:0});
-   }
- }
- return {name:a.name,total,carbon,cycles,events,perYear:total/years};
-}
-function chart(el,results,key,unit){
- const max=Math.max(1,...results.map(r=>r[key]));
- el.innerHTML=results.map((r,i)=>`<div class="ab-bar-row"><div class="ab-bar-head"><span>${escape(r.name)}</span><b>${fmt(r[key],key==='carbon'?1:0)} ${unit}</b></div><div class="ab-track"><div class="ab-bar" style="width:${Math.max(0,r[key]/max*100)}%;background:${colors[i]}"></div></div></div>`).join('');
-}
-function update(){
- const years=num($('ab-years').value),rate=num($('ab-rate').value);
- const all=[years,rate,...data.flatMap(a=>fields.map(([k])=>a[k]))];
- const bad=all.some(v=>!Number.isFinite(v))||years<1||years>50||!Number.isInteger(years)||rate<0||rate>30||data.some(a=>a.life<1||!Number.isInteger(a.life)||fields.some(([k,, ,min])=>a[k]<min));
- const warning=$('ab-warning');
- if(bad){warning.hidden=false;warning.textContent='Kontrollera inmatningen. Analysperiod och livslängd måste vara hela positiva år, kostnader och utsläpp får inte vara negativa.';return}
- warning.hidden=true;
- last=data.map(a=>calculate(a,years,rate/100));
- const lowCost=last.reduce((a,b)=>a.total<=b.total?a:b);
- const lowCarbon=last.reduce((a,b)=>a.carbon<=b.carbon?a:b);
- $('ab-best-cost').textContent=fmt(lowCost.total)+' kr';
- $('ab-best-cost-val').textContent=lowCost.name;
- $('ab-best-carbon').textContent=fmt(lowCarbon.carbon,1)+' kg CO₂e';
- $('ab-best-carbon-val').textContent=lowCarbon.name;
- chart($('ab-cost-chart'),last,'total','kr');
- chart($('ab-carbon-chart'),last,'carbon','kg');
- $('ab-table').innerHTML=last.map((r,i)=>`<tr><th>${escape(r.name)}</th><td>${fmt(r.total)}</td><td>${fmt(r.perYear)}</td><td>${fmt(r.carbon,1)}</td><td>${r.cycles-1}</td></tr>`).join('');
- $('ab-insight').textContent=lowCost.name===lowCarbon.name?`${lowCost.name} har både lägst beräknad livscykelkostnad och lägst klimatpåverkan utifrån angivna värden.`:`Ekonomiskt lägst: ${lowCost.name}. Klimatmässigt lägst: ${lowCarbon.name}. Valet beror på prioriteringar och kvaliteten i klimatunderlaget.`;
- $('ab-update').textContent='Beräknat för '+years+' år · '+fmt(rate,1)+' % kalkylränta';
-}
-root.addEventListener('input',e=>{
- const el=e.target;
- if(el.dataset.alt!==undefined){
-   const i=Number(el.dataset.alt),field=el.dataset.field;
-   if(field==='source')data[i].source=el.value;
-   else data[i][field]=num(el.value);
- }
- update();
-});
-root.addEventListener('change',update);
-function save(name,blob){const a=document.createElement('a');const url=URL.createObjectURL(blob);a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
-const fileBase=()=>($('ab-product').value.trim()||'aterbruksval').replace(/[^a-zA-Z0-9åäöÅÄÖ_-]+/g,'_').slice(0,50);
-$('ab-example').addEventListener('click',()=>{data=specs.map(s=>({...s}));$('ab-years').value=10;$('ab-rate').value=3;$('ab-product').value='Kontorsstol';renderInputs();update()});
-$('ab-save').addEventListener('click',()=>save(fileBase()+'_indata.json',new Blob([JSON.stringify({version:1,product:$('ab-product').value,years:$('ab-years').value,rate:$('ab-rate').value,alternatives:data},null,2)],{type:'application/json'})));
-$('ab-load').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const obj=JSON.parse(await f.text());if(!Array.isArray(obj.alternatives)||obj.alternatives.length!==3)throw Error('Felaktig fil');const parsed=obj.alternatives.map((a,i)=>{const r={...specs[i]};fields.forEach(([k])=>{if(a[k]===undefined)throw Error('Saknar fält '+k);r[k]=num(a[k])});r.source=String(a.source||'').slice(0,250);return r});data=parsed;$('ab-product').value=String(obj.product||'').slice(0,80);$('ab-years').value=obj.years;$('ab-rate').value=obj.rate;renderInputs();update()}catch(err){alert('Kunde inte läsa in filen: '+err.message)}finally{e.target.value=''}});
-$('ab-csv').addEventListener('click',()=>{if(!last.length)return;const rows=[['Produkt',$('ab-product').value],['Analysperiod år',$('ab-years').value],['Kalkylränta %',$('ab-rate').value],[],['Alternativ','LCC kr','LCC kr per år','Klimat kg CO2e','Ersättningsköp','Källa klimatdata'],...last.map((r,i)=>[r.name,r.total.toFixed(2),r.perYear.toFixed(2),r.carbon.toFixed(2),r.cycles-1,data[i].source||'Ej angiven'])];const csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(';')).join('\r\n');save(fileBase()+'_jamforelse.csv',new Blob([csv],{type:'text/csv;charset=utf-8'}))});
-$('ab-print').addEventListener('click',()=>window.print());
-renderInputs();update();
+(()=>{'use strict';const root=document.getElementById('chart-view');if(!root)return;const $=id=>document.getElementById(id);let headers=[],rows=[],lastSvg='',slideSvg='';const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const number=v=>{let s=String(v??'').trim().replace(/\s/g,'');if(s.includes(',')&&!s.includes('.'))s=s.replace(',','.');return Number(s)};const fmt=v=>new Intl.NumberFormat('sv-SE',{maximumFractionDigits:1}).format(v);const demo=[['Månad','Energi_kWh','Kostnad_kr'],['Januari',12500,18750],['Februari',11300,16950],['Mars',9800,14700],['April',8500,12750],['Maj',7200,10800],['Juni',6100,9150],['Juli',5900,8850],['Augusti',6500,9750],['September',8200,12300],['Oktober',9900,14850],['November',11300,16950],['December',13100,19650]];
+function parseCSV(text){const line=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim());if(line.length<2)throw Error('Filen behöver rubriker och minst en datarad.');const first=line[0],sep=first.includes('\t')?'\t':first.includes(';')?';':',';return line.map(l=>{const out=[];let field='',quote=false;for(let i=0;i<l.length;i++){const c=l[i];if(c==='"'){if(quote&&l[i+1]==='"'){field+='"';i++}else quote=!quote}else if(c===sep&&!quote){out.push(field);field=''}else field+=c}out.push(field);return out})}
+function load(data,name){if(data.length<2)throw Error('Ingen användbar data hittades.');headers=data[0].map(x=>String(x??'').trim());rows=data.slice(1).filter(r=>r.some(x=>String(x??'').trim()));if(!rows.length)throw Error('Det saknas datarader.');for(const id of ['flchart-x','flchart-series']){const sel=$(id);sel.replaceChildren();headers.forEach((h,i)=>{const o=document.createElement('option');o.value=i;o.textContent=h||'Kolumn '+(i+1);sel.appendChild(o)})} $('flchart-x').value='0';$('flchart-series').value=String(headers.length>1?1:0);$('flchart-status').textContent=`✓ ${rows.length} rader inlästa från ${name}`;$('flchart-error').textContent='';render()}
+function selected(){const x=Number($('flchart-x').value),y=Number($('flchart-series').value);if(x===y)throw Error('Välj olika kolumner för etiketter och värden.');const data=rows.map(r=>({label:String(r[x]??''),value:number(r[y])})).filter(r=>r.label&&Number.isFinite(r.value));if(!data.length)throw Error('Värdekolumnen innehåller inga numeriska värden.');return data.slice(0,120)}
+function svgChart(data,style='bar'){const w=960,h=450,left=88,right=28,top=42,bottom=95;const vals=data.map(d=>d.value),min=Math.min(0,...vals),max=Math.max(0,...vals),span=max-min||1;const X=i=>left+(i+.5)*(w-left-right)/data.length,Y=v=>top+(max-v)/span*(h-top-bottom);const base=Y(0);const color=$('flchart-palette').value==='warm'?'#b76e42':$('flchart-palette').value==='mono'?'#49616e':'#1087a1';if(style==='pie'){const positives=data.filter(d=>d.value>0),total=positives.reduce((a,b)=>a+b.value,0);if(!total)throw Error('Cirkeldiagram kräver positiva värden.');let start=-Math.PI/2;const colors=['#087c90','#26bba8','#3b75b2','#d6a247','#756bb1','#d27863'];const slices=positives.map((d,i)=>{const end=start+d.value/total*Math.PI*2,x1=480+170*Math.cos(start),y1=225+170*Math.sin(start),x2=480+170*Math.cos(end),y2=225+170*Math.sin(end),large=end-start>Math.PI?1:0;const path=`<path d="M 480 225 L ${x1} ${y1} A 170 170 0 ${large} 1 ${x2} ${y2} Z" fill="${colors[i%colors.length]}"/>`;start=end;return path}).join('');return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 450" width="960" height="450"><rect width="960" height="450" fill="white"/>${slices}<text x="720" y="45" font-size="20" fill="#12394f">${esc($('flchart-title').value||'Fördelning')}</text>${positives.slice(0,12).map((d,i)=>`<text x="720" y="${80+i*26}" font-size="16" fill="${colors[i%colors.length]}">■ ${esc(d.label.slice(0,14))}: ${fmt(d.value)}</text>`).join('')}</svg>`}let parts=[`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="Diagram över ${esc(headers[Number($('flchart-series').value)])}"><rect width="${w}" height="${h}" fill="#fff"/><line x1="${left}" y1="${base}" x2="${w-right}" y2="${base}" stroke="#aec4d0"/>`];const step=(w-left-right)/data.length;data.forEach((d,i)=>{const x=X(i),y=Y(d.value);if(style==='line'){if(i)parts.push(`<line x1="${X(i-1)}" y1="${Y(data[i-1].value)}" x2="${x}" y2="${y}" stroke="${color}" stroke-width="4"/>`);parts.push(`<circle cx="${x}" cy="${y}" r="4" fill="${color}"/>`)}else parts.push(`<rect x="${x-step*.34}" y="${Math.min(y,base)}" width="${Math.max(2,step*.68)}" height="${Math.max(1,Math.abs(base-y))}" rx="3" fill="${color}"/>`);if(data.length<=24||i%Math.ceil(data.length/18)===0)parts.push(`<text x="${x}" y="${h-60}" font-size="${data.length>16?12:16}" fill="#37546a" text-anchor="end" transform="rotate(-38 ${x} ${h-60})">${esc(d.label.slice(0,15))}</text>`)});for(let i=0;i<=4;i++){const v=min+span*i/4;parts.push(`<text x="${left-12}" y="${Y(v)+5}" font-size="15" fill="#536e80" text-anchor="end">${esc(fmt(v))}</text>`)}parts.push(`<text x="${left}" y="25" font-size="20" font-weight="700" fill="#102f43">${esc($('flchart-title').value||headers[Number($('flchart-series').value)]||'Diagram')}</text></svg>`);return parts.join('')}
+function save(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}function png(svg,name){const url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'})),img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=1920;c.height=900;const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(b=>b?save(b,name):$('flchart-error').textContent='PNG kunde inte skapas.','image/png')};img.onerror=()=>{$('flchart-error').textContent='Bilden kunde inte exporteras.';URL.revokeObjectURL(url)};img.src=url}
+function render(){if(!rows.length)return;try{const data=selected(),vals=data.map(d=>d.value),sum=vals.reduce((a,b)=>a+b,0),avg=sum/vals.length,max=Math.max(...vals),min=Math.min(...vals),imax=vals.indexOf(max);lastSvg=svgChart(data,$('flchart-type').value);$('flchart-graphic').innerHTML=lastSvg;const statement=`${data.length} värden. Summa ${fmt(sum)}, medelvärde ${fmt(avg)}, högsta värde ${fmt(max)} (${data[imax].label}) och lägsta värde ${fmt(min)}. Jämförelsen beskriver endast inlästa data.`;$('flchart-insights').textContent=statement;$('flchart-series-help').textContent=headers[Number($('flchart-series').value)]||'';if(!$('flpres-headline').value)$('flpres-headline').value=$('flchart-title').value||'Resultat från analysen';if(!$('flpres-conclusion').value)$('flpres-conclusion').value=statement;renderSlide();$('flchart-error').textContent=''}catch(e){$('flchart-error').textContent=e.message}}
+function renderSlide(){if(!lastSvg)return;const title=esc($('flpres-headline').value||'Analysresultat'),source=esc($('flpres-source').value||'Egna data'),conclusion=esc($('flpres-conclusion').value||'');const dark=$('flpres-style').value==='dark',bg=dark?'#08243a':'#f6fafb',fg=dark?'#fff':'#102f43';slideSvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720"><rect width="1280" height="720" fill="${bg}"/><text x="60" y="83" fill="${fg}" font-size="42" font-family="Arial" font-weight="700">${title.slice(0,55)}</text><svg x="60" y="120" width="1160" height="440" viewBox="0 0 960 450">${lastSvg.replace(/^.*?<svg[^>]*>/,'').replace(/<\/svg>$/,'')}</svg><text x="60" y="613" fill="${fg}" font-size="24" font-family="Arial">${conclusion.slice(0,90)}</text><text x="60" y="670" fill="${fg}" font-size="18" font-family="Arial">Källa: ${source.slice(0,85)}</text></svg>`;$('flpres-preview').innerHTML=slideSvg}
+$('flchart-excel').onclick=()=>{if(!rows.length){$('flchart-error').textContent='Ladda upp data eller visa ett exempel först.';return}window.flExportWorkbook([['Underlag',[headers,...rows.map(r=>r.map(x=>{const n=number(x);return String(x).trim()!==''&&Number.isFinite(n)?n:String(x)}))]]],'visualiserad-data')};$('flchart-example').onclick=()=>load(demo,'demonstrationsdata');$('flchart-template').onclick=()=>save(new Blob(['Månad;Energi_kWh;Kostnad_kr\nJanuari;12500;18750\nFebruari;11300;16950\n'],{type:'text/csv;charset=utf-8'}),'mall-visualisera-data.csv');$('flchart-use-paste').onclick=()=>{try{load(parseCSV($('flchart-paste').value),'inklistring')}catch(e){$('flchart-error').textContent=e.message}};$('flchart-file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{let data;if(/\.xlsx$/i.test(f.name)){if(typeof window.flPeriodReadXlsx!=='function')throw Error('Excel-inläsning saknas. Använd CSV.');data=(await window.flPeriodReadXlsx(f)).rows}else data=parseCSV(await f.text());load(data,f.name)}catch(err){$('flchart-error').textContent=err.message}};
+['flchart-x','flchart-series','flchart-type','flchart-title','flchart-unit','flchart-palette'].forEach(id=>$(id).addEventListener('input',render));['flpres-headline','flpres-source','flpres-style','flpres-highlight','flpres-conclusion'].forEach(id=>$(id).addEventListener('input',renderSlide));$('flchart-suggest').onclick=render;$('flchart-copy-insights').onclick=()=>navigator.clipboard?.writeText($('flchart-insights').textContent);$('flchart-svg').onclick=()=>lastSvg&&save(new Blob([lastSvg],{type:'image/svg+xml'}),'diagram.svg');$('flchart-png').onclick=()=>lastSvg&&png(lastSvg,'diagram.png');$('flpres-suggest').onclick=()=>{if(rows.length){$('flpres-headline').value=$('flchart-title').value||'Sammanfattning av data';$('flpres-conclusion').value=$('flchart-insights').textContent;renderSlide()}};$('flpres-copy').onclick=()=>navigator.clipboard?.writeText($('flpres-headline').value+'\n'+$('flpres-conclusion').value);$('flpres-svg').onclick=()=>slideSvg&&save(new Blob([slideSvg],{type:'image/svg+xml'}),'presentation.svg');$('flpres-png').onclick=()=>slideSvg&&png(slideSvg,'presentation.png');
 })();
