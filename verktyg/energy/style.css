@@ -92,7 +92,7 @@
 #energy-view .payback-heading strong{font-size:23px;white-space:nowrap}
 @media(max-width:480px){#energy-view .payback-heading{column-gap:12px}
 #energy-view .payback-heading strong{font-size:22px}}
-#energy-view .ea-shell{width:100%;max-width:940px;margin:auto;padding:0 0 32px;min-width:0}
+#energy-view .ea-shell{width:100%;max-width:none;margin:0;padding:0 0 32px;min-width:0}
 #energy-view .ea-toolbar{display:flex;justify-content:flex-end;margin-bottom:16px}
 #energy-view .panel{background:#fff}
 #energy-view .summary{color:#fff}
