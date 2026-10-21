@@ -52,6 +52,11 @@ html,body{max-width:100%;overflow-x:clip}
 .fl-principles .fl-principle strong{grid-column:2;margin:0 0 4px;font-size:1.03rem;line-height:1.3}
 .fl-principles .fl-principle p{grid-column:2;margin:0;font-size:.94rem;line-height:1.48}
 @media(max-width:700px){.fl-principles .fl-principle{padding:16px 16px 17px;column-gap:12px}.fl-principles .fl-principle-icon{width:36px;height:36px}.fl-principles .fl-principle-icon svg{width:20px;height:20px}}
+
+/* Centrerad och mer sammanhållen innehållsbredd på stora skärmar. */
+@media (min-width: 761px) {
+  .main > .content { max-width: 1060px; width: 100%; margin-left: auto; margin-right: auto; }
+}
 </style><style>.native-form-wrap{width:100%;min-width:0;background:#fff;border:1px solid #dfe7ef;border-radius:20px;padding:28px;box-shadow:0 12px 36px rgba(18,39,70,.055)}#idea-form{display:flex;flex-direction:column;gap:12px}#idea-form label{font-size:14px;font-weight:750;color:#233452;margin-top:7px}#idea-form label span:not(.optional){color:#d04848}#idea-form .optional{font-weight:400;color:#728096}#idea-form textarea,#idea-form select,#idea-form input[type=email]{width:100%;min-width:0;border:1px solid #cfdbea;border-radius:12px;padding:14px 15px;font:inherit;font-size:15px;color:#1a2b49;background:#fff;box-sizing:border-box}#idea-form textarea{resize:vertical;min-height:135px}#idea-form textarea:focus,#idea-form select:focus,#idea-form input:focus{outline:3px solid #c4f3ee;border-color:#13a99e}#idea-form .idea-submit{border:0;border-radius:12px;background:#22bdb4;color:#092d43;padding:16px 20px;font:inherit;font-weight:800;cursor:pointer;margin-top:10px}#idea-form .idea-submit:disabled{opacity:.65;cursor:wait}#idea-form .idea-privacy{font-size:12px;color:#6c7990;line-height:1.6;margin:0}#idea-form .idea-feedback{font-size:14px;font-weight:650;line-height:1.5;padding:12px;border-radius:10px;background:#eaf8f5;color:#12675d;margin:2px 0}#idea-form .idea-feedback.error{background:#fff0ee;color:#9d3535}#idea-form .honeypot{position:absolute;left:-9999px;opacity:0;pointer-events:none}@media(max-width:760px){.native-form-wrap{padding:20px;border-radius:16px}}</style><style>
 .fl-thanks-backdrop{position:fixed;inset:0;z-index:99999;background:rgba(11,29,56,.58);display:none;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
 .fl-thanks-backdrop.fl-visible{display:flex}
