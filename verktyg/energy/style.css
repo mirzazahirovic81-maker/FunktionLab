@@ -105,3 +105,9 @@
 #energy-view .ea-shell .payback-heading strong{margin-left:0}
 #energy-view .ea-shell .bank[hidden],#energy-view .ea-shell #ea-pending[hidden]{display:none!important}
 @media(max-width:600px){#energy-view .ea-shell{padding:0 0 25px}#energy-view .panel{padding:16px}}
+
+/* Samma exempelknapp som Hitta energibesparingar. */
+#energy-view .ea-example-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:17px 0}
+#energy-view .ea-example-btn{background:#e8f2f6;border:1px solid #8eb2c2;border-radius:10px;color:#164d66;padding:12px 18px;font-weight:700;font-size:inherit;line-height:1.3;cursor:pointer;box-shadow:none}
+#energy-view .ea-example-btn:hover{background:#dcecf2}
+#energy-view .ea-example-btn:focus-visible{outline:3px solid #0c8fa6;outline-offset:2px}
