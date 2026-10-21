@@ -101,3 +101,29 @@
 .fl-intro-steps b{color:#6de1cf;font-size:12px}
 @media(max-width:760px){.fl-tool-intro{border-radius:18px;margin:12px 0 22px}.fl-intro-top{padding:20px 20px 0}.fl-intro-main{padding:15px 20px 22px}.fl-intro-symbol{width:55px;height:55px;border-radius:15px;gap:4px}.fl-intro-symbol span{width:6px}.fl-intro-symbol span:nth-child(1){height:15px}.fl-intro-symbol span:nth-child(2){height:27px}.fl-intro-symbol span:nth-child(3){height:19px}.fl-intro-copy h2{font-size:clamp(27px,6vw,36px)}.fl-intro-promise{font-size:18px}.fl-intro-desc{font-size:14px}.fl-intro-steps{padding:12px 20px;gap:9px 0}.fl-intro-steps span{font-size:10px}.fl-intro-steps span:not(:last-child):after{margin:0 10px}}
 @media(max-width:420px){.fl-intro-symbol{display:none}.fl-intro-steps span:not(:last-child):after{margin:0 7px}.fl-intro-kicker{font-size:10px;letter-spacing:.09em}}
+
+
+/* FunktionLab – konsekventa sidomarginaler på mobil.
+   Gäller både startsidan och samtliga verktygsvyer. */
+@media (max-width: 760px) {
+  .main > .content {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .main > .content > #home-view,
+  .main > .content > .tool-view {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .main > .content .hero,
+  .main > .content .fl-tool-intro {
+    box-sizing: border-box;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
