@@ -28,8 +28,12 @@
 
 /* Stående flöde: vänsterställt diagram, utan den generella 850px-minbredden.
    Horisontellt flöde behåller sidledes rullning vid behov. */
-#wf-diagram[data-direction="vertical"]{width:540px;min-width:540px;max-width:none}
+#wf-diagram[data-direction="vertical"]{width:430px;min-width:430px;max-width:none}
 @media(max-width:600px){
   .wf-preview-scroll{padding:0;overflow-x:auto;overscroll-behavior-x:contain}
-  #wf-diagram[data-direction="vertical"]{width:540px;min-width:540px}
+  #wf-diagram[data-direction="vertical"]{width:430px;min-width:430px}
 }
+
+/* SVG-bredden styrs av viewBox; ingen förstoring på mobila skärmar. */
+#wf-diagram[data-direction="vertical"]{width:430px;min-width:430px;max-width:none}
+.wf-preview-scroll{min-width:0;max-width:100%}

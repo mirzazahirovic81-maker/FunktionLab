@@ -18,19 +18,19 @@
  const draw=()=>{
   const svg=$('wf-diagram');svg.replaceChildren();const pal=palette(),vertical=$('wf-direction').value==='vertical',showRoles=$('wf-show-roles').checked;
   const n=steps.length,stepSpace=vertical?145:235,axisStart=vertical?175:190;
-  const w=vertical?540:Math.max(850,340+n*stepSpace),h=vertical?Math.max(430,245+n*stepSpace):530;
+  const w=vertical?430:Math.max(850,340+n*stepSpace),h=vertical?Math.max(430,245+n*stepSpace):530;
   svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.setAttribute('width',w);svg.setAttribute('height',h);svg.setAttribute('data-direction',vertical?'vertical':'horizontal');
   svg.appendChild(el('rect',{width:w,height:h,fill:pal.bg}));
   const defs=el('defs');const marker=el('marker',{id:'wf-arrow',viewBox:'0 0 10 10',refX:8,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'});marker.appendChild(el('path',{d:'M 1 1 L 9 5 L 1 9 z',fill:pal.line}));defs.appendChild(marker);svg.appendChild(defs);
   const title=safe($('wf-title').value,90)||'Mitt arbetsflöde';txt(svg,36,47,title,{anchor:'start',size:26,weight:700,fill:pal.ink});
   const sub=safe($('wf-subtitle').value,130);if(sub)txt(svg,36,73,sub,{anchor:'start',size:13,weight:400,fill:pal.muted});
-  const cx=vertical?145:0,cy=vertical?0:h/2;
+  const cx=vertical?125:0,cy=vertical?0:h/2;
   // Draw connectors first so the nodes remain on top.
   steps.forEach((s,i)=>{
    const a=axisStart+i*stepSpace,b=axisStart+(i+1)*stepSpace;
    if(i<n-1){if(vertical){path(svg,`M ${cx} ${a+43} V ${b-43}`,pal)}else{path(svg,`M ${a+86} ${cy} H ${b-86}`,pal)}}
    if(s.type==='decision'){
-    if(vertical){const by=a+80, branchX=cx+155;path(svg,`M ${cx+94} ${a} H ${branchX}`,pal);txt(svg,cx+116,a-11,'Nej',{size:12,fill:pal.muted});txt(svg,cx-21,a+74,'Ja',{size:12,fill:pal.muted});const r=el('rect',{x:branchX+3,y:by-22,width:150,height:44,rx:12,fill:'#fff',stroke:pal.stroke});svg.appendChild(r);txt(svg,branchX+78,by+4,'Återgå / ändra',{size:12,fill:pal.ink});if(i>0){const returnX=branchX+176,previousY=a-stepSpace;path(svg,`M ${branchX+153} ${by} H ${returnX} V ${previousY} H ${cx+89}`,pal,'5 5')}}
+    if(vertical){const by=a+80,branchX=250,branchW=145,returnX=412;path(svg,`M ${cx+94} ${a} H ${branchX-15} V ${by} H ${branchX}`,pal);txt(svg,cx+110,a-11,'Nej',{size:12,fill:pal.muted});txt(svg,cx-21,a+74,'Ja',{size:12,fill:pal.muted});const r=el('rect',{x:branchX,y:by-22,width:branchW,height:44,rx:12,fill:'#fff',stroke:pal.stroke});svg.appendChild(r);txt(svg,branchX+branchW/2,by+4,'Återgå / ändra',{size:12,fill:pal.ink});if(i>0){const previousY=a-stepSpace;path(svg,`M ${branchX+branchW} ${by} H ${returnX} V ${previousY} H ${cx+89}`,pal,'5 5')}}
     else{const by=cy+112;path(svg,`M ${a} ${cy+46} V ${by-24}`,pal);txt(svg,a+16,cy+76,'Nej',{size:12,fill:pal.muted});svg.appendChild(el('rect',{x:a-80,y:by-20,width:160,height:42,rx:11,fill:'#fff',stroke:pal.stroke}));txt(svg,a,by+5,'Återgå / ändra',{size:12,fill:pal.ink});if(i<n-1)path(svg,`M ${a+80} ${by} H ${a+112} V ${cy+22} H ${a+120}`,pal,'5 5');txt(svg,a+112,cy-15,'Ja',{size:12,fill:pal.muted})}
    }
   });
