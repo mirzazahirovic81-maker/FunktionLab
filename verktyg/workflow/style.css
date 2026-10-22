@@ -25,3 +25,11 @@
 
 /* Läsbar förhandsvisning: behåll full upplösning och tillåt sidledes panorering. */
 .wf-layout{grid-template-columns:minmax(310px,.8fr) minmax(0,1.2fr)}.wf-preview-scroll{background:#f7fbfc;max-height:none;padding:14px}#wf-diagram{width:max(100%,850px);max-width:none;height:auto;min-width:850px}.wf-preview-head{font-size:1.12rem}.wf-preview-head small{font-size:.95rem}@media(max-width:1040px){.wf-layout{grid-template-columns:1fr}}
+
+/* Stående flöde: vänsterställt diagram, utan den generella 850px-minbredden.
+   Horisontellt flöde behåller sidledes rullning vid behov. */
+#wf-diagram[data-direction="vertical"]{width:540px;min-width:540px;max-width:none}
+@media(max-width:600px){
+  .wf-preview-scroll{padding:0;overflow-x:auto;overscroll-behavior-x:contain}
+  #wf-diagram[data-direction="vertical"]{width:540px;min-width:540px}
+}
