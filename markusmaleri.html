@@ -59,7 +59,7 @@ body{background:linear-gradient(180deg,#edf5f3 0,#f5f7f7 360px,#f5f7f7 100%)}
 <div id="roomFields"><div class="visual-guide"><div class="visual-title">Se ditt rum inifrån</div><p>Ändra måtten och öppningarna. Se rummets innerväggar från insidan.</p><svg id="interiorSvg" class="scene-svg" viewBox="0 0 440 270" role="img" aria-label="Interaktiv vy inifrån rummet med väggar, golv, fönster och dörr"><g id="interiorScene"></g></svg><div class="visual-meta"><strong id="liveWallArea">0 m² väggyta</strong><span id="liveFloorArea">Golvyta: 20 m²</span></div></div><div class="grid3"><div class="field"><label for="roomLength">Längd (m)</label><input class="input" id="roomLength" type="number" min="0.5" max="100" step="0.1" value="5" inputmode="decimal"><div class="range-field"><input type="range" id="roomLengthSlider" min="1" max="12" step="0.1" value="5" aria-label="Justera roomLength"><div class="range-scale"><span>1 m</span><span>12 m</span></div></div></div><div class="field"><label for="roomWidth">Bredd (m)</label><input class="input" id="roomWidth" type="number" min="0.5" max="100" step="0.1" value="4" inputmode="decimal"><div class="range-field"><input type="range" id="roomWidthSlider" min="1" max="12" step="0.1" value="4" aria-label="Justera roomWidth"><div class="range-scale"><span>1 m</span><span>12 m</span></div></div></div><div class="field"><label for="roomHeight">Takhöjd (m)</label><input class="input" id="roomHeight" type="number" min="1" max="15" step="0.1" value="2.5" inputmode="decimal"><div class="range-field"><input type="range" id="roomHeightSlider" min="2" max="4" step="0.1" value="2.5" aria-label="Justera roomHeight"><div class="range-scale"><span>2 m</span><span>4 m</span></div></div></div></div><div class="grid2" id="openingsFields"><div class="field"><label for="doors">Antal dörrar</label><input class="input" id="doors" type="number" min="0" max="30" step="1" value="1" inputmode="numeric"></div><div class="field"><label for="windows">Antal fönster</label><input class="input" id="windows" type="number" min="0" max="30" step="1" value="2" inputmode="numeric"></div></div><label class="checkline" id="ceilingOption"><input type="checkbox" id="includeCeiling"> Måla taket också</label><div class="area-preview" id="areaPreview" aria-live="polite"></div><div class="hint">För väggar drar vi schablonmässigt av 1,8 m² per dörr och 1,5 m² per fönster. Målerifirman kan behöva justera den debiterbara ytan efter besiktning.</div></div><div id="facadeFields" hidden><div class="visual-guide"><div class="visual-title">Se fasaden utifrån</div><p>Ändra fasadens bredd, höjd och antal öppningar. Målningsytan räknas om direkt.</p><svg id="facadeSvg" class="scene-svg" viewBox="0 0 440 270" role="img" aria-label="Interaktiv fasad med fönster och dörrar"><g id="facadeScene"></g></svg><div class="visual-meta"><strong id="liveFacadeArea">0 m² fasadyta</strong><span>Förenklad fasadvy, ej skalenlig ritning</span></div></div><div class="grid2"><div class="field"><label for="facadeWidth">Fasadens bredd (m)</label><input class="input" id="facadeWidth" type="number" min="1" max="100" step="0.1" value="10" inputmode="decimal"><div class="range-field"><input type="range" id="facadeWidthSlider" min="2" max="30" step="0.1" value="10"><div class="range-scale"><span>2 m</span><span>30 m</span></div></div></div><div class="field"><label for="facadeHeight">Fasadens höjd (m)</label><input class="input" id="facadeHeight" type="number" min="1" max="30" step="0.1" value="4" inputmode="decimal"><div class="range-field"><input type="range" id="facadeHeightSlider" min="2" max="12" step="0.1" value="4"><div class="range-scale"><span>2 m</span><span>12 m</span></div></div></div></div><div class="grid2"><div class="field"><label for="facadeDoors">Antal dörrar</label><input class="input" id="facadeDoors" type="number" min="0" max="30" step="1" value="1" inputmode="numeric"></div><div class="field"><label for="facadeWindows">Antal fönster</label><input class="input" id="facadeWindows" type="number" min="0" max="30" step="1" value="3" inputmode="numeric"></div></div><div class="hint">Fasadyta beräknas som bredd × höjd minus schablonavdrag för dörrar och fönster. Gäller en rektangulär fasadyta, utan gavlar eller andra särskilda byggnadsdelar.</div></div><div class="field"><label for="condition">Underlagets skick</label><select id="condition"><option value="good">Bra, normalt förarbete</option><option value="medium">Visst spacklingsbehov</option><option value="poor">Omfattande förarbete</option></select></div><div class="grid2"><div class="field"><label for="coats">Antal strykningar</label><select id="coats"><option value="1">1 strykning</option><option value="2" selected>2 strykningar</option><option value="3">3 strykningar</option></select></div><div class="field"><label for="access">Åtkomlighet</label><select id="access"><option value="normal">Normal</option><option value="difficult">Svåråtkomligt / hög höjd</option></select></div></div>
 <div class="divider"></div><div class="section-head"><div class="step">3</div><div><h2>Tillägg och förutsättningar</h2><p>Välj det som är aktuellt för ditt projekt.</p></div></div>
 <label class="checkline"><input type="checkbox" id="cover" checked> Skyddstäckning och maskering behövs</label><label class="checkline"><input type="checkbox" id="paintIncluded" checked> Färg och normalt förbrukningsmaterial ska ingå</label><label class="checkline"><input type="checkbox" id="rot"> Visa illustrativt ROT-avdrag (förutsätter att villkoren är uppfyllda)</label><p class="hint">Kalkylatorn ger en schablonberäkning. Slutpris, materialåtgång och eventuellt ROT-avdrag fastställs av målerifirman.</p></div></section>
-<aside class="card summary"><div class="summary-top"><div class="small">Din preliminära prisindikation</div><div class="price" id="price">0 kr</div><p id="priceNote">Inklusive moms, före eventuellt ROT-avdrag</p></div><div class="summary-content"><h3>Din sammanställning</h3><div class="lineitem"><span>Arbete</span><strong id="jobName">Väggmålning</strong></div><div class="lineitem"><span>Målningsyta</span><strong id="areaText">40 m²</strong></div><div class="lineitem"><span>Arbete och förarbete</span><strong id="laborText">0 kr</strong></div><div class="lineitem"><span>Material och tillägg</span><strong id="extraText">0 kr</strong></div><div class="lineitem"><span>Moms 25 %</span><strong id="vatText">0 kr</strong></div><div class="lineitem" id="rotLine" hidden><span>Illustrativt ROT-avdrag</span><strong id="rotText">0 kr</strong></div><div class="total"><span id="totalLabel">Uppskattat totalpris</span><span id="finalText">0 kr</span></div><div class="notice">Detta är en prisindikation, inte en bindande offert. Priset kan ändras efter bedömning av arbetet.</div><button class="primary" id="printBtn" type="button">Ladda ner prisunderlag (PDF)</button><button class="secondary" id="browserPrintBtn" type="button">Skriv ut eller spara som PDF</button></div>
+<aside class="card summary"><div class="summary-top"><div class="small">Din preliminära prisindikation</div><div class="price" id="price">0 kr</div><p id="priceNote">Inklusive moms, före eventuellt ROT-avdrag</p></div><div class="summary-content"><h3>Din sammanställning</h3><div class="lineitem"><span>Arbete</span><strong id="jobName">Väggmålning</strong></div><div class="lineitem"><span>Målningsyta</span><strong id="areaText">40 m²</strong></div><div class="lineitem"><span>Arbete och förarbete</span><strong id="laborText">0 kr</strong></div><div class="lineitem"><span>Material och tillägg</span><strong id="extraText">0 kr</strong></div><div class="lineitem"><span>Moms 25 %</span><strong id="vatText">0 kr</strong></div><div class="lineitem" id="rotLine" hidden><span>Illustrativt ROT-avdrag</span><strong id="rotText">0 kr</strong></div><div class="total"><span id="totalLabel">Uppskattat totalpris</span><span id="finalText">0 kr</span></div><div class="notice">Detta är en prisindikation, inte en bindande offert. Priset kan ändras efter bedömning av arbetet.</div><button class="primary" id="printBtn" type="button">Ladda ner prisunderlag (PDF)</button></div>
 <section class="pdf-guide" aria-label="Så använder du prisunderlaget"><div class="pdf-guide-heading"><span class="pdf-guide-icon" aria-hidden="true">✓</span><div><h3>Ta nästa steg med ditt prisunderlag</h3><p>Du har redan gjort en första uppskattning av arbetet. Spara PDF-filen och skicka den till Markus Måleri när du vill gå vidare.</p></div></div><div class="pdf-guide-benefit"><strong>Enklare för dig. Smidigare för oss.</strong><p>Underlaget samlar dina val, mått och det preliminära priset. Då kan vi snabbare förstå ditt projekt och återkomma med rätt frågor inför en offert.</p></div><p class="pdf-guide-tip">På mobilen kan du öppna PDF-filen och dela den via din mejlapp. På datorn kan du bifoga den i ett mejl.</p></section><section class="contact-card" aria-label="Kontakta Markus Måleri"><h3>Kontakta Markus Måleri</h3><div class="contact-line"><span>Telefon</span><a href="tel:0700000000">070-000 00 00</a></div><div class="contact-line"><span>E-post</span><a href="mailto:exempel@markusmaleri.se">exempel@markusmaleri.se</a></div><div class="contact-line"><span>Webb</span><a href="https://markusmaleri.exempel.se" target="_blank" rel="noopener noreferrer">markusmaleri.exempel.se</a></div></section></aside></div></main>
 <footer><div class="wrap foot"><span>© <span id="year"></span> <strong id="footerBrand">Markus Måleri</strong>. Prisberäkningen är preliminär.</span><span>Priskalkylator från Funktionlab.se</span></div></footer>
 <section class="print-sheet" id="printSheet" aria-hidden="true"><div class="pdf-top"><div class="pdf-logo"><div class="pdf-mark" id="pdfMark">M</div><div class="pdf-company" id="pdfBrand">Markus Måleri</div></div><div class="pdf-ref">PRISINDIKATION<br><span id="pdfDate"></span></div></div><div class="pdf-eyebrow">DITT MÅLERIPROJEKT</div><h1 class="pdf-title">Din prisuppskattning</h1><p class="pdf-lead">Ett överskådligt underlag för det måleriarbete du planerar. Beräkningen bygger på de uppgifter du har angett.</p><div class="pdf-price-panel"><div><div class="pdf-label">Preliminärt pris inklusive moms</div><div class="pdf-big" id="pdfPrice">0 kr</div><div class="pdf-sub" id="pdfPriceNote">Före eventuellt ROT-avdrag</div></div><div class="pdf-icon">◈</div></div><h2 class="pdf-heading">Sammanställning</h2><table class="pdf-table"><tbody><tr><td>Typ av arbete</td><td id="pdfJob"></td></tr><tr id="pdfDimensionsRow"><td>Mått</td><td id="pdfDimensions"></td></tr><tr id="pdfOpeningsRow"><td>Öppningar</td><td id="pdfOpenings"></td></tr><tr><td>Målningsyta</td><td id="pdfArea"></td></tr><tr><td>Underlagets skick</td><td id="pdfCondition"></td></tr><tr><td>Antal strykningar</td><td id="pdfCoats"></td></tr><tr><td>Åtkomlighet</td><td id="pdfAccess"></td></tr><tr><td>Skyddstäckning</td><td id="pdfCover"></td></tr><tr><td>Färg och förbrukningsmaterial</td><td id="pdfMaterial"></td></tr><tr><td>Arbete och förarbete, exkl. moms</td><td id="pdfLabor"></td></tr><tr><td>Material och tillägg, exkl. moms</td><td id="pdfExtras"></td></tr><tr><td>Moms</td><td id="pdfVat"></td></tr><tr id="pdfRotRow"><td>Illustrativt ROT-avdrag</td><td id="pdfRot"></td></tr><tr class="pdf-total"><td>Uppskattat belopp att betala</td><td id="pdfFinal"></td></tr></tbody></table><div class="pdf-note"><strong>Observera</strong><br>Detta dokument är en preliminär prisindikation och utgör inte en bindande offert. Faktiskt pris beror på arbetsplatsens förutsättningar och målerifirmans bedömning. Eventuellt ROT-avdrag förutsätter att samtliga villkor är uppfyllda.</div><div class="pdf-footer"><span><strong id="pdfFooterBrand">Markus Måleri</strong> · Prisindikation</span><span>Skapad med FunktionLab</span></div></section>
@@ -194,144 +194,58 @@ function updatePrintSheet(){
  Object.entries(fields).forEach(([id,val])=>$(id).textContent=val);
  $('pdfRotRow').hidden=!$('rot').checked;$('pdfDimensionsRow').hidden=!v.dimensions;$('pdfOpeningsRow').hidden=!v.dimensions||v.job.startsWith('Tak');
 }
-// PDF skapas lokalt utan externa script eller serverfunktioner.
-// Sidformat A4, PDF 1.4, standardteckensnitt Helvetica med WinAnsi-tecken.
-function generatePricePDF(v){
-  const lines=[];
-  const pageHeight=841.89;
-  const f=n=>Number(n.toFixed(3));
-  const rgb=([r,g,b])=>[r,g,b].map(c=>f(c/255)).join(' ');
-  const dark=[21,51,64],teal=[23,108,112],muted=[86,111,116],pale=[239,247,245];
-  const escapePDF=s=>{
-    const substitutions={'–':'-','—':'-','−':'-','’':"'",'“':'"','”':'"','…':'...','€':'EUR','✓':'v'};
-    return [...String(s)].map(c=>{
-      c=substitutions[c]??c;
-      return [...c].map(ch=>{
-        const n=ch.codePointAt(0);
-        if(ch==='\\'||ch==='('||ch===')')return '\\'+ch;
-        if(n<32)return ' ';
-        if(n>255)return '?';
-        if(n>126)return '\\'+n.toString(8).padStart(3,'0');
-        return ch;
-      }).join('');
-    }).join('');
-  };
-  const approximateWidth=(str,size)=>[...String(str)].reduce((w,ch)=>{
-    if('il.,:;!| '.includes(ch))return w+0.27*size;
-    if('MW@'.includes(ch))return w+0.83*size;
-    if('0123456789'.includes(ch))return w+0.56*size;
-    return w+0.52*size;
-  },0);
-  const text=(str,x,top,size=11,bold=false,color=dark,align='left')=>{
-    if(align==='right')x-=approximateWidth(str,size);
-    lines.push(`BT /${bold?'F2':'F1'} ${size} Tf ${rgb(color)} rg 1 0 0 1 ${f(x)} ${f(pageHeight-top)} Tm (${escapePDF(str)}) Tj ET`);
-  };
-  const rect=(x,top,w,h,color)=>lines.push(`${rgb(color)} rg ${f(x)} ${f(pageHeight-top-h)} ${f(w)} ${f(h)} re f`);
-  const line=(x1,top1,x2,top2,color=[224,232,230])=>lines.push(`${rgb(color)} RG 0.7 w ${f(x1)} ${f(pageHeight-top1)} m ${f(x2)} ${f(pageHeight-top2)} l S`);
-  const cond={good:'Bra, normalt förarbete',medium:'Visst spacklingsbehov',poor:'Omfattande förarbete'};
-  const d=v.dimensions;
-  const dimensionText=d?(d.facadeWidth?`${d.facadeWidth} × ${d.facadeHeight} m (fasad)`:`${d.length} × ${d.width} × ${d.height} m (rum)`):'Ej angivet';
-  const openingText=d?`${d.doors} ${d.doors===1?'dörr':'dörrar'}, ${d.windows} fönster`:'Ej angivet';
-  const rows=[
-    ['Typ av arbete',v.job],['Mått',dimensionText],['Dörrar och fönster',openingText],
-    ['Målningsyta',v.area.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m²'],
-    ['Underlagets skick',cond[v.condition]||'Ej angivet'],['Antal strykningar',String(v.coats)],
-    ['Åtkomlighet',v.access==='difficult'?'Svåråtkomligt / hög höjd':'Normal'],
-    ['Skyddstäckning',v.cover?'Ingår':'Ingår inte'],
-    ['Färg och material',v.paintIncluded?'Ingår':'Ingår inte'],
-    ['Arbete och förarbete, exkl. moms',money(v.labor)],
-    ['Material och tillägg, exkl. moms',money(v.material+v.coverCost)],
-    ['Moms',money(v.vat)]
-  ];
-  if(v.rot>0)rows.push(['Illustrativt ROT-avdrag','-'+money(v.rot)]);
-  rows.push(['Uppskattat belopp att betala',money(v.final)]);
-
-  rect(43,41,509,63,teal);
-  rect(57,55,36,36,[255,255,255]);
-  text(COMPANY.initial,75,81,22,true,teal,'right');
-  text(COMPANY.name,106,79,20,true,[255,255,255]);
-  text('PRELIMINÄRT PRISUNDERLAG',44,133,10,true,teal);
-  text('Din prisuppskattning',44,165,24,true,dark);
-  text(new Date().toLocaleDateString('sv-SE'),551,133,10,false,muted,'right');
-  const contact=[COMPANY.phone,COMPANY.contactEmail].filter(Boolean).join('  |  ');
-  text(contact,44,185,9,false,muted);
-  rect(43,207,509,80,pale);
-  text('UPPSKATTAT PRIS INKLUSIVE MOMS',59,232,10,true,teal);
-  text(money(v.final),59,268,24,true,dark);
-  text(v.rot>0?'Efter illustrativt ROT-avdrag':'Före eventuellt ROT-avdrag',538,266,10,false,muted,'right');
-  text('Sammanställning',44,325,16,true,dark);
-  let y=348;
-  for(const [label,value] of rows){
-    const isTotal=label==='Uppskattat belopp att betala';
-    if(isTotal){rect(43,y-12,509,30,pale);}
-    text(label,50,y,isTotal?10.7:9.8,isTotal,dark);
-    text(value,541,y,isTotal?11.5:9.8,isTotal,dark,'right');
-    if(!isTotal)line(44,y+8,551,y+8);
-    y+=26;
-  }
-  const noteTop=Math.max(y+18,735);
-  rect(43,noteTop,509,51,pale);
-  text('Observera',54,noteTop+17,10,true,teal);
-  text('Prisuppskattningen är preliminär och utgör inte en bindande offert.',54,noteTop+31,9,false,muted);
-  text('Slutpris och eventuellt ROT-avdrag fastställs efter bedömning och gällande villkor.',54,noteTop+44,8.5,false,muted);
-  line(43,816,552,816);
-  text((COMPANY.website||'').replace(/^https?:\/\//,''),44,830,8.5,false,muted);
-  text('Skapad med FunktionLab',550,830,8.5,false,muted,'right');
-  const stream=lines.join('\n')+'\n';
-  const objects=[
-    '<< /Type /Catalog /Pages 2 0 R >>',
-    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
-    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>',
-    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>',
-    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>',
-    `<< /Length ${stream.length} >>\nstream\n${stream}endstream`
-  ];
-  let doc='%PDF-1.4\n%FunctionLab\n';
-  const offsets=[0];
-  for(let i=0;i<objects.length;i++){
-    offsets.push(doc.length);
-    doc+=`${i+1} 0 obj\n${objects[i]}\nendobj\n`;
-  }
-  const xref=doc.length;
-  doc+=`xref\n0 ${offsets.length}\n0000000000 65535 f \n`;
-  for(let i=1;i<offsets.length;i++)doc+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
-  doc+=`trailer\n<< /Size ${offsets.length} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
-  return new Blob([new TextEncoder().encode(doc)],{type:'application/pdf'});
+// Generera en riktig PDF. Fungerar även i iOS Safari utan window.print().
+function loadJsPDF(){
+ return new Promise((resolve,reject)=>{
+  if(window.jspdf?.jsPDF){resolve(window.jspdf.jsPDF);return;}
+  const script=document.createElement('script');script.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js';
+  script.onload=()=>window.jspdf?.jsPDF?resolve(window.jspdf.jsPDF):reject(new Error('PDF-bibliotek saknas'));
+  script.onerror=()=>reject(new Error('PDF-bibliotek kunde inte hämtas'));document.head.appendChild(script);
+ });
 }
 $('printBtn').addEventListener('click',async()=>{
-  const btn=$('printBtn');
-  try{
-    if(!latest)throw new Error('Ingen prisberäkning finns.');
-    // Synkront skapande: ingen nätverksförfrågan eller sen öppning av nytt fönster.
-    const blob=generatePricePDF(latest);
-    const filename='prisunderlag-markus-maleri.pdf';
-    const file=typeof File==='function'?new File([blob],filename,{type:'application/pdf'}):null;
-    const ios=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-    if(ios&&file&&navigator.share&&navigator.canShare?.({files:[file]})){
-      try{
-        await navigator.share({files:[file],title:'Prisunderlag från '+COMPANY.name});
-        return;
-      }catch(err){
-        if(err?.name==='AbortError')return; // Användaren stängde delningsdialogen.
-        console.warn('Delning inte tillgänglig, öppnar PDF i stället.',err);
-      }
-    }
-    const url=URL.createObjectURL(blob);
-    if(ios){
-      // PDF-förhandsvisning på iOS: dela eller välj Spara i Filer.
-      const win=window.open(url,'_blank');
-      if(!win)window.location.assign(url);
-    }else{
-      const a=document.createElement('a');a.href=url;a.download=filename;
-      document.body.appendChild(a);a.click();a.remove();
-    }
-    setTimeout(()=>URL.revokeObjectURL(url),180000);
-  }catch(err){
-    console.error('PDF-generering misslyckades:',err);
-    if(confirm('Direktnedladdningen kunde inte genomföras. Vill du i stället spara som PDF via webbläsarens utskriftsfunktion?')){updatePrintSheet();window.print();}
+ const btn=$('printBtn'),old=btn.textContent;
+ // Öppna fliken direkt vid klick så Safari inte blockerar den efter async-laddning.
+ const ios=/iPad|iPhone|iPod/.test(navigator.userAgent);
+ const pdfTab=ios?window.open('','_blank'):null;
+ btn.disabled=true;btn.textContent='Skapar PDF…';
+ try{
+  const JsPDF=await loadJsPDF(),v=latest; if(!v)throw Error('Ingen beräkning');
+  const pdf=new JsPDF({unit:'mm',format:'a4'});const dark=[21,51,64],teal=[23,108,112];
+  const txt=(str,x,y,size=11,bold=false,color=dark)=>{pdf.setFont('helvetica',bold?'bold':'normal');pdf.setFontSize(size);pdf.setTextColor(...color);pdf.text(String(str),x,y);};
+  pdf.setFillColor(...teal);pdf.roundedRect(16,16,178,22,3,3,'F');txt(COMPANY.name,22,30,19,true,[255,255,255]);
+  txt(COMPANY.phone+' | '+COMPANY.contactEmail,17,41,8,false,[90,110,115]);
+  txt('PRELIMINÄRT PRISUNDERLAG',17,49,10,true,teal);
+  txt('Din prisuppskattning',17,61,21,true);
+  txt(new Date().toLocaleDateString('sv-SE'),193,49,9,false,[90,110,115]);
+  pdf.setFillColor(239,247,245);pdf.roundedRect(16,69,178,29,3,3,'F');
+  txt('UPPSKATTAT PRIS INKLUSIVE MOMS',22,78,9,true,teal);txt(money(v.final),22,91,22,true);
+  txt(v.rot>0?'Efter illustrativt ROT-avdrag':'Före eventuellt ROT-avdrag',105,91,9,false,[80,100,106]);
+  txt('Sammanställning',17,111,14,true);
+  const cond={good:'Bra, normalt förarbete',medium:'Visst spacklingsbehov',poor:'Omfattande förarbete'};
+  const d=v.dimensions;
+   const dims=d?(d.facadeWidth?`${d.facadeWidth} × ${d.facadeHeight} m (fasad)`:`${d.length} × ${d.width} × ${d.height} m (rum)`):'Ej angivet';
+   const openings=d?`${d.doors} dörrar, ${d.windows} fönster`:'Ej angivet';
+   const rows=[['Arbete',v.job],['Mått',dims],['Öppningar',openings],['Målningsyta',v.area.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m2'],['Underlag',cond[v.condition]],['Strykningar',String(v.coats)],['Arbete och förarbete, exkl. moms',money(v.labor)],['Material och tillägg, exkl. moms',money(v.material+v.coverCost)],['Moms 25 %',money(v.vat)]];
+  if(v.rot>0)rows.push(['Illustrativt ROT-avdrag','-'+money(v.rot)]);
+  rows.push(['Uppskattat belopp att betala',money(v.final)]);
+  let y=119;rows.forEach(([label,value],i)=>{txt(label,18,y,10,i===rows.length-1);pdf.setFont('helvetica',i===rows.length-1?'bold':'normal');pdf.setFontSize(10);pdf.setTextColor(...dark);pdf.text(value,192,y,{align:'right'});pdf.setDrawColor(224,232,230);pdf.line(17,y+4,193,y+4);y+=11;});
+  y+=6;pdf.setFillColor(239,247,245);pdf.roundedRect(16,y,178,27,3,3,'F');
+  pdf.setFont('helvetica','normal');pdf.setFontSize(9);pdf.setTextColor(70,94,98);
+  const note='Detta är en preliminär prisindikation, inte en bindande offert. Slutpriset fastställs av målerifirman. ROT-avdrag förutsätter att villkoren är uppfyllda.';
+  pdf.text(pdf.splitTextToSize(note,164),22,y+10);
+  txt(COMPANY.website.replace(/^https?:\/\//,'')+' | Skapad med FunktionLab',17,284,8,false,[100,120,125]);
+  const blob=pdf.output('blob'),url=URL.createObjectURL(blob);
+  // iPhone: öppna PDF i ny flik, där användaren kan spara/dela via Safari.
+  if(ios){
+    if(pdfTab)pdfTab.location.href=url;else window.location.href=url;
+  }else{
+    const a=document.createElement('a');a.href=url;a.download='prisunderlag-maleri.pdf';document.body.appendChild(a);a.click();a.remove();
   }
+  setTimeout(()=>URL.revokeObjectURL(url),120000);
+ }catch(e){if(pdfTab)pdfTab.close();console.error(e);alert('PDF kunde inte skapas. Kontrollera internetanslutningen och försök igen.');}
+ finally{btn.disabled=false;btn.textContent=old;}
 });
-$('browserPrintBtn').addEventListener('click',()=>{updatePrintSheet();window.print();});
 window.addEventListener('beforeprint',updatePrintSheet);
 
 calculate();
