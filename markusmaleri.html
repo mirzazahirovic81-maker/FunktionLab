@@ -194,58 +194,83 @@ function updatePrintSheet(){
  Object.entries(fields).forEach(([id,val])=>$(id).textContent=val);
  $('pdfRotRow').hidden=!$('rot').checked;$('pdfDimensionsRow').hidden=!v.dimensions;$('pdfOpeningsRow').hidden=!v.dimensions||v.job.startsWith('Tak');
 }
-// Generera en riktig PDF. Fungerar även i iOS Safari utan window.print().
-function loadJsPDF(){
- return new Promise((resolve,reject)=>{
-  if(window.jspdf?.jsPDF){resolve(window.jspdf.jsPDF);return;}
-  const script=document.createElement('script');script.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js';
-  script.onload=()=>window.jspdf?.jsPDF?resolve(window.jspdf.jsPDF):reject(new Error('PDF-bibliotek saknas'));
-  script.onerror=()=>reject(new Error('PDF-bibliotek kunde inte hämtas'));document.head.appendChild(script);
+// Självständig PDF-generering utan externa bibliotek eller nätverksanrop.
+// PDF använder inbyggda Helvetica och WinAnsiEncoding (svenska tecken stöds).
+function makePricePdf(v){
+ const esc=t=>String(t).replace(/[^\x20-\x7e\xa0-\xff]/g,c=>({'\u2013':'-','\u2014':'-','\u2019':"'",'\u2212':'-','\u00d7':'x','\u00b2':'2'}[c]||'?')).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+ const cmds=[];
+ const color=(r,g,b)=>`${(r/255).toFixed(3)} ${(g/255).toFixed(3)} ${(b/255).toFixed(3)}`;
+ const rect=(x,y,w,h,rgb)=>cmds.push(`${color(...rgb)} rg ${x} ${842-y-h} ${w} ${h} re f`);
+ const line=(x1,y1,x2,y2,rgb=[222,233,230])=>cmds.push(`${color(...rgb)} RG 0.65 w ${x1} ${842-y1} m ${x2} ${842-y2} l S`);
+ const txt=(t,x,y,size=10,bold=false,rgb=[21,51,64])=>cmds.push(`BT /${bold?'F2':'F1'} ${size} Tf ${color(...rgb)} rg 1 0 0 1 ${x} ${842-y} Tm (${esc(t)}) Tj ET`);
+ // A4, koordinater i punkter från övre vänstra hörnet.
+ rect(45,45,505,61,[23,108,112]);txt(COMPANY.name,61,83,20,true,[255,255,255]);
+ txt(COMPANY.phone+'  |  '+COMPANY.contactEmail,47,124,9,false,[79,106,111]);
+ txt('PRELIMINÄRT PRISUNDERLAG',47,153,10,true,[23,108,112]);
+ txt('Din prisuppskattning',47,185,22,true);
+ txt(new Date().toLocaleDateString('sv-SE'),430,154,9,false,[79,106,111]);
+ rect(45,207,505,75,[239,247,245]);
+ txt('UPPSKATTAT PRIS INKLUSIVE MOMS',61,232,10,true,[23,108,112]);
+ txt(money(v.final),61,264,23,true);
+ txt(v.rot>0?'Efter illustrativt ROT-avdrag':'Före eventuellt ROT-avdrag',305,262,9,false,[79,106,111]);
+ txt('Sammanställning',47,313,15,true);
+ const cond={good:'Bra, normalt förarbete',medium:'Visst spacklingsbehov',poor:'Omfattande förarbete'};
+ const d=v.dimensions;
+ const dims=d?(d.facadeWidth?`${d.facadeWidth} x ${d.facadeHeight} m (fasad)`:`${d.length} x ${d.width} x ${d.height} m (rum)`):'Ej angivet';
+ const openings=d?`${d.doors} dörrar, ${d.windows} fönster`:'Ej angivet';
+ const rows=[['Arbete',v.job],['Mått',dims],['Öppningar',openings],['Målningsyta',v.area.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m²'],['Underlag',cond[v.condition]],['Strykningar',String(v.coats)],['Åtkomlighet',v.access==='normal'?'Normal':'Svåråtkomligt / hög höjd'],['Skyddstäckning',v.cover?'Ingår':'Ingår inte'],['Färg och förbrukningsmaterial',v.paintIncluded?'Ingår':'Ingår inte'],['Arbete och förarbete, exkl. moms',money(v.labor)],['Material och tillägg, exkl. moms',money(v.material+v.coverCost)],['Moms 25 %',money(v.vat)]];
+ if(v.rot>0)rows.push(['Illustrativt ROT-avdrag','-'+money(v.rot)]);
+ rows.push(['Uppskattat belopp att betala',money(v.final)]);
+ let y=337;const rowHeight=v.rot>0?27:29;
+ rows.forEach(([label,value],i)=>{
+   const isTotal=i===rows.length-1;
+   if(isTotal)rect(45,y-17,505,rowHeight,[239,247,245]);
+   txt(label,49,y,isTotal?11:9.5,isTotal);
+   // Högerkolumn med konservativ position, utan textöverlappning.
+   txt(value,367,y,isTotal?12:10,isTotal);
+   if(!isTotal)line(47,y+8,548,y+8);
+   y+=rowHeight;
  });
+ const noteY=Math.min(760,y+12);
+ rect(45,noteY-15,505,48,[239,247,245]);
+ txt('Detta är en preliminär prisindikation, inte en bindande offert.',57,noteY+2,9);
+ txt('Slutpriset fastställs av målerifirman. ROT-avdrag kräver uppfyllda villkor.',57,noteY+17,9);
+ line(45,805,550,805);
+ txt(COMPANY.website.replace(/^https?:\/\//,''),47,822,8,false,[90,110,115]);
+ txt('Skapad med FunktionLab',418,822,8,false,[90,110,115]);
+ const content=cmds.join('\n')+'\n';
+ // PDF-byteformat: bygg offset-tabell från faktiska bytes, inte JS-stränglängd.
+ const encoder=new TextEncoder();
+ const bytesLatin1=str=>Uint8Array.from(Array.from(str,c=>c.charCodeAt(0)&255));
+ const parts=[],offsets=[0];let length=0;
+ const append=bytes=>{parts.push(bytes);length+=bytes.length;};
+ append(bytesLatin1('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n'));
+ const addObj=(id,body)=>{offsets[id]=length;append(bytesLatin1(`${id} 0 obj\n${body}\nendobj\n`));};
+ addObj(1,'<< /Type /Catalog /Pages 2 0 R >>');
+ addObj(2,'<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+ addObj(3,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>');
+ addObj(4,'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+ addObj(5,'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+ const stream=bytesLatin1(content);offsets[6]=length;
+ append(bytesLatin1(`6 0 obj\n<< /Length ${stream.length} >>\nstream\n`));append(stream);append(bytesLatin1('endstream\nendobj\n'));
+ const xref=length;append(bytesLatin1('xref\n0 7\n0000000000 65535 f \n'));
+ for(let i=1;i<=6;i++)append(bytesLatin1(`${String(offsets[i]).padStart(10,'0')} 00000 n \n`));
+ append(bytesLatin1(`trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`));
+ return new Blob(parts,{type:'application/pdf'});
 }
-$('printBtn').addEventListener('click',async()=>{
- const btn=$('printBtn'),old=btn.textContent;
- // Öppna fliken direkt vid klick så Safari inte blockerar den efter async-laddning.
- const ios=/iPad|iPhone|iPod/.test(navigator.userAgent);
- const pdfTab=ios?window.open('','_blank'):null;
- btn.disabled=true;btn.textContent='Skapar PDF…';
+$('printBtn').addEventListener('click',()=>{
+ const btn=$('printBtn');btn.disabled=true;
  try{
-  const JsPDF=await loadJsPDF(),v=latest; if(!v)throw Error('Ingen beräkning');
-  const pdf=new JsPDF({unit:'mm',format:'a4'});const dark=[21,51,64],teal=[23,108,112];
-  const txt=(str,x,y,size=11,bold=false,color=dark)=>{pdf.setFont('helvetica',bold?'bold':'normal');pdf.setFontSize(size);pdf.setTextColor(...color);pdf.text(String(str),x,y);};
-  pdf.setFillColor(...teal);pdf.roundedRect(16,16,178,22,3,3,'F');txt(COMPANY.name,22,30,19,true,[255,255,255]);
-  txt(COMPANY.phone+' | '+COMPANY.contactEmail,17,41,8,false,[90,110,115]);
-  txt('PRELIMINÄRT PRISUNDERLAG',17,49,10,true,teal);
-  txt('Din prisuppskattning',17,61,21,true);
-  txt(new Date().toLocaleDateString('sv-SE'),193,49,9,false,[90,110,115]);
-  pdf.setFillColor(239,247,245);pdf.roundedRect(16,69,178,29,3,3,'F');
-  txt('UPPSKATTAT PRIS INKLUSIVE MOMS',22,78,9,true,teal);txt(money(v.final),22,91,22,true);
-  txt(v.rot>0?'Efter illustrativt ROT-avdrag':'Före eventuellt ROT-avdrag',105,91,9,false,[80,100,106]);
-  txt('Sammanställning',17,111,14,true);
-  const cond={good:'Bra, normalt förarbete',medium:'Visst spacklingsbehov',poor:'Omfattande förarbete'};
-  const d=v.dimensions;
-   const dims=d?(d.facadeWidth?`${d.facadeWidth} × ${d.facadeHeight} m (fasad)`:`${d.length} × ${d.width} × ${d.height} m (rum)`):'Ej angivet';
-   const openings=d?`${d.doors} dörrar, ${d.windows} fönster`:'Ej angivet';
-   const rows=[['Arbete',v.job],['Mått',dims],['Öppningar',openings],['Målningsyta',v.area.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m2'],['Underlag',cond[v.condition]],['Strykningar',String(v.coats)],['Arbete och förarbete, exkl. moms',money(v.labor)],['Material och tillägg, exkl. moms',money(v.material+v.coverCost)],['Moms 25 %',money(v.vat)]];
-  if(v.rot>0)rows.push(['Illustrativt ROT-avdrag','-'+money(v.rot)]);
-  rows.push(['Uppskattat belopp att betala',money(v.final)]);
-  let y=119;rows.forEach(([label,value],i)=>{txt(label,18,y,10,i===rows.length-1);pdf.setFont('helvetica',i===rows.length-1?'bold':'normal');pdf.setFontSize(10);pdf.setTextColor(...dark);pdf.text(value,192,y,{align:'right'});pdf.setDrawColor(224,232,230);pdf.line(17,y+4,193,y+4);y+=11;});
-  y+=6;pdf.setFillColor(239,247,245);pdf.roundedRect(16,y,178,27,3,3,'F');
-  pdf.setFont('helvetica','normal');pdf.setFontSize(9);pdf.setTextColor(70,94,98);
-  const note='Detta är en preliminär prisindikation, inte en bindande offert. Slutpriset fastställs av målerifirman. ROT-avdrag förutsätter att villkoren är uppfyllda.';
-  pdf.text(pdf.splitTextToSize(note,164),22,y+10);
-  txt(COMPANY.website.replace(/^https?:\/\//,'')+' | Skapad med FunktionLab',17,284,8,false,[100,120,125]);
-  const blob=pdf.output('blob'),url=URL.createObjectURL(blob);
-  // iPhone: öppna PDF i ny flik, där användaren kan spara/dela via Safari.
-  if(ios){
-    if(pdfTab)pdfTab.location.href=url;else window.location.href=url;
-  }else{
-    const a=document.createElement('a');a.href=url;a.download='prisunderlag-maleri.pdf';document.body.appendChild(a);a.click();a.remove();
-  }
-  setTimeout(()=>URL.revokeObjectURL(url),120000);
- }catch(e){if(pdfTab)pdfTab.close();console.error(e);alert('PDF kunde inte skapas. Kontrollera internetanslutningen och försök igen.');}
- finally{btn.disabled=false;btn.textContent=old;}
+  if(!latest)calculate();
+  const blob=makePricePdf(latest),url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='prisunderlag-maleri.pdf';a.style.display='none';document.body.appendChild(a);
+  a.click();a.remove();
+  // Behåll objekt-URL tillräckligt länge för att mobilens delnings-/filvy ska hinna läsa den.
+  setTimeout(()=>URL.revokeObjectURL(url),300000);
+ }catch(e){console.error('PDF-fel:',e);alert('Det gick inte att skapa PDF-filen. Försök igen.');}
+ finally{btn.disabled=false;}
 });
+
 window.addEventListener('beforeprint',updatePrintSheet);
 
 calculate();
