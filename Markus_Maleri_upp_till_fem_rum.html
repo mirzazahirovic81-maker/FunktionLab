@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142a39"><title>Beräkna ditt måleriarbete | Markus Måleri</title>
+<style>
+:root{--brand:#176c70;--brand-dark:#114c50;--ink:#152b39;--muted:#647582;--bg:#f3f6f5;--line:#dfe7e5;--white:#fff;--radius:18px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-size:15px}button,input,select{font:inherit}button{cursor:pointer}header{background:#fff;border-bottom:1px solid var(--line)}.wrap{max-width:1100px;margin:auto;padding:0 25px}.head{height:86px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}.logo-icon{background:var(--brand);color:#fff;width:43px;height:43px;display:grid;place-items:center;border-radius:12px;font-weight:800;font-size:24px}.logo-text{font-size:20px;font-weight:800;letter-spacing:-.7px}.head-note{color:var(--muted);font-size:13px}.hero{padding:53px 0 37px}.eyebrow{font-size:12px;font-weight:800;color:var(--brand);letter-spacing:1.6px;text-transform:uppercase}.hero h1{font-size:clamp(33px,5vw,53px);line-height:1.08;letter-spacing:-2px;max-width:740px;margin:14px 0}.hero p{color:var(--muted);font-size:17px;max-width:650px;line-height:1.65;margin:0}.pill{display:inline-flex;align-items:center;gap:8px;background:#e5f1ef;border-radius:30px;padding:9px 14px;color:var(--brand-dark);font-size:12px;font-weight:700;margin-top:22px}.dot{height:7px;width:7px;border-radius:50%;background:var(--brand)}.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:23px;align-items:start;padding-bottom:50px}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 7px 28px rgba(20,42,57,.035);overflow:hidden}.card-body{padding:29px}.section-head{display:flex;gap:14px;align-items:center;margin-bottom:25px}.step{width:34px;height:34px;background:#e9f3f1;border-radius:10px;display:grid;place-items:center;color:var(--brand);font-weight:800;flex-shrink:0}.section-head h2{font-size:19px;letter-spacing:-.4px;margin:0}.section-head p{color:var(--muted);font-size:13px;margin:4px 0 0}.divider{height:1px;background:var(--line);margin:29px 0}.field{margin-bottom:21px}.field:last-child{margin-bottom:0}label,.label{display:block;font-size:13px;font-weight:750;margin-bottom:9px}.hint{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.5}.input,select{width:100%;height:47px;border:1px solid #cfdad7;border-radius:10px;background:#fff;color:var(--ink);padding:0 13px;outline:none}.input:focus,select:focus{border-color:var(--brand);box-shadow:0 0 0 3px #176c701a}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:17px}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.choice{border:1px solid #d4dfdc;background:#fff;border-radius:11px;padding:14px 8px;text-align:center;color:var(--ink);font-weight:650;font-size:13px}.choice:hover{border-color:var(--brand)}.choice.active{border:2px solid var(--brand);background:#f0f8f6;color:var(--brand-dark);padding:13px 7px}.choice svg{display:block;margin:0 auto 8px}.checkline{display:flex;align-items:flex-start;gap:10px;line-height:1.5;font-size:13px;margin:14px 0}.checkline input{accent-color:var(--brand);width:17px;height:17px;flex-shrink:0;margin:1px 0 0}.summary{position:sticky;top:18px}.summary-top{background:#153340;padding:27px 28px;color:#fff}.summary-top .small{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#b8d6d5;font-weight:750}.price{font-size:clamp(34px,3.6vw,45px);letter-spacing:-1.5px;font-weight:800;margin:9px 0 3px}.summary-top p{font-size:12px;color:#c5d6d8;margin:0}.summary-content{padding:26px}.summary-content h3{font-size:16px;margin:0 0 18px}.lineitem{display:flex;justify-content:space-between;gap:12px;padding:11px 0;font-size:13px;border-bottom:1px solid #edf0ef}.lineitem span:first-child{color:var(--muted)}.lineitem strong{text-align:right}.total{display:flex;justify-content:space-between;font-weight:800;font-size:16px;padding:19px 0}.notice{background:#f1f6f5;border-radius:11px;padding:13px 14px;color:#536b6b;font-size:12px;line-height:1.55;margin:5px 0 22px}.primary{width:100%;border:0;border-radius:11px;background:var(--brand);color:#fff;font-weight:750;padding:15px 14px;transition:.2s}.primary:hover{background:var(--brand-dark)}.secondary{width:100%;border:1px solid #ccd8d5;border-radius:11px;background:#fff;color:var(--ink);font-weight:700;padding:12px 14px;margin-top:10px}.mailbox{border-top:1px solid var(--line);padding:25px 27px}.mailbox h3{font-size:16px;margin:0 0 7px}.mailbox p{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 17px}.mailbox .field{margin-bottom:12px}.status{font-size:12px;line-height:1.55;margin-top:12px;color:#4f6865}.status.error{color:#b43e3e}.foot{padding:20px 0 35px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:15px}.foot strong{color:var(--ink)}@media(max-width:800px){.layout{grid-template-columns:1fr}.summary{position:static}.hero{padding:36px 0 25px}.hero h1{letter-spacing:-1.2px}.head{height:72px}}@media(max-width:520px){.wrap{padding:0 16px}.card-body,.summary-content,.mailbox{padding:22px}.grid2{grid-template-columns:1fr;gap:0}.choices{gap:6px}.choice{font-size:11px;padding:11px 4px}.choice.active{padding:10px 3px}.head-note{display:none}.foot{display:block}.foot span{display:block;margin-top:8px}}@media print{header,.hero,.card:first-child,.mailbox,.secondary,.primary,.foot{display:none!important}.layout{display:block}.summary{box-shadow:none}.summary-top{background:#fff;color:#000;border-bottom:1px solid #ccc}.summary-top .small,.summary-top p{color:#444}.wrap{max-width:800px}}
+
+/* Polerad kundvy */
+body{background:linear-gradient(180deg,#edf5f3 0,#f5f7f7 360px,#f5f7f7 100%)}
+.hero{position:relative;padding-top:58px}.hero:before{content:"";position:absolute;right:3%;top:42px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,#c9e9e1 0,transparent 68%);opacity:.55;pointer-events:none}.hero h1{font-weight:850}.hero p{position:relative}.card{box-shadow:0 14px 45px rgba(18,53,56,.055)}.choice{min-height:98px;transition:transform .16s,border-color .16s,background .16s}.choice:hover{transform:translateY(-2px)}.summary-top{background:linear-gradient(135deg,#123c42,#176c70)}.price{font-variant-numeric:tabular-nums}.primary{box-shadow:0 6px 14px #176c7029}.primary:focus-visible,.secondary:focus-visible,.choice:focus-visible{outline:3px solid #75c4ba;outline-offset:3px}.logo-icon{box-shadow:0 3px 10px #176c7020}.mailbox{background:#fbfdfc}.hint{max-width:520px}.trust-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:19px;color:#52716d;font-size:12px;font-weight:650}.trust-row span{display:inline-flex;gap:7px;align-items:center}.trust-row span:before{content:'✓';color:var(--brand);font-weight:900}.print-sheet{display:none}
+@media(max-width:520px){.hero:before{display:none}.hero{padding-top:30px}.hero h1{font-size:36px}.choice{min-height:90px}.summary-top{padding:25px 22px}.trust-row{gap:10px}}
+@page{size:A4;margin:0}
+@media print{
+ html,body{background:#fff!important;margin:0!important;padding:0!important;color:#172f37!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ header,main,footer{display:none!important}
+ .print-sheet{display:block!important;width:210mm;min-height:297mm;box-sizing:border-box;padding:18mm 18mm 14mm;position:relative;background:#fff;color:#17313a;font-family:Inter,Arial,sans-serif}
+ .pdf-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #dce8e5;padding-bottom:17px}.pdf-logo{display:flex;align-items:center;gap:11px}.pdf-mark{width:42px;height:42px;background:var(--brand);color:white;border-radius:11px;display:grid;place-items:center;font-size:22px;font-weight:800}.pdf-company{font-size:20px;font-weight:800;letter-spacing:-.5px}.pdf-ref{text-align:right;font-size:11px;color:#647984;line-height:1.6}
+ .pdf-eyebrow{color:var(--brand);font-size:10px;font-weight:800;letter-spacing:2px;margin-top:33px}.pdf-title{font-size:32px;font-weight:850;letter-spacing:-1px;margin:10px 0 9px}.pdf-lead{font-size:12px;color:#607781;line-height:1.65;margin:0 0 24px}.pdf-price-panel{background:#143d42;color:#fff;border-radius:16px;padding:24px 27px;margin:25px 0 29px;display:flex;justify-content:space-between;align-items:center}.pdf-price-panel .pdf-label{font-size:11px;color:#c6e1de;margin-bottom:7px}.pdf-price-panel .pdf-big{font-size:31px;font-weight:850;letter-spacing:-.8px}.pdf-price-panel .pdf-sub{font-size:10px;color:#d0e3e0;margin-top:5px}.pdf-price-panel .pdf-icon{font-size:32px;opacity:.35}
+ .pdf-heading{font-size:15px;font-weight:800;margin:0 0 12px}.pdf-table{width:100%;border-collapse:collapse;font-size:12px}.pdf-table td{padding:11px 0;border-bottom:1px solid #e4ecea}.pdf-table td:first-child{color:#6b7d84}.pdf-table td:last-child{text-align:right;font-weight:750}.pdf-table tr.pdf-total td{padding-top:18px;font-size:15px;color:#17313a;border-bottom:0;font-weight:850}.pdf-note{background:#f0f6f4;border-radius:12px;padding:17px 18px;font-size:11px;color:#476861;line-height:1.65;margin-top:24px}.pdf-footer{position:absolute;bottom:16mm;left:18mm;right:18mm;border-top:1px solid #dce8e5;padding-top:13px;display:flex;justify-content:space-between;font-size:10px;color:#6b7e85}.pdf-footer strong{color:#17313a}
+}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.room-guide{display:flex;align-items:center;gap:14px;background:#f3faf7;border:1px solid #e0eee9;border-radius:14px;padding:12px 17px;margin-bottom:20px}.room-guide p{color:#536d69;font-size:13px;line-height:1.6;margin:0}.room-illustration{flex:0 0 160px}.room-illustration svg{display:block;width:100%;height:auto}.area-preview{background:#e7f3ef;border-radius:10px;padding:13px 15px;color:#155b57;font-size:13px;font-weight:750;margin-bottom:10px}[hidden]{display:none!important}@media(max-width:520px){.grid3{gap:8px}.grid3 label{font-size:11px}.grid3 .input{padding:0 8px}.room-guide{display:block}.room-illustration{max-width:230px;margin:auto}.room-guide p{margin-top:5px}}
+
+/* Interaktiv rumsmodell och direktreglage */
+.range-field{margin-top:-11px;margin-bottom:15px}.range-field input{width:100%;accent-color:var(--brand);cursor:pointer}.range-scale{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.live-room{background:linear-gradient(145deg,#e9f7f3,#f7fbfa);border:1px solid #d6eae4;border-radius:15px;padding:16px;margin:0 0 17px;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}.live-room svg{width:100%;max-height:160px;overflow:visible}.live-room .live-stat{font-size:12px;color:#56726e}.live-room strong{display:block;font-size:23px;color:var(--brand-dark);margin:5px 0}.live-room .small-detail{font-size:11px;color:#607a75;line-height:1.5}.price{transition:color .18s}.price.changed{color:#8fe3d0}@media(max-width:520px){.live-room{grid-template-columns:1fr 1fr;padding:12px}.live-room strong{font-size:19px}}
+/* En enda A4-sida, även när ROT och alla projektrader visas */
+@media print{
+ @page{size:A4 portrait;margin:0}
+ html,body{width:210mm!important;height:297mm!important;overflow:hidden!important}
+ .print-sheet{width:210mm!important;height:297mm!important;min-height:0!important;max-height:297mm!important;padding:12mm 16mm 12mm!important;overflow:hidden!important;break-after:avoid!important;page-break-after:avoid!important}
+ .pdf-top{padding-bottom:9px!important}.pdf-mark{width:35px!important;height:35px!important;font-size:18px!important}.pdf-company{font-size:17px!important}.pdf-ref{font-size:9px!important}
+ .pdf-eyebrow{margin-top:16px!important;font-size:9px!important}.pdf-title{font-size:25px!important;margin:5px 0!important}.pdf-lead{font-size:10px!important;line-height:1.35!important;margin:0 0 11px!important}
+ .pdf-price-panel{padding:14px 19px!important;margin:12px 0 16px!important;border-radius:11px!important}.pdf-price-panel .pdf-big{font-size:27px!important}.pdf-price-panel .pdf-label{font-size:10px!important}.pdf-price-panel .pdf-sub{font-size:9px!important}
+ .pdf-heading{font-size:13px!important;margin-bottom:6px!important}.pdf-table{font-size:10px!important;line-height:1.2!important}.pdf-table td{padding:6px 0!important}.pdf-table tr.pdf-total td{padding:11px 0 5px!important;font-size:13px!important}.pdf-note{margin-top:13px!important;padding:10px 12px!important;font-size:9px!important;line-height:1.4!important}.pdf-footer{bottom:11mm!important;left:16mm!important;right:16mm!important;padding-top:8px!important;font-size:9px!important}
+ .pdf-table tr,.pdf-price-panel,.pdf-note{break-inside:avoid!important;page-break-inside:avoid!important}
+}
+</style><style>
+.head{height:auto;min-height:86px;padding-top:15px;padding-bottom:15px}.brand-block{display:flex;flex-direction:column;gap:6px}.brand-contact{display:flex;gap:7px 15px;flex-wrap:wrap;margin-left:55px;color:#5b7476;font-size:11px}.brand-contact a{color:#176c70;text-decoration:none}.brand-contact a:hover{text-decoration:underline}.visual-guide{background:linear-gradient(145deg,#eaf7f3,#f9fcfb);border:1px solid #d6eae4;border-radius:15px;padding:16px;margin-bottom:19px}.visual-title{font-size:15px;font-weight:800;color:#164c50}.visual-guide p{font-size:12px;color:#55726d;line-height:1.5;margin:5px 0 8px}.scene-svg{display:block;width:100%;height:auto;max-height:none;aspect-ratio:auto;overflow:hidden}.visual-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline;color:#597570;font-size:12px}.visual-meta strong{font-size:17px;color:#115b57}@media(max-width:520px){.head{min-height:72px}.brand-contact{margin-left:0;font-size:10px}.visual-guide{padding:11px}.scene-svg{max-height:none}}
+</style><style>.contact-card{margin:16px 0 0;padding:20px 22px;border:1px solid #dbe8e5;background:#f6faf9;border-radius:15px;color:#183d3d}.contact-card h3{font-size:17px;margin:0 0 12px;color:#174c4c}.contact-line{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:13px;flex-wrap:wrap}.contact-line span{color:#647c79}.contact-line a{color:#176c70;text-decoration:none;overflow-wrap:anywhere}.contact-line a:hover{text-decoration:underline}@media(max-width:520px){.contact-card{padding:16px}.contact-line{display:block}.contact-line span{display:block;margin-bottom:3px}}</style><style>/* Navigering från demonstrationssidan till FunktionLab */
+.back-to-lab{display:inline-flex;align-items:center;gap:9px;flex-shrink:0;padding:11px 15px;border:1px solid #cbded9;border-radius:11px;background:#fff;color:#176c70;text-decoration:none;font-size:13px;font-weight:750;transition:background .15s,border-color .15s}
+.back-to-lab:hover{background:#eaf6f2;border-color:#176c70}
+.back-to-lab:focus-visible{outline:3px solid #75c4ba;outline-offset:3px}
+@media(max-width:520px){.back-to-lab{font-size:12px;padding:9px 11px;gap:6px}.head{gap:10px}.logo-text{font-size:18px}}
+@media print{.back-to-lab{display:none!important}}
+</style><style>
+/* PDF-vägledning: utan mejltjänst eller personuppgiftsformulär */
+.pdf-guide{margin:0 26px 4px;padding:22px 0 5px;border-top:1px solid var(--line)}
+.pdf-guide-heading{display:flex;gap:12px;align-items:flex-start}
+.pdf-guide-icon{width:32px;height:32px;display:grid;place-items:center;flex-shrink:0;border-radius:10px;background:#e4f2ed;color:var(--brand);font-weight:850;font-size:18px}
+.pdf-guide h3{font-size:16px;line-height:1.35;margin:1px 0 8px;letter-spacing:-.2px}
+.pdf-guide p{color:#58716e;font-size:12px;line-height:1.65;margin:0}
+.pdf-guide-benefit{margin:17px 0 13px;padding:15px 16px;background:#edf7f3;border:1px solid #dcece6;border-radius:12px}
+.pdf-guide-benefit strong{display:block;color:#174f4e;font-size:13px;margin-bottom:5px}
+.pdf-guide .pdf-guide-tip{font-size:11px;color:#687d7a;padding:0 2px}
+@media(max-width:520px){.pdf-guide{margin:0 22px 4px;padding-top:20px}}
+</style></head><body>
+<header><div class="wrap head"><div class="brand-block"><div class="logo" aria-label="Företagslogotyp"><div class="logo-icon" id="logoIcon">M</div><span class="logo-text" id="brandName">Markus Måleri</span></div></div><a class="back-to-lab" href="https://funktionlab.se/" aria-label="Till FunktionLab.se"><span aria-hidden="true">←</span> Till FunktionLab.se</a></div></header>
+<main class="wrap"><div class="hero"><div class="eyebrow">PRISKALKYLATOR FÖR MÅLERI</div><h1>Vad kostar ditt<br>måleriprojekt?</h1><p>Få en preliminär prisindikation som underlättar kontakten med målerifirman. Ange mått och förutsättningar och spara underlaget inför en offertförfrågan.</p><div class="trust-row"><span>Direkt prisuppskattning</span><span>Inga förpliktelser</span><span>Underlag som PDF</span></div></div>
+<div class="layout"><section class="card"><div class="card-body"><div class="section-head"><div class="step">1</div><div><h2>Vad vill du måla?</h2><p>Välj vilken typ av arbete det gäller.</p></div></div>
+<div class="choices" id="jobChoices"><button class="choice active" data-job="walls" type="button"><svg width="29" height="29" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="26" height="22" rx="2"/><path d="M16 5v22M3 16h26"/></svg>Innerväggar</button><button class="choice" data-job="facade" type="button"><svg width="29" height="29" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3 15 13-11 13 11M6 13v15h20V13M13 28v-9h6v9"/></svg>Fasad</button></div>
+<div class="divider"></div><div class="section-head"><div class="step">2</div><div><h2 id="measureTitle">Rummets mått</h2><p id="measureDescription">Fyll i rummets mått så räknar vi ut målningsytan.</p></div></div>
+<div id="roomFields"><div class="field"><label for="roomCount">Antal rum</label><select id="roomCount"><option value="1">1 rum</option><option value="2">2 rum</option><option value="3">3 rum</option><option value="4">4 rum</option><option value="5">5 rum</option></select><div class="hint">Ange mått och öppningar för varje rum. Den sammanlagda målningsytan används för prisindikationen.</div></div><div class="field" id="roomPickerField" hidden><label for="activeRoom">Rum att ställa in</label><select id="activeRoom"><option value="0">Rum 1</option></select></div><div class="visual-guide"><div class="visual-title">Se ditt rum inifrån</div><p>Ändra måtten och öppningarna. Se rummets innerväggar från insidan.</p><svg id="interiorSvg" class="scene-svg" viewBox="0 0 440 270" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Interaktiv vy inifrån rummet med väggar, golv, fönster och dörr"><g id="interiorScene"></g></svg><div class="visual-meta"><strong id="liveWallArea">0 m² väggyta</strong><span id="liveFloorArea">Golvyta: 20 m²</span></div></div><div class="grid3"><div class="field"><label for="roomLength">Längd (m)</label><input class="input" id="roomLength" type="number" min="0.5" max="100" step="0.1" value="5" inputmode="decimal"><div class="range-field"><input type="range" id="roomLengthSlider" min="1" max="12" step="0.1" value="5" aria-label="Justera roomLength"><div class="range-scale"><span>1 m</span><span>12 m</span></div></div></div><div class="field"><label for="roomWidth">Bredd (m)</label><input class="input" id="roomWidth" type="number" min="0.5" max="100" step="0.1" value="4" inputmode="decimal"><div class="range-field"><input type="range" id="roomWidthSlider" min="1" max="12" step="0.1" value="4" aria-label="Justera roomWidth"><div class="range-scale"><span>1 m</span><span>12 m</span></div></div></div><div class="field"><label for="roomHeight">Takhöjd (m)</label><input class="input" id="roomHeight" type="number" min="1" max="15" step="0.1" value="2.5" inputmode="decimal"><div class="range-field"><input type="range" id="roomHeightSlider" min="2" max="4" step="0.1" value="2.5" aria-label="Justera roomHeight"><div class="range-scale"><span>2 m</span><span>4 m</span></div></div></div></div><div class="grid2" id="openingsFields"><div class="field"><label for="doors">Antal dörrar</label><input class="input" id="doors" type="number" min="0" max="30" step="1" value="1" inputmode="numeric"></div><div class="field"><label for="windows">Antal fönster</label><input class="input" id="windows" type="number" min="0" max="30" step="1" value="2" inputmode="numeric"></div></div><label class="checkline" id="ceilingOption"><input type="checkbox" id="includeCeiling"> Måla taket också</label><div class="area-preview" id="areaPreview" aria-live="polite"></div><div class="hint">För väggar drar vi schablonmässigt av 1,8 m² per dörr och 1,5 m² per fönster. Målerifirman kan behöva justera den debiterbara ytan efter besiktning.</div></div><div id="facadeFields" hidden><div class="field"><label for="roofType">Taktyp</label><select id="roofType"><option value="gable" selected>Sadeltak</option><option value="flat">Platt tak</option></select></div><div class="visual-guide"><div class="visual-title">Anpassa huset utifrån</div><p>Justera husets längd, bredd, höjd, dörrar och fönster med reglagen. Huset och målningsytan uppdateras direkt.</p><svg id="facadeSvg" class="scene-svg" viewBox="0 0 440 290" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Interaktiv tredimensionell husvy med justerbara mått, dörrar och fönster"><g id="facadeScene"></g></svg><div class="visual-meta"><strong id="liveFacadeArea">0 m² fasadyta</strong><span>Illustrativ vy, öppningar på baksidan kan vara dolda</span></div></div>
+<div class="grid2">
+<div class="field"><label for="facadeLength">Husets längd (m)</label><input class="input" id="facadeLength" type="number" min="2" max="40" step="0.1" value="13.9" inputmode="decimal"><div class="range-field"><input type="range" id="facadeLengthSlider" min="2" max="40" step="0.1" value="13.9"><div class="range-scale"><span>2 m</span><span>40 m</span></div></div></div>
+<div class="field"><label for="facadeWidth">Husets bredd (m)</label><input class="input" id="facadeWidth" type="number" min="2" max="30" step="0.1" value="9" inputmode="decimal"><div class="range-field"><input type="range" id="facadeWidthSlider" min="2" max="30" step="0.1" value="9"><div class="range-scale"><span>2 m</span><span>30 m</span></div></div></div>
+<div class="field"><label for="facadeHeight">Fasadens höjd (m)</label><input class="input" id="facadeHeight" type="number" min="2" max="12" step="0.1" value="3.8" inputmode="decimal"><div class="range-field"><input type="range" id="facadeHeightSlider" min="2" max="12" step="0.1" value="3.8"><div class="range-scale"><span>2 m</span><span>12 m</span></div></div></div>
+<div class="field"><label for="facadeDoors">Antal ytterdörrar</label><input class="input" id="facadeDoors" type="number" min="0" max="2" step="1" value="1" inputmode="numeric"><div class="range-field"><input type="range" id="facadeDoorsSlider" min="0" max="2" step="1" value="1"><div class="range-scale"><span>0</span><span>2</span></div></div></div>
+<div class="field"><label for="facadeWindows">Antal fönster</label><input class="input" id="facadeWindows" type="number" min="0" max="24" step="1" value="8" inputmode="numeric"><div class="range-field"><input type="range" id="facadeWindowsSlider" min="0" max="24" step="1" value="8"><div class="range-scale"><span>0</span><span>24</span></div></div></div></div>
+<div class="hint">Beräkningen avser fyra ytterväggar och, vid sadeltak, två triangulära gavlar, minus schablonavdrag för dörrar och fönster. Takytan ingår inte. Vid sadeltak beräknas gavlarna med en illustrativ takresning på 28 % av husets bredd. Fasadens höjd avser höjden till takfoten.</div></div><div class="field"><label for="condition">Underlagets skick</label><select id="condition"><option value="good">Bra, normalt förarbete</option><option value="medium">Visst spacklingsbehov</option><option value="poor">Omfattande förarbete</option></select></div><div class="grid2"><div class="field"><label for="coats">Antal strykningar</label><select id="coats"><option value="1">1 strykning</option><option value="2" selected>2 strykningar</option><option value="3">3 strykningar</option></select></div><div class="field"><label for="access">Åtkomlighet</label><select id="access"><option value="normal">Normal</option><option value="difficult">Svåråtkomligt / hög höjd</option></select></div></div>
+<div class="divider"></div><div class="section-head"><div class="step">3</div><div><h2>Tillägg och förutsättningar</h2><p>Välj det som är aktuellt för ditt projekt.</p></div></div>
+<label class="checkline"><input type="checkbox" id="cover" checked> Skyddstäckning och maskering behövs</label><label class="checkline"><input type="checkbox" id="paintIncluded" checked> Färg och normalt förbrukningsmaterial ska ingå</label><label class="checkline"><input type="checkbox" id="rot"> Visa illustrativt ROT-avdrag (förutsätter att villkoren är uppfyllda)</label><p class="hint">Kalkylatorn ger en schablonberäkning. Slutpris, materialåtgång och eventuellt ROT-avdrag fastställs av målerifirman.</p></div></section>
+<aside class="card summary"><div class="summary-top"><div class="small">Din preliminära prisindikation</div><div class="price" id="price">0 kr</div><p id="priceNote">Inklusive moms, före eventuellt ROT-avdrag</p></div><div class="summary-content"><h3>Din sammanställning</h3><div class="lineitem"><span>Arbete</span><strong id="jobName">Väggmålning</strong></div><div class="lineitem"><span>Målningsyta</span><strong id="areaText">40 m²</strong></div><div class="lineitem"><span>Arbete och förarbete</span><strong id="laborText">0 kr</strong></div><div class="lineitem"><span>Material och tillägg</span><strong id="extraText">0 kr</strong></div><div class="lineitem"><span>Moms 25 %</span><strong id="vatText">0 kr</strong></div><div class="lineitem" id="rotLine" hidden><span>Illustrativt ROT-avdrag</span><strong id="rotText">0 kr</strong></div><div class="total"><span id="totalLabel">Uppskattat totalpris</span><span id="finalText">0 kr</span></div><div class="notice">Prisindikationen är ett underlag som underlättar kontakten med målerifirman. Det är ingen bindande offert. Slutpriset fastställs efter bedömning av arbetet.</div><button class="primary" id="printBtn" type="button">Visa och spara prisunderlag (PDF)</button></div>
+<section class="pdf-guide" aria-label="Så använder du prisunderlaget"><div class="pdf-guide-heading"><span class="pdf-guide-icon" aria-hidden="true">✓</span><div><h3>Ta nästa steg med ditt prisunderlag</h3><p>Du har redan gjort en första uppskattning av arbetet. Spara PDF-filen och skicka den till Markus Måleri när du vill gå vidare.</p></div></div><div class="pdf-guide-benefit"><strong>Enklare för dig. Smidigare för oss.</strong><p>Underlaget samlar dina val, mått och det preliminära priset. Då kan vi snabbare förstå ditt projekt och återkomma med rätt frågor inför en offert.</p></div><p class="pdf-guide-tip">På mobilen kan du öppna PDF-filen och dela den via din mejlapp. På datorn kan du bifoga den i ett mejl.</p></section><section class="contact-card" aria-label="Kontakta Markus Måleri"><h3>Kontakta Markus Måleri</h3><div class="contact-line"><span>Telefon</span><a href="tel:0700000000">070-000 00 00</a></div><div class="contact-line"><span>E-post</span><a href="mailto:exempel@markusmaleri.se">exempel@markusmaleri.se</a></div><div class="contact-line"><span>Webb</span><a href="https://markusmaleri.exempel.se" target="_blank" rel="noopener noreferrer">markusmaleri.exempel.se</a></div></section></aside></div></main>
+<footer><div class="wrap foot"><span>© <span id="year"></span> <strong id="footerBrand">Markus Måleri</strong>. Prisberäkningen är preliminär.</span><span>Priskalkylator från Funktionlab.se</span></div></footer>
+<section class="print-sheet" id="printSheet" aria-hidden="true"><div class="pdf-top"><div class="pdf-logo"><div class="pdf-mark" id="pdfMark">M</div><div class="pdf-company" id="pdfBrand">Markus Måleri</div></div><div class="pdf-ref">PRISINDIKATION<br><span id="pdfDate"></span></div></div><div class="pdf-eyebrow">DITT MÅLERIPROJEKT</div><h1 class="pdf-title">Din prisuppskattning</h1><p class="pdf-lead">Ett överskådligt underlag för det måleriarbete du planerar. Beräkningen bygger på de uppgifter du har angett.</p><div class="pdf-price-panel"><div><div class="pdf-label">Preliminärt pris inklusive moms</div><div class="pdf-big" id="pdfPrice">0 kr</div><div class="pdf-sub" id="pdfPriceNote">Före eventuellt ROT-avdrag</div></div><div class="pdf-icon">◈</div></div><h2 class="pdf-heading">Sammanställning</h2><table class="pdf-table"><tbody><tr><td>Typ av arbete</td><td id="pdfJob"></td></tr><tr id="pdfDimensionsRow"><td>Mått</td><td id="pdfDimensions"></td></tr><tr id="pdfOpeningsRow"><td>Öppningar</td><td id="pdfOpenings"></td></tr><tr><td>Målningsyta</td><td id="pdfArea"></td></tr><tr><td>Underlagets skick</td><td id="pdfCondition"></td></tr><tr><td>Antal strykningar</td><td id="pdfCoats"></td></tr><tr><td>Åtkomlighet</td><td id="pdfAccess"></td></tr><tr><td>Skyddstäckning</td><td id="pdfCover"></td></tr><tr><td>Färg och förbrukningsmaterial</td><td id="pdfMaterial"></td></tr><tr><td>Arbete och förarbete, exkl. moms</td><td id="pdfLabor"></td></tr><tr><td>Material och tillägg, exkl. moms</td><td id="pdfExtras"></td></tr><tr><td>Moms</td><td id="pdfVat"></td></tr><tr id="pdfRotRow"><td>Illustrativt ROT-avdrag</td><td id="pdfRot"></td></tr><tr class="pdf-total"><td>Uppskattat belopp att betala</td><td id="pdfFinal"></td></tr></tbody></table><div class="pdf-note"><strong>Observera</strong><br>Detta dokument är en preliminär prisindikation och utgör inte en bindande offert. Faktiskt pris beror på arbetsplatsens förutsättningar och målerifirmans bedömning. Eventuellt ROT-avdrag förutsätter att samtliga villkor är uppfyllda.</div><div class="pdf-footer"><span><strong id="pdfFooterBrand">Markus Måleri</strong> · Prisindikation</span><span>Skapad med FunktionLab</span></div></section>
+<script>
+'use strict';
+/* FÖRETAGSKONFIGURATION: ändra enbart dessa värden för varje kund.
+   logoUrl kan anges till en publicerad bild-URL; tom sträng visar initialen.
+   Samma kunduppgifter används i kalkylatorn och PDF-underlaget. */
+const COMPANY = Object.freeze({
+  name:'Markus Måleri', initial:'M', logoUrl:'', primaryColor:'#176c70',
+  phone:'070-000 00 00', contactEmail:'exempel@markusmaleri.se', website:'https://markusmaleri.exempel.se',
+  priceRules:{
+    walls:{name:'Väggmålning',laborPerM2:165,materialPerM2:48},
+    ceiling:{name:'Takmålning',laborPerM2:195,materialPerM2:55},
+    facade:{name:'Fasadmålning',laborPerM2:230,materialPerM2:70},
+    preparationMultiplier:{good:1,medium:1.25,poor:1.6},
+    coatsMultiplier:{1:0.72,2:1,3:1.32},
+    difficultAccessMultiplier:1.2,coverFixed:450,minPriceExVat:2400,
+    vatRate:0.25,rotIllustrationRate:0.30
+  }
+});
+const $=id=>document.getElementById(id), money=n=>Math.round(n).toLocaleString('sv-SE')+' kr';
+let job='walls', latest=null;
+const roomIds=['roomLength','roomWidth','roomHeight','doors','windows'];
+const initialRoom={roomLength:'5',roomWidth:'4',roomHeight:'2.5',doors:'1',windows:'2',includeCeiling:false};
+let roomStates=[{...initialRoom}],activeRoomIndex=0,loadingRoom=false;
+function storeActiveRoom(){
+ if(loadingRoom)return;
+ const room=roomStates[activeRoomIndex];
+ roomIds.forEach(id=>room[id]=$(id).value);
+ room.includeCeiling=$('includeCeiling').checked;
+}
+function loadActiveRoom(){
+ loadingRoom=true;
+ const room=roomStates[activeRoomIndex];
+ roomIds.forEach(id=>$(id).value=room[id]);
+ $('includeCeiling').checked=room.includeCeiling;
+ $('activeRoom').value=String(activeRoomIndex);
+ loadingRoom=false;
+ calculate();
+}
+function roomGeometry(room){
+ const clamp=(v,a,b)=>Math.min(b,Math.max(a,Number(v)||a));
+ const length=clamp(room.roomLength,.5,100),width=clamp(room.roomWidth,.5,100),height=clamp(room.roomHeight,1,15);
+ const doors=Math.round(clamp(room.doors,0,30)),windows=Math.round(clamp(room.windows,0,30));
+ const gross=2*(length+width)*height;
+ return {length,width,height,doors,windows,walls:Math.max(0,gross-Math.min(gross,doors*1.8+windows*1.5)),ceiling:length*width,includeCeiling:room.includeCeiling};
+}
+
+document.documentElement.style.setProperty('--brand',COMPANY.primaryColor);
+$('brandName').textContent=COMPANY.name;$('footerBrand').textContent=COMPANY.name;
+$('year').textContent=new Date().getFullYear();$('logoIcon').textContent=COMPANY.initial;
+if(COMPANY.logoUrl){const img=document.createElement('img');img.src=COMPANY.logoUrl;img.alt=COMPANY.name;img.style.cssText='max-width:160px;max-height:50px;object-fit:contain';$('logoIcon').replaceWith(img);}
+function getGeometry(){
+ const valid=(id,min,max)=>Math.min(max,Math.max(min,Number($(id).value)||min));
+ const length=valid('roomLength',0.5,100),width=valid('roomWidth',0.5,100),height=valid('roomHeight',1,15);
+ const doors=Math.round(valid('doors',0,30)),windows=Math.round(valid('windows',0,30));
+ ['roomLength','roomWidth','roomHeight'].forEach(id=>{const sl=$(id+'Slider');if(sl){sl.value=Math.min(Number(sl.max),Math.max(Number(sl.min),Number($(id).value)||Number(sl.min)));}});
+ const gross=2*(length+width)*height,deduction=Math.min(gross,doors*1.8+windows*1.5);
+ const walls=Math.max(0,gross-deduction),ceiling=length*width;
+ return {length,width,height,doors,windows,walls,ceiling};
+}
+
+function svgEl(tag,attrs={},text){const n=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,String(v));if(text!==undefined)n.textContent=text;return n;}
+function addSvg(group,tag,attrs,text){const n=svgEl(tag,attrs,text);group.appendChild(n);return n;}
+function renderInterior(g){
+ const el=$('interiorScene'),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ const depth=clamp(g.length/5,.35,2.5),width=clamp(g.width/4,.35,2.5),height=clamp(g.height/2.5,.55,1.8);
+ const bw=clamp(190*width/(.7+.3*depth),105,286),bh=clamp(137*height/(.78+.22*depth),90,172);
+ const x=220-bw/2,X=220+bw/2,y=126-bh/2,Y=126+bh/2;
+ const pts=a=>a.map(p=>p.join(',')).join(' ');
+ const wall=(points,fill)=>`<polygon points="${pts(points)}" fill="${fill}" stroke="#9aaba7" stroke-width=".7"/>`;
+ const left=[[12,12],[x,y],[x,Y],[12,230]],right=[[X,y],[428,12],[428,230],[X,Y]];
+ const w=Math.min(5,g.windows),d=Math.min(5,g.doors);
+ const windowWidth=clamp(bw*.23,22,59),windowHeight=clamp(bh*.39,30,65);
+  // Fönstret placeras på högra sidoväggen och projiceras efter rummets geometri.
+  // Fönstrets relativa bredd styrs av rummets längd, höjden av takhöjden.
+  const rightPoint=(u,v)=>[X+(428-X)*u, y+(12-y)*u+((Y-y)+(230-12-(Y-y))*u)*v];
+  const rw=clamp(1.2/g.length,.09,.43),rh=clamp(1.2/g.height,.18,.55);
+  const ru=clamp(.47-rw/2,.12,.78-rw),rv=clamp(.36-rh/2,.12,.8-rh);
+  const rightPoly=(u,v,w,h)=>[rightPoint(u,v),rightPoint(u+w,v),rightPoint(u+w,v+h),rightPoint(u,v+h)].map(p=>p.join(',')).join(' ');
+ const doorWidth=clamp(bw*.16,18,40),doorHeight=clamp(bh*.72,50,112);
+ let openings='';
+  if(w>0){
+   const outer=rightPoly(ru-.012,rv-.016,rw+.024,rh+.032);
+   const glass=rightPoly(ru,rv,rw,rh);
+   const a=rightPoint(ru+rw/2,rv),b=rightPoint(ru+rw/2,rv+rh);
+   const c=rightPoint(ru,rv+rh/2),e=rightPoint(ru+rw,rv+rh/2);
+   openings+=`<g filter="url(#mmShadow)"><polygon points="${outer}" fill="#f7f4ec" stroke="#b3afa5" stroke-width="1.5"/><polygon points="${glass}" fill="url(#mmSky)" stroke="#c3d0cb" stroke-width="1"/><path d="M${a.join(' ')}L${b.join(' ')} M${c.join(' ')}L${e.join(' ')}" stroke="#f9f7f0" stroke-width="3"/></g>`;
+  }
+ if(d>0){
+  const dx=x+bw*.08,dy=Y-doorHeight;
+  openings+=`<g><rect x="${dx}" y="${dy}" width="${doorWidth}" height="${doorHeight}" fill="#b3a89a" stroke="#f6f3ec" stroke-width="4"/><rect x="${dx+4}" y="${dy+5}" width="${doorWidth-8}" height="${doorHeight-10}" fill="url(#mmDoor)"/><path d="M${dx+6} ${dy+8}h${doorWidth-12}v${doorHeight*.36}h${-doorWidth+12}z M${dx+6} ${dy+doorHeight*.49}h${doorWidth-12}v${doorHeight*.37}h${-doorWidth+12}z" fill="none" stroke="#b6aa98" stroke-width="1"/><circle cx="${dx+doorWidth-6}" cy="${dy+doorHeight*.53}" r="2" fill="#a18b63"/></g>`;
+ }
+ el.innerHTML=`<defs>
+ <linearGradient id="mmLeft" x1="0" x2="1"><stop stop-color="#c2d1cc"/><stop offset="1" stop-color="#e3e8e1"/></linearGradient>
+ <linearGradient id="mmRight" x1="0" x2="1"><stop stop-color="#e8eae3"/><stop offset="1" stop-color="#c6d5cf"/></linearGradient>
+ <linearGradient id="mmBack" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#f4f3ed"/><stop offset="1" stop-color="#e6e7de"/></linearGradient>
+ <linearGradient id="mmFloor" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#e0d2bb"/><stop offset="1" stop-color="#bfa98d"/></linearGradient>
+ <linearGradient id="mmSky" x1="0" x2=".7" y1="0" y2="1"><stop stop-color="#c4e1ed"/><stop offset="1" stop-color="#edf4ed"/></linearGradient>
+ <linearGradient id="mmDoor" x1="0" x2="1"><stop stop-color="#e6ded1"/><stop offset="1" stop-color="#c9c1b5"/></linearGradient>
+ <linearGradient id="mmUpholstery" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#f1ece2"/><stop offset="1" stop-color="#bcb5a9"/></linearGradient>
+ <filter id="mmShadow" x="-25%" y="-40%" width="150%" height="190%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#344640" flood-opacity=".22"/></filter>
+ <pattern id="mmTexture" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".5" fill="#879c90" opacity=".16"/></pattern>
+ </defs>
+ <rect width="440" height="270" rx="9" fill="#e6eee9"/>
+ ${wall(left,'#e5e8e1')}${wall(right,'#e5e8e1')}
+ ${wall([[x,y],[X,y],[X,Y],[x,Y]],'#e5e8e1')}
+ ${wall([[12,230],[x,Y],[X,Y],[428,230]],'url(#mmFloor)')}
+ <polygon points="${pts([[12,12],[x,y],[X,y],[428,12]])}" fill="${$('includeCeiling').checked?'#e7f0e9':'#f8f8f3'}"/>
+ <path d="M12 12 L${x} ${y} H${X} L428 12 M12 230 L${x} ${Y} H${X} L428 230" stroke="#fff" stroke-width="3" fill="none" opacity=".8"/>
+ <path d="M${x} ${y}V${Y} M${X} ${y}V${Y}" stroke="#d4d7cf" stroke-width="1.5"/>
+ ${openings}
+
+ <rect x="0" y="239" width="440" height="31" fill="#f2f7f4"/>
+ <text x="220" y="259" text-anchor="middle" fill="#176c70" font-size="13" font-weight="700">${g.length.toLocaleString('sv-SE')} × ${g.width.toLocaleString('sv-SE')} × ${g.height.toLocaleString('sv-SE')} m</text>
+ `;
+}
+function renderFacade(length,width,height,doors,windows,area,roofType){
+ const el=$('facadeScene'),gable=roofType==='gable';
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ // Två separata geometriska modeller: sadeltak med gavel, respektive plant tak.
+ // Samma projektionsvektor används för samtliga parallella kanter.
+ const frontW=clamp(92+width*4.2,100,162);
+ const sideW=clamp(94+length*4.5,100,190);
+ const wallH=clamp(76+height*7,90,140);
+ const dx=sideW,dy=clamp(sideW*.17,17,32);
+ const roofRise=gable?clamp(frontW*.28,27,47):0;
+ const x0=(440-frontW-dx)/2,x1=x0+frontW,xm=(x0+x1)/2;
+ const eaveY=clamp(91+roofRise*.45,105,128),baseY=eaveY+wallH;
+ const P=(x,y)=>`${x.toFixed(2)},${y.toFixed(2)}`;
+ const poly=(pts,fill,stroke='none',sw=1)=>`<polygon points="${pts.map(q=>P(...q)).join(' ')}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
+ const front=gable?[[x0,eaveY],[xm,eaveY-roofRise],[x1,eaveY],[x1,baseY],[x0,baseY]]:[[x0,eaveY],[x1,eaveY],[x1,baseY],[x0,baseY]];
+ const side=[[x1,eaveY],[x1+dx,eaveY-dy],[x1+dx,baseY-dy],[x1,baseY]];
+ function opening(face,u,v,w,h,kind){
+  const point=(a,b)=>face==='front'?[x0+a*frontW,eaveY+b*wallH]:[x1+a*dx,eaveY-a*dy+b*wallH];
+  const q=[point(u,v),point(u+w,v),point(u+w,v+h),point(u,v+h)];
+  let out=poly(q,kind==='door'?'#536269':'#c9d9df','#9cacae',1.4);
+  const t=.09;
+  out+=poly([point(u+w*t,v+h*t),point(u+w*(1-t),v+h*t),point(u+w*(1-t),v+h*(1-t)),point(u+w*t,v+h*(1-t))],kind==='door'?'#343f44':'url(#facGlass)','#b6c7c8',.7);
+  if(kind==='window'){
+   const a=point(u+w*.5,v+h*t),b=point(u+w*.5,v+h*(1-t));
+   out+=`<path d="M${a.join(' ')}L${b.join(' ')}" stroke="#e8f0ed" stroke-width="2"/>`;
+  }else{
+   const hnd=point(u+w*.78,v+h*.57);
+   out+=`<circle cx="${hnd[0]}" cy="${hnd[1]}" r="1.5" fill="#e2e6e3"/>`;
+  }
+  return out;
+ }
+ const doorH=clamp(2.05/height,.22,.84),frontDoorW=clamp(1/width,.07,.2),sideDoorW=clamp(1/length,.06,.18);
+ let frontOpen='',sideOpen='';
+ if(doors>0)frontOpen+=opening('front',.12,1-doorH,frontDoorW,doorH,'door');
+ if(doors>1)sideOpen+=opening('side',.70,1-doorH,sideDoorW,doorH,'door');
+ const levels=height>=4.3?[.13,.57]:[.26];
+ const fw=clamp(1.2/width,.075,.17),sw=clamp(1.2/length,.06,.16),wh=clamp(1.2/height,.13,.32);
+ const frontSlots=[],sideSlots=[];
+ for(const v of levels){
+  for(const u of [.29,.53,.76]){
+   if(u+fw>.96||v+wh>.95)continue;
+   if(doors>0&&v+wh>1-doorH-.03&&u<.12+frontDoorW+.03&&u+fw>.10)continue;
+   frontSlots.push({u,v});
+  }
+  for(const u of [.08,.27,.47,.67,.85]){
+   if(u+sw>.98||v+wh>.95)continue;
+   if(doors>1&&v+wh>1-doorH-.03&&u<.70+sideDoorW+.03&&u+sw>.68)continue;
+   sideSlots.push({u,v});
+  }
+ }
+ const frontN=Math.min(frontSlots.length,Math.ceil(windows*.38));
+ const sideN=Math.min(sideSlots.length,windows-frontN);
+ const spread=(slots,n)=>n?Array.from({length:n},(_,i)=>slots[Math.min(slots.length-1,Math.floor((i+.5)*slots.length/n))]):[];
+ spread(frontSlots,frontN).forEach(q=>frontOpen+=opening('front',q.u,q.v,fw,wh,'window'));
+ spread(sideSlots,sideN).forEach(q=>sideOpen+=opening('side',q.u,q.v,sw,wh,'window'));
+ const roof=gable?
+  // Endast synligt takfall: från nock till takfot, konsekvent parallellprojektion.
+  `${poly([[xm,eaveY-roofRise],[xm+dx,eaveY-roofRise-dy],[x1+dx,eaveY-dy],[x1,eaveY]],'url(#facRoof)','#3d5056',1.7)}
+   <path d="M${P(xm,eaveY-roofRise)}L${P(xm+dx,eaveY-roofRise-dy)}" fill="none" stroke="#c6cfd0" stroke-width="2"/>`:
+  // Platt tak har inga nockar, takfall eller triangulära gavlar.
+  `${poly([[x0,eaveY],[x0+dx,eaveY-dy],[x1+dx,eaveY-dy],[x1,eaveY]],'#687a7e','#45565b',1.5)}
+   <path d="M${P(x0,eaveY)}L${P(x1,eaveY)}L${P(x1+dx,eaveY-dy)}" stroke="#aebec0" stroke-width="2" fill="none"/>`;
+ el.innerHTML=`<defs>
+ <linearGradient id="facSky" x2="0" y2="1"><stop stop-color="#dcecf0"/><stop offset="1" stop-color="#f5f8f6"/></linearGradient>
+ <linearGradient id="facGlass" x2=".8" y2="1"><stop stop-color="#668998"/><stop offset=".48" stop-color="#c0d9de"/><stop offset="1" stop-color="#698b96"/></linearGradient>
+ <linearGradient id="facRoof" x2="0" y2="1"><stop stop-color="#84959a"/><stop offset="1" stop-color="#4d5e65"/></linearGradient>
+ <filter id="facShadow"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#182a2a" flood-opacity=".18"/></filter>
+ </defs>
+ <rect width="440" height="290" rx="9" fill="url(#facSky)"/>
+ <g filter="url(#facShadow)">
+ ${poly(side,'#252f34','#19252a',1.2)}
+ ${poly(front,'#343e43','#19252a',1.2)}
+ ${roof}
+ ${sideOpen}${frontOpen}
+ <path d="M${P(x0,baseY)}L${P(x1,baseY)}L${P(x1+dx,baseY-dy)}" fill="none" stroke="#52685d" stroke-width="2"/>
+ </g>
+ <rect y="258" width="440" height="32" fill="#f1f7f4"/>
+ <text x="220" y="278" text-anchor="middle" fill="#176c70" font-size="12" font-weight="700">${length.toLocaleString('sv-SE')} × ${width.toLocaleString('sv-SE')} × ${height.toLocaleString('sv-SE')} m (L × B × H)</text>`;
+}
+function calculate(){
+  const r=COMPANY.priceRules,g=getGeometry(),isFacade=job==='facade';
+  const fl=Math.min(40,Math.max(2,Number($('facadeLength').value)||2)),fw=Math.min(30,Math.max(2,Number($('facadeWidth').value)||2)),fh=Math.min(12,Math.max(2,Number($('facadeHeight').value)||2));
+  const fd=Math.min(2,Math.max(0,Math.round(Number($('facadeDoors').value)||0))),fn=Math.min(24,Math.max(0,Math.round(Number($('facadeWindows').value)||0)));
+  const roofType=$('roofType').value;
+   const gableRise=roofType==='gable'?fw*0.28:0;
+   const facadeArea=Math.max(0,2*(fl+fw)*fh+(roofType==='gable'?fw*gableRise:0)-fd*1.8-fn*1.5);
+   $('facadeDoors').value=fd;
+   ['facadeLength','facadeWidth','facadeHeight','facadeDoors','facadeWindows'].forEach(id=>{const slider=$(id+'Slider');if(slider)slider.value=$(id).value;});
+  const rooms=roomStates.map(roomGeometry);
+  const wallSum=rooms.reduce((sum,room)=>sum+room.walls,0);
+  const ceilingSum=rooms.reduce((sum,room)=>sum+(room.includeCeiling?room.ceiling:0),0);
+  const area=isFacade?facadeArea:wallSum;
+  const extraCeiling=isFacade?0:ceilingSum;
+  $('roomFields').hidden=isFacade;$('facadeFields').hidden=!isFacade;
+  $('openingsFields').hidden=isFacade;$('ceilingOption').hidden=isFacade;
+  $('liveWallArea').textContent=g.walls.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m² väggyta';
+ $('liveFloorArea').textContent='Golvyta: '+g.ceiling.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m²';
+ renderInterior(g);renderFacade(fl,fw,fh,fd,fn,facadeArea,roofType);
+ $('liveFacadeArea').textContent=facadeArea.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m² fasadyta';
+ $('measureTitle').textContent=isFacade?'Fasadens mått':(rooms.length>1?'Rummens mått':'Rummets mått');$('measureDescription').textContent=isFacade?'Ange husets mått för alla fyra ytterväggar.':'Fyll i rummets mått så räknar vi ut målningsytan.';
+ $('areaPreview').textContent=isFacade?`Beräknad fasadyta: ${area.toLocaleString('sv-SE',{maximumFractionDigits:1})} m²`:`Rum ${activeRoomIndex+1}: ${g.walls.toLocaleString('sv-SE',{maximumFractionDigits:1})} m² vägg. Totalt ${wallSum.toLocaleString('sv-SE',{maximumFractionDigits:1})} m² vägg${extraCeiling?' + '+extraCeiling.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m² tak':''} för ${rooms.length} rum.`;
+  const condition=$('condition').value,coats=Number($('coats').value),access=$('access').value;
+  const laborBase=area*r[job].laborPerM2*r.preparationMultiplier[condition]*r.coatsMultiplier[coats]*(access==='difficult'?r.difficultAccessMultiplier:1);
+  const extraLabor=extraCeiling*r.ceiling.laborPerM2*r.preparationMultiplier[condition]*r.coatsMultiplier[coats];
+  const material=$('paintIncluded').checked?(area*r[job].materialPerM2+extraCeiling*r.ceiling.materialPerM2)*r.coatsMultiplier[coats]:0;
+  const cover=$('cover').checked?r.coverFixed:0;
+  const labor=Math.max(laborBase+extraLabor,r.minPriceExVat-material-cover),net=labor+material+cover;
+  const vat=net*r.vatRate,total=net+vat;
+  // ROT: endast en illustrativ schablon på arbetskostnad inkl moms, inte skatterådgivning.
+  const rot=$('rot').checked?labor*(1+r.vatRate)*r.rotIllustrationRate:0;
+  latest={company:COMPANY.name,job:r[job].name+(extraCeiling?' + takmålning':''),area:area+extraCeiling,dimensions:isFacade?{facadeLength:fl,facadeWidth:fw,facadeHeight:fh,roofType,doors:fd,windows:fn}:g,rooms:isFacade?null:rooms,condition,coats,access,cover:$('cover').checked,paintIncluded:$('paintIncluded').checked,labor,material,coverCost:cover,vat,total,rot,final:total-rot,createdAt:new Date().toISOString()};
+  $('price').textContent=money(total-rot);$('priceNote').textContent=$('rot').checked?'Inklusive moms, efter illustrativt ROT-avdrag':'Inklusive moms, före eventuellt ROT-avdrag';$('jobName').textContent=r[job].name+(isFacade?'':` (${rooms.length} ${rooms.length===1?'rum':'rum'})`)+(extraCeiling?' + takmålning':'');$('areaText').textContent=(area+extraCeiling).toLocaleString('sv-SE',{maximumFractionDigits:1})+' m²';$('laborText').textContent=money(labor);$('extraText').textContent=money(material+cover);$('vatText').textContent=money(vat);$('rotLine').hidden=!$('rot').checked;$('rotText').textContent='−'+money(rot);$('finalText').textContent=money(total-rot);$('totalLabel').textContent=rot?'Efter illustrativt ROT':'Uppskattat totalpris';
+}
+$('roomCount').addEventListener('change',()=>{
+ storeActiveRoom();
+ const count=Number($('roomCount').value);
+ while(roomStates.length<count)roomStates.push({...initialRoom});
+ roomStates.length=count;
+ if(activeRoomIndex>=count)activeRoomIndex=count-1;
+ $('roomPickerField').hidden=count===1;
+ $('activeRoom').innerHTML=roomStates.map((_,i)=>`<option value="${i}">Rum ${i+1}</option>`).join('');
+ loadActiveRoom();
+});
+$('activeRoom').addEventListener('change',()=>{storeActiveRoom();activeRoomIndex=Number($('activeRoom').value);loadActiveRoom();});
+roomIds.concat(['includeCeiling']).forEach(id=>$(id).addEventListener('input',storeActiveRoom));
+document.querySelectorAll('[data-job]').forEach(b=>b.addEventListener('click',()=>{job=b.dataset.job;document.querySelectorAll('[data-job]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b));});calculate()}));
+['facadeLength','facadeWidth','facadeHeight','facadeDoors','facadeWindows','roofType','roomLength','roomWidth','roomHeight','doors','windows','includeCeiling','condition','coats','access','cover','paintIncluded','rot'].forEach(id=>$(id).addEventListener('input',calculate));
+['roomLength','roomWidth','roomHeight','facadeLength','facadeWidth','facadeHeight','facadeDoors','facadeWindows'].forEach(id=>{const slider=$(id+'Slider');if(slider)slider.addEventListener('input',()=>{$(id).value=slider.value;calculate();});});
+function updatePrintSheet(){
+ if(!latest)return;
+ const v=latest,cond={good:'Bra, normalt förarbete',medium:'Visst spacklingsbehov',poor:'Omfattande förarbete'};
+ const fields={pdfBrand:COMPANY.name,pdfMark:COMPANY.initial,pdfFooterBrand:COMPANY.name,pdfDate:new Date().toLocaleDateString('sv-SE',{year:'numeric',month:'long',day:'numeric'}),pdfPrice:money(v.final),pdfPriceNote:v.rot>0?'Inklusive moms, efter illustrativt ROT-avdrag':'Inklusive moms, före eventuellt ROT-avdrag',pdfJob:v.job+(v.dimensions?.roofType?` (${v.dimensions.roofType==='gable'?'sadeltak':'platt tak'})`: ''),pdfArea:v.area.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m²',pdfDimensions:v.rooms?`${v.rooms.length} rum`:v.dimensions?(v.dimensions.facadeWidth?`${v.dimensions.facadeLength} × ${v.dimensions.facadeWidth} × ${v.dimensions.facadeHeight} m (hus)`:`${v.dimensions.length} × ${v.dimensions.width} × ${v.dimensions.height} m`):'Ej angivet',pdfOpenings:v.rooms?`${v.rooms.reduce((n,r)=>n+r.doors,0)} dörrar, ${v.rooms.reduce((n,r)=>n+r.windows,0)} fönster`:v.dimensions?`${v.dimensions.doors} dörrar, ${v.dimensions.windows} fönster`:'Ej angivet',pdfCondition:cond[v.condition],pdfCoats:String(v.coats),pdfAccess:v.access==='normal'?'Normal':'Svåråtkomligt / hög höjd',pdfCover:v.cover?'Ingår':'Ingår inte',pdfMaterial:v.paintIncluded?'Ingår':'Ingår inte',pdfLabor:money(v.labor),pdfExtras:money(v.material+v.coverCost),pdfVat:money(v.vat),pdfRot:'−'+money(v.rot),pdfFinal:money(v.final)};
+ Object.entries(fields).forEach(([id,val])=>$(id).textContent=val);
+ $('pdfRotRow').hidden=!$('rot').checked;$('pdfDimensionsRow').hidden=!v.dimensions;$('pdfOpeningsRow').hidden=!v.dimensions||v.job.startsWith('Tak');
+}
+// Självständig PDF-generering utan externa bibliotek eller nätverksanrop.
+// PDF använder inbyggda Helvetica och WinAnsiEncoding (svenska tecken stöds).
+function makePricePdf(v){
+ const esc=t=>String(t).replace(/[^\x20-\x7e\xa0-\xff]/g,c=>({'\u2013':'-','\u2014':'-','\u2019':"'",'\u2212':'-','\u00d7':'x','\u00b2':'2'}[c]||'?')).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+ const cmds=[];
+ const color=(r,g,b)=>`${(r/255).toFixed(3)} ${(g/255).toFixed(3)} ${(b/255).toFixed(3)}`;
+ const rect=(x,y,w,h,rgb)=>cmds.push(`${color(...rgb)} rg ${x} ${842-y-h} ${w} ${h} re f`);
+ const line=(x1,y1,x2,y2,rgb=[222,233,230])=>cmds.push(`${color(...rgb)} RG 0.65 w ${x1} ${842-y1} m ${x2} ${842-y2} l S`);
+ const txt=(t,x,y,size=10,bold=false,rgb=[21,51,64])=>cmds.push(`BT /${bold?'F2':'F1'} ${size} Tf ${color(...rgb)} rg 1 0 0 1 ${x} ${842-y} Tm (${esc(t)}) Tj ET`);
+ // A4, koordinater i punkter från övre vänstra hörnet.
+ rect(45,45,505,61,[23,108,112]);txt(COMPANY.name,61,83,20,true,[255,255,255]);
+ txt(COMPANY.phone+'  |  '+COMPANY.contactEmail,47,124,9,false,[79,106,111]);
+ txt('PRELIMINÄRT PRISUNDERLAG',47,153,10,true,[23,108,112]);
+ txt('Din prisuppskattning',47,185,22,true);
+ txt(new Date().toLocaleDateString('sv-SE'),430,154,9,false,[79,106,111]);
+ rect(45,207,505,75,[239,247,245]);
+ txt('UPPSKATTAT PRIS INKLUSIVE MOMS',61,232,10,true,[23,108,112]);
+ txt(money(v.final),61,264,23,true);
+ txt(v.rot>0?'Efter illustrativt ROT-avdrag':'Före eventuellt ROT-avdrag',305,262,9,false,[79,106,111]);
+ txt('Sammanställning',47,313,15,true);
+ const cond={good:'Bra, normalt förarbete',medium:'Visst spacklingsbehov',poor:'Omfattande förarbete'};
+ const d=v.dimensions;
+ const dims=v.rooms?`${v.rooms.length} rum, totalt ${v.area.toLocaleString('sv-SE',{maximumFractionDigits:1})} m²`:d?(d.facadeWidth?`${d.facadeLength} x ${d.facadeWidth} x ${d.facadeHeight} m (hus)`:`${d.length} x ${d.width} x ${d.height} m (rum)`):'Ej angivet';
+ const openings=v.rooms?`${v.rooms.reduce((n,r)=>n+r.doors,0)} dörrar, ${v.rooms.reduce((n,r)=>n+r.windows,0)} fönster`:d?`${d.doors} dörrar, ${d.windows} fönster`:'Ej angivet';
+ const rows=[['Arbete',v.job+(d?.roofType?` (${d.roofType==='gable'?'sadeltak':'platt tak'})`:'')],['Mått',dims],['Öppningar',openings],['Målningsyta',v.area.toLocaleString('sv-SE',{maximumFractionDigits:1})+' m²'],['Underlag',cond[v.condition]],['Strykningar',String(v.coats)],['Åtkomlighet',v.access==='normal'?'Normal':'Svåråtkomligt / hög höjd'],['Skyddstäckning',v.cover?'Ingår':'Ingår inte'],['Färg och förbrukningsmaterial',v.paintIncluded?'Ingår':'Ingår inte'],['Arbete och förarbete, exkl. moms',money(v.labor)],['Material och tillägg, exkl. moms',money(v.material+v.coverCost)],['Moms 25 %',money(v.vat)]];
+  if(v.rooms&&v.rooms.length>1){
+    // En rad per rum i PDF-underlaget, så att målerifirman ser uppdelningen.
+    const insertAt=rows.findIndex(row=>row[0]==='Underlag');
+    rows.splice(insertAt,0,...v.rooms.map((room,i)=>[`Rum ${i+1}: ${room.length} x ${room.width} x ${room.height} m`,`${(room.walls+(room.includeCeiling?room.ceiling:0)).toLocaleString('sv-SE',{maximumFractionDigits:1})} m²`]));
+  }
+ if(v.rot>0)rows.push(['Illustrativt ROT-avdrag','-'+money(v.rot)]);
+ rows.push(['Uppskattat belopp att betala',money(v.final)]);
+ let y=337;const rowHeight=v.rooms&&v.rooms.length>1?Math.max(21,Math.floor(377/rows.length)):(v.rot>0?27:29);
+ rows.forEach(([label,value],i)=>{
+   const isTotal=i===rows.length-1;
+   if(isTotal)rect(45,y-17,505,rowHeight,[239,247,245]);
+   txt(label,49,y,isTotal?11:9.5,isTotal);
+   // Högerkolumn med konservativ position, utan textöverlappning.
+   txt(value,367,y,isTotal?12:10,isTotal);
+   if(!isTotal)line(47,y+8,548,y+8);
+   y+=rowHeight;
+ });
+ const noteY=Math.min(760,y+12);
+ rect(45,noteY-15,505,48,[239,247,245]);
+ txt('Detta är en preliminär prisindikation, inte en bindande offert.',57,noteY+2,9);
+ txt('Slutpriset fastställs av målerifirman. ROT-avdrag kräver uppfyllda villkor.',57,noteY+17,9);
+ line(45,805,550,805);
+ txt(COMPANY.website.replace(/^https?:\/\//,''),47,822,8,false,[90,110,115]);
+ txt('Skapad med FunktionLab',418,822,8,false,[90,110,115]);
+ const content=cmds.join('\n')+'\n';
+ // PDF-byteformat: bygg offset-tabell från faktiska bytes, inte JS-stränglängd.
+ const encoder=new TextEncoder();
+ const bytesLatin1=str=>Uint8Array.from(Array.from(str,c=>c.charCodeAt(0)&255));
+ const parts=[],offsets=[0];let length=0;
+ const append=bytes=>{parts.push(bytes);length+=bytes.length;};
+ append(bytesLatin1('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n'));
+ const addObj=(id,body)=>{offsets[id]=length;append(bytesLatin1(`${id} 0 obj\n${body}\nendobj\n`));};
+ addObj(1,'<< /Type /Catalog /Pages 2 0 R >>');
+ addObj(2,'<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+ addObj(3,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>');
+ addObj(4,'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+ addObj(5,'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+ const stream=bytesLatin1(content);offsets[6]=length;
+ append(bytesLatin1(`6 0 obj\n<< /Length ${stream.length} >>\nstream\n`));append(stream);append(bytesLatin1('endstream\nendobj\n'));
+ const xref=length;append(bytesLatin1('xref\n0 7\n0000000000 65535 f \n'));
+ for(let i=1;i<=6;i++)append(bytesLatin1(`${String(offsets[i]).padStart(10,'0')} 00000 n \n`));
+ append(bytesLatin1(`trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`));
+ return new Blob(parts,{type:'application/pdf'});
+}
+$('printBtn').addEventListener('click',()=>{
+ const btn=$('printBtn');btn.disabled=true;
+ try{
+  if(!latest)calculate();
+  const blob=makePricePdf(latest),url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='prisunderlag-maleri.pdf';a.style.display='none';document.body.appendChild(a);
+  a.click();a.remove();
+  // Behåll objekt-URL tillräckligt länge för att mobilens delnings-/filvy ska hinna läsa den.
+  setTimeout(()=>URL.revokeObjectURL(url),300000);
+ }catch(e){console.error('PDF-fel:',e);alert('Det gick inte att skapa PDF-filen. Försök igen.');}
+ finally{btn.disabled=false;}
+});
+
+window.addEventListener('beforeprint',updatePrintSheet);
+
+calculate();
+</script></body></html>
