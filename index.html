@@ -1089,7 +1089,8 @@ body.fl-modal-open{overflow:hidden}
     <div class="fl-config-controls">
       <div class="fl-config-section"><span class="fl-config-label">Modell</span><div class="fl-config-options fl-model-options" role="group" aria-label="Välj modell"><button type="button" class="fl-config-option" data-model="corner" aria-pressed="false">Hörnsoffa</button><button type="button" class="fl-config-option" data-model="2" aria-pressed="false">2-sits</button><button type="button" class="fl-config-option is-selected" data-model="3" aria-pressed="true">3-sits</button><button type="button" class="fl-config-option" data-model="chair" aria-pressed="false">Fåtölj</button></div></div>
       <div class="fl-config-section"><span class="fl-config-label">Klädsel</span><div class="fl-config-swatches" role="group" aria-label="Välj klädselfärg"><button type="button" class="fl-config-swatch is-selected" data-fabric="sand" aria-label="Sand" aria-pressed="true" style="--swatch:#d8c7b3"></button><button type="button" class="fl-config-swatch" data-fabric="sage" aria-label="Salviagrön" aria-pressed="false" style="--swatch:#8ca99a"></button><button type="button" class="fl-config-swatch" data-fabric="blue" aria-label="Marinblå" aria-pressed="false" style="--swatch:#536e89"></button><button type="button" class="fl-config-swatch" data-fabric="clay" aria-label="Terrakotta" aria-pressed="false" style="--swatch:#b97e6b"></button><span id="fl-config-color-name" class="fl-config-color-name">Sand</span></div></div>
-      <div class="fl-config-summary"><div><span>Preliminärt pris</span><strong id="fl-config-price" aria-live="polite">12 900 kr</strong></div><button type="button" id="fl-config-reset">Börja om ↺</button></div>
+      <div class="fl-config-summary"><div><span>Preliminärt pris</span><strong id="fl-config-price" aria-live="polite">12 900 kr</strong></div></div>
+      <button type="button" id="fl-config-pdf" style="display:block;width:100%;margin:12px 0 4px;padding:12px 16px;border:1px solid #0b777b;border-radius:10px;background:#e7f6f3;color:#07545b;font:inherit;font-weight:750;cursor:pointer">Ladda ner prisunderlag (PDF)</button>
       <p class="fl-config-disclaimer">Illustrativa priser och färgsimulering. Produktbilderna är demonstrationsmaterial.</p>
     </div>
   </div>
@@ -1912,6 +1913,109 @@ var flSofaImages={"corner":"data:image/webp;base64,UklGRmTlAQBXRUJQVlA4WAoAAAAQA
 var model='3',fabric='sand';var labels={corner:'Hörnsoffa','2':'2-sits','3':'3-sits',chair:'Fåtölj'};
 var colors={sand:['Sand','none'],sage:['Salviagrön','sepia(.22) saturate(.65) hue-rotate(73deg) brightness(.90)'],blue:['Marinblå','sepia(.65) saturate(1.6) hue-rotate(170deg) brightness(.78)'],clay:['Terrakotta','sepia(.35) saturate(1.35) hue-rotate(320deg) brightness(.92)']};
 var prices={corner:24900,'2':10900,'3':13900,chair:6900};var fmt=new Intl.NumberFormat('sv-SE');
-function render(){var img=document.getElementById('fl-config-product-image');img.src=flSofaImages[model];img.alt='Viken '+labels[model]+' i '+colors[fabric][0].toLowerCase()+' klädsel';img.style.filter=colors[fabric][1];document.getElementById('fl-config-model').textContent='Viken '+labels[model]+' · '+colors[fabric][0];document.getElementById('fl-config-color-name').textContent=colors[fabric][0];document.getElementById('fl-config-price').textContent=fmt.format(prices[model])+' kr';panel.querySelectorAll('[data-model]').forEach(function(b){var yes=b.dataset.model===model;b.classList.toggle('is-selected',yes);b.setAttribute('aria-pressed',String(yes));});panel.querySelectorAll('[data-fabric]').forEach(function(b){var yes=b.dataset.fabric===fabric;b.classList.toggle('is-selected',yes);b.setAttribute('aria-pressed',String(yes));});}
-panel.querySelectorAll('[data-model]').forEach(function(b){b.addEventListener('click',function(){model=b.dataset.model;render();});});panel.querySelectorAll('[data-fabric]').forEach(function(b){b.addEventListener('click',function(){fabric=b.dataset.fabric;render();});});document.getElementById('fl-config-reset').addEventListener('click',function(){model='3';fabric='sand';render();});render();}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();</script></body></html>
+function render(){var img=document.getElementById('fl-config-product-image');img.src=flSofaImages[model];img.alt='Viken '+labels[model]+' i '+colors[fabric][0].toLowerCase()+' klädsel';img.style.filter=colors[fabric][1];img.dataset.vikenModel=model;img.dataset.vikenFabric=fabric;document.getElementById('fl-config-model').textContent='Viken '+labels[model]+' · '+colors[fabric][0];document.getElementById('fl-config-color-name').textContent=colors[fabric][0];document.getElementById('fl-config-price').textContent=fmt.format(prices[model])+' kr';panel.querySelectorAll('[data-model]').forEach(function(b){var yes=b.dataset.model===model;b.classList.toggle('is-selected',yes);b.setAttribute('aria-pressed',String(yes));});panel.querySelectorAll('[data-fabric]').forEach(function(b){var yes=b.dataset.fabric===fabric;b.classList.toggle('is-selected',yes);b.setAttribute('aria-pressed',String(yes));});}
+panel.querySelectorAll('[data-model]').forEach(function(b){b.addEventListener('click',function(){model=b.dataset.model;render();});});panel.querySelectorAll('[data-fabric]').forEach(function(b){b.addEventListener('click',function(){fabric=b.dataset.fabric;render();});});render();}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();</script>
+<script>
+/* Viken: prisunderlag skapas lokalt från aktuella val, utan externa bibliotek. */
+(function(){
+  function pdfBytes(imageBytes, model, color, price) {
+    var enc=new TextEncoder(), parts=[], offsets=[0], size=0;
+    function add(bytes){parts.push(bytes);size+=bytes.length;}
+    function latin(str){return Uint8Array.from(str,function(c){return c.charCodeAt(0)&255;});}
+    function obj(n,str){offsets[n]=size;add(latin(n+' 0 obj\n'+str+'\nendobj\n'));}
+    function safe(str){return String(str).replace(/[^\x20-\xff]/g,'?').replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');}
+    function txt(str,x,y,font,sz){return 'BT /'+font+' '+sz+' Tf 0.08 0.20 0.25 rg 1 0 0 1 '+x+' '+y+' Tm ('+safe(str)+') Tj ET\n';}
+    var content='0.92 0.97 0.96 rg 40 702 515 100 re f\n'+
+      txt('FUNKTIONLAB  /  DEMONSTRATION',44,795,'F2',11)+
+      txt('Prisunderlag',44,756,'F2',27)+
+      txt('Viken soffkonfigurator',44,729,'F1',13)+
+      'q 490 0 0 320 52 353 cm /Im1 Do Q\n'+
+      txt('Vald modell',52,326,'F1',11)+txt(model,240,326,'F2',13)+
+      txt('Klädselfärg',52,296,'F1',11)+txt(color,240,296,'F2',13)+
+      '0.92 0.97 0.96 rg 44 215 507 58 re f\n'+
+      txt('Preliminärt pris',57,247,'F1',11)+txt(price,320,242,'F2',21)+
+      txt('Detta prisunderlag baseras på dina val i konfiguratorn.',44,171,'F1',10)+
+      txt('Priset är illustrativt och kan ändras. Underlaget kan användas',44,155,'F1',10)+
+      txt('vid kontakt med möbelföretaget och är inte en bindande offert.',44,139,'F1',10)+
+      txt('Produktbild och färg är en visualisering, inte ett produktlöfte.',44,111,'F1',9)+
+      txt('Skapat '+new Date().toLocaleDateString('sv-SE')+'  |  funktionlab.se',44,59,'F1',9);
+    add(latin('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n'));
+    obj(1,'<< /Type /Catalog /Pages 2 0 R >>');
+    obj(2,'<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+    obj(3,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> /XObject << /Im1 7 0 R >> >> /Contents 6 0 R >>');
+    obj(4,'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+    obj(5,'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+    var stream=latin(content);offsets[6]=size;add(latin('6 0 obj\n<< /Length '+stream.length+' >>\nstream\n'));add(stream);add(latin('endstream\nendobj\n'));
+    offsets[7]=size;add(latin('7 0 obj\n<< /Type /XObject /Subtype /Image /Width 980 /Height 640 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+imageBytes.length+' >>\nstream\n'));add(imageBytes);add(latin('\nendstream\nendobj\n'));
+    var xref=size;add(latin('xref\n0 8\n0000000000 65535 f \n'));
+    for(var i=1;i<=7;i++)add(latin(String(offsets[i]).padStart(10,'0')+' 00000 n \n'));
+    add(latin('trailer\n<< /Size 8 /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF'));
+    return new Blob(parts,{type:'application/pdf'});
+  }
+  async function download(){
+    var btn=document.getElementById('fl-config-pdf'),display=document.getElementById('fl-config-product-image');
+    if(!btn||!display)return;
+    btn.disabled=true;
+    try{
+      // Frys aktuellt val vid klicket. Läs alltid den bild som hör till den valda modellen.
+      var chosenModel=display.dataset.vikenModel;
+      var chosenFabric=display.dataset.vikenFabric;
+      var names={corner:'Hörnsoffa','2':'2-sits','3':'3-sits',chair:'Fåtölj'};
+      var fabrics={sand:'Sand',sage:'Salviagrön',blue:'Marinblå',clay:'Terrakotta'};
+      var costs={corner:24900,'2':10900,'3':13900,chair:6900};
+      if(!Object.prototype.hasOwnProperty.call(names,chosenModel)||!Object.prototype.hasOwnProperty.call(fabrics,chosenFabric))throw Error('Ogiltigt soffval');
+      var src=display.currentSrc||display.src;
+      var filter=getComputedStyle(display).filter;
+      // Egen bildinstans hindrar att ett senare omritat DOM-element ger fel bild i PDF.
+      var selectedImage=new Image();
+      selectedImage.src=src;
+      if(selectedImage.decode)await selectedImage.decode();
+      else await new Promise(function(resolve,reject){if(selectedImage.complete&&selectedImage.naturalWidth)return resolve();selectedImage.onload=resolve;selectedImage.onerror=reject;});
+      if(!selectedImage.naturalWidth)throw Error('Produktbilden kunde inte läsas');
+      var c=document.createElement('canvas');c.width=980;c.height=640;
+      var ctx=c.getContext('2d');ctx.fillStyle='#f3f8f6';ctx.fillRect(0,0,980,640);
+      // Använd ofiltrerad originalbild. Färgen läggs på pixeldata före JPEG/PDF.
+      ctx.filter='none';
+      var scale=Math.min(940/selectedImage.naturalWidth,600/selectedImage.naturalHeight);
+      var w=selectedImage.naturalWidth*scale,h=selectedImage.naturalHeight*scale;
+      ctx.drawImage(selectedImage,(980-w)/2,(640-h)/2,w,h);
+      ctx.filter='none';
+      // Safari kan visa CSS-filtret i förhandsvisningen men inte i PDF.
+      // Färgsätt därför soffans tyg direkt i bildens pixlar före JPEG-kodning.
+      if(chosenFabric!=='sand'){
+        var targets={sage:[99,123,94],blue:[38,62,91],clay:[165,91,70]};
+        var target=targets[chosenFabric],pixels=ctx.getImageData(0,0,980,640),px=pixels.data;
+        for(var p=0;p<px.length;p+=4){
+          var r=px[p],g=px[p+1],b=px[p+2];
+          var max=Math.max(r,g,b),min=Math.min(r,g,b),lum=(r+g+b)/3;
+          var y=Math.floor(p/4/980);
+          // Undanta den ljusa studiobakgrunden och de mörka träbenen.
+          if(lum>224 || lum<53 || (y>480 && lum<115))continue;
+          // Tygets beige/grå bas har relativt neutrala, varma kanaler.
+          // Toleransen är bred nog för skuggor, sömmar och iOS-rendering.
+          if(r<g-18 || g<b-20 || max-min>85)continue;
+          var shade=Math.max(.42,Math.min(1.75,lum/158));
+          var strength=Math.min(.96,Math.max(.72,(230-lum)/90));
+          px[p]=r*(1-strength)+target[0]*shade*strength;
+          px[p+1]=g*(1-strength)+target[1]*shade*strength;
+          px[p+2]=b*(1-strength)+target[2]*shade*strength;
+        }
+        ctx.putImageData(pixels,0,0);
+      }
+      var data=c.toDataURL('image/jpeg',.9).split(',')[1];
+      var binary=atob(data),bytes=new Uint8Array(binary.length);
+      for(var i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+      var price=new Intl.NumberFormat('sv-SE').format(costs[chosenModel])+' kr';
+      var pdf=pdfBytes(bytes,'Viken '+names[chosenModel],fabrics[chosenFabric],price);
+      var url=URL.createObjectURL(pdf),a=document.createElement('a');
+      a.href=url;a.download='Viken-prisunderlag.pdf';document.body.appendChild(a);a.click();a.remove();
+      setTimeout(function(){URL.revokeObjectURL(url);},300000);
+    }catch(err){console.error('Prisunderlag:',err);alert('Det gick inte att skapa prisunderlaget. Försök igen.');}
+    finally{btn.disabled=false;}
+  }
+  function init(){var btn=document.getElementById('fl-config-pdf');if(btn)btn.addEventListener('click',download);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body></html>
