@@ -2112,6 +2112,23 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     var value = section();
     if (value && value !== 'hem' && value !== 'verktyg') track('funktion_visad', { funktion: value });
   });
+  // Registrera faktisk interaktion, inte bara att en funktion öppnas.
+  var usedFunctions = Object.create(null);
+  function markUsed(target) {
+    var view = target && target.closest && target.closest('.tool-view');
+    if (!view || !view.classList.contains('visible')) return;
+    var id = (view.id || '').replace(/-view$/, '');
+    if (!id || usedFunctions[id]) return;
+    usedFunctions[id] = true;
+    track('funktion_anvand', { funktion: id });
+  }
+  document.addEventListener('click', function (event) {
+    var action = event.target.closest('button, input[type="button"], input[type="submit"]');
+    if (action && !action.matches('[data-go], [data-contact-trigger]')) markUsed(action);
+  });
+  document.addEventListener('change', function (event) {
+    if (event.target.matches('input,select,textarea')) markUsed(event.target);
+  });
   window.flTrackUmami = track;
 })();
 </script>
