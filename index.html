@@ -2011,15 +2011,47 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       else await new Promise(function(resolve,reject){if(selectedImage.complete&&selectedImage.naturalWidth)return resolve();selectedImage.onload=resolve;selectedImage.onerror=reject;});
       if(!selectedImage.naturalWidth)throw Error('Produktbilden kunde inte läsas');
       var c=document.createElement('canvas');c.width=980;c.height=640;
-      var ctx=c.getContext('2d');ctx.fillStyle='#f3f8f6';ctx.fillRect(0,0,980,640);
+      var ctx=c.getContext('2d');ctx.clearRect(0,0,980,640);
       // Använd samma färgfilter som den synliga produktbilden.
       // Tidigare pixelbaserad omfärgning gav fläckar i tyget och på filten.
       var selectedFilter=filter&&filter!=='none'?filter:'none';
-      ctx.filter=selectedFilter;
+      ctx.filter='none';
       var scale=Math.min(940/selectedImage.naturalWidth,600/selectedImage.naturalHeight);
       var w=selectedImage.naturalWidth*scale,h=selectedImage.naturalHeight*scale;
       ctx.drawImage(selectedImage,(980-w)/2,(640-h)/2,w,h);
       ctx.filter='none';
+      // Safari på iPhone saknar i vissa versioner stöd för CanvasRenderingContext2D.filter.
+      // Använd samma CSS-filter matematiskt på bildpixlarna när canvasfiltret saknas.
+      if(selectedFilter!=='none'){
+        var pixels=ctx.getImageData(0,0,980,640), p=pixels.data;
+        var matches=[...selectedFilter.matchAll(/(sepia|saturate|hue-rotate|brightness)\(([^)]+)\)/g)];
+        function clamp(v){return Math.max(0,Math.min(255,v));}
+        function transform(r,g,b,type,value){
+          var x=parseFloat(value),a,cs,sn;
+          if(type==='brightness')return [r*x,g*x,b*x];
+          if(type==='sepia')return [r*(1-.607*x)+g*.769*x+b*.189*x,r*.349*x+g*(1-.314*x)+b*.168*x,r*.272*x+g*.534*x+b*(1-.869*x)];
+          if(type==='saturate')return [r*(.213+.787*x)+g*(.715-.715*x)+b*(.072-.072*x),r*(.213-.213*x)+g*(.715+.285*x)+b*(.072-.072*x),r*(.213-.213*x)+g*(.715-.715*x)+b*(.072+.928*x)];
+          if(type==='hue-rotate'){
+            a=x*Math.PI/180;cs=Math.cos(a);sn=Math.sin(a);
+            return [r*(.213+cs*.787-sn*.213)+g*(.715-cs*.715-sn*.715)+b*(.072-cs*.072+sn*.928),r*(.213-cs*.213+sn*.143)+g*(.715+cs*.285+sn*.140)+b*(.072-cs*.072-sn*.283),r*(.213-cs*.213-sn*.787)+g*(.715-cs*.715+sn*.715)+b*(.072+cs*.928+sn*.072)];
+          }
+          return [r,g,b];
+        }
+        for(var k=0;k<p.length;k+=4){
+          if(p[k+3]===0)continue;
+          var rgb=[p[k],p[k+1],p[k+2]];
+          for(var j=0;j<matches.length;j++){
+            rgb=transform(rgb[0],rgb[1],rgb[2],matches[j][1],matches[j][2]);
+            rgb=[clamp(rgb[0]),clamp(rgb[1]),clamp(rgb[2])];
+          }
+          p[k]=rgb[0];p[k+1]=rgb[1];p[k+2]=rgb[2];
+        }
+        ctx.putImageData(pixels,0,0);
+      }
+      // Lägg bakgrunden bakom den redan färgjusterade, frilagda soffan.
+      ctx.globalCompositeOperation='destination-over';
+      ctx.fillStyle='#f3f8f6';ctx.fillRect(0,0,980,640);
+      ctx.globalCompositeOperation='source-over';
       var data=c.toDataURL('image/jpeg',.9).split(',')[1];
       var binary=atob(data),bytes=new Uint8Array(binary.length);
       for(var i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
