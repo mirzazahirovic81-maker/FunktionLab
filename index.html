@@ -2059,6 +2059,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       var pdf=pdfBytes(bytes,'Viken '+names[chosenModel],fabrics[chosenFabric],price);
       var url=URL.createObjectURL(pdf),a=document.createElement('a');
       a.href=url;a.download='Viken-prisunderlag.pdf';document.body.appendChild(a);a.click();a.remove();
+      if(window.flTrackUmami)window.flTrackUmami('pdf_skapad',{funktion:'viken',modell:chosenModel,kladsel:chosenFabric});
       setTimeout(function(){URL.revokeObjectURL(url);},300000);
     }catch(err){console.error('Prisunderlag:',err);alert('Det gick inte att skapa prisunderlaget. Försök igen.');}
     finally{btn.disabled=false;}
@@ -2067,4 +2068,51 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
-<div class="fl-contact-overlay" id="fl-contact-overlay" hidden><section class="fl-contact-dialog" role="dialog" aria-modal="true" aria-labelledby="fl-contact-heading"><button class="fl-contact-close" type="button" id="fl-contact-close" aria-label="Stäng kontaktformuläret">×</button><div id="fl-contact-content"><h2 id="fl-contact-heading">Kontakta FunktionLab</h2><p>Skicka ett meddelande så återkommer vi via e-post.</p><form class="fl-contact-form" id="fl-contact-form" action="https://formsubmit.co/kontakt@funktionlab.se" method="POST"><label>Namn<input name="name" autocomplete="name" maxlength="120" required></label><label>E-post<input name="email" type="email" autocomplete="email" maxlength="254" required></label><label>Meddelande<textarea name="message" maxlength="5000" required></textarea></label><input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"><input type="hidden" name="_subject" value="Nytt kontaktmeddelande från FunktionLab"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table"><button class="fl-contact-send" type="submit">Skicka meddelande</button><p class="fl-contact-status" id="fl-contact-status" role="status" aria-live="polite"></p></form></div></section></div><script id="fl-contact-script">(function(){const overlay=document.getElementById('fl-contact-overlay'),open=document.getElementById('fl-contact-open'),close=document.getElementById('fl-contact-close'),content=document.getElementById('fl-contact-content');if(!overlay||!open||!close)return;let previousFocus=null;const original=content.innerHTML;function show(topic){previousFocus=document.activeElement;content.innerHTML=original;if(topic){const field=content.querySelector('textarea[name="message"]')||content.querySelector('textarea');if(field)field.value="Hej! Jag vill veta mer om " + topic + ".\n\n";}overlay.hidden=false;document.body.style.overflow='hidden';close.focus();}function hide(){overlay.hidden=true;document.body.style.overflow='';if(previousFocus)previousFocus.focus();}open.addEventListener('click',()=>show(null));document.querySelectorAll('[data-contact-trigger]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();const sidebar=document.querySelector('.sidebar');if(sidebar)sidebar.classList.remove('open');const mobileOverlay=document.querySelector('.mobile-overlay');if(mobileOverlay)mobileOverlay.classList.remove('on');show(el.dataset.contactTopic||null);}));close.addEventListener('click',hide);overlay.addEventListener('click',e=>{if(e.target===overlay)hide()});document.addEventListener('keydown',e=>{if(overlay.hidden)return;if(e.key==='Escape')hide();if(e.key==='Tab'){const nodes=[...overlay.querySelectorAll('button:not(:disabled),input:not([tabindex="-1"]),textarea')].filter(el=>el.getClientRects().length);if(!nodes.length)return;const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});/* Formuläret skickas med vanlig POST till FormSubmit, utan AJAX/CORS. */})();</script></body></html>
+<div class="fl-contact-overlay" id="fl-contact-overlay" hidden><section class="fl-contact-dialog" role="dialog" aria-modal="true" aria-labelledby="fl-contact-heading"><button class="fl-contact-close" type="button" id="fl-contact-close" aria-label="Stäng kontaktformuläret">×</button><div id="fl-contact-content"><h2 id="fl-contact-heading">Kontakta FunktionLab</h2><p>Skicka ett meddelande så återkommer vi via e-post.</p><form class="fl-contact-form" id="fl-contact-form" action="https://formsubmit.co/kontakt@funktionlab.se" method="POST"><label>Namn<input name="name" autocomplete="name" maxlength="120" required></label><label>E-post<input name="email" type="email" autocomplete="email" maxlength="254" required></label><label>Meddelande<textarea name="message" maxlength="5000" required></textarea></label><input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"><input type="hidden" name="_subject" value="Nytt kontaktmeddelande från FunktionLab"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table"><button class="fl-contact-send" type="submit">Skicka meddelande</button><p class="fl-contact-status" id="fl-contact-status" role="status" aria-live="polite"></p></form></div></section></div><script id="fl-contact-script">(function(){const overlay=document.getElementById('fl-contact-overlay'),open=document.getElementById('fl-contact-open'),close=document.getElementById('fl-contact-close'),content=document.getElementById('fl-contact-content');if(!overlay||!open||!close)return;let previousFocus=null;const original=content.innerHTML;function show(topic){previousFocus=document.activeElement;content.innerHTML=original;if(topic){const field=content.querySelector('textarea[name="message"]')||content.querySelector('textarea');if(field)field.value="Hej! Jag vill veta mer om " + topic + ".\n\n";}overlay.hidden=false;document.body.style.overflow='hidden';close.focus();}function hide(){overlay.hidden=true;document.body.style.overflow='';if(previousFocus)previousFocus.focus();}open.addEventListener('click',()=>show(null));document.querySelectorAll('[data-contact-trigger]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();const sidebar=document.querySelector('.sidebar');if(sidebar)sidebar.classList.remove('open');const mobileOverlay=document.querySelector('.mobile-overlay');if(mobileOverlay)mobileOverlay.classList.remove('on');show(el.dataset.contactTopic||null);}));close.addEventListener('click',hide);overlay.addEventListener('click',e=>{if(e.target===overlay)hide()});document.addEventListener('keydown',e=>{if(overlay.hidden)return;if(e.key==='Escape')hide();if(e.key==='Tab'){const nodes=[...overlay.querySelectorAll('button:not(:disabled),input:not([tabindex="-1"]),textarea')].filter(el=>el.getClientRects().length);if(!nodes.length)return;const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});/* Formuläret skickas med vanlig POST till FormSubmit, utan AJAX/CORS. */})();</script>
+<!-- FunktionLab: anonym användningsstatistik. Inga formulärvärden eller personuppgifter skickas. -->
+<script id="fl-umami-events">
+(function () {
+  'use strict';
+  function track(name, data) {
+    if (typeof window.umami !== 'undefined' && typeof window.umami.track === 'function') {
+      try { window.umami.track(name, data || {}); } catch (_) {}
+    }
+  }
+  function section() {
+    return (location.hash || '#hem').replace(/^#/, '').split('?')[0].slice(0, 70);
+  }
+  document.addEventListener('click', function (event) {
+    var el = event.target.closest('a,button,input[type="radio"],label');
+    if (!el) return;
+    if (el.matches('[data-contact-trigger], #fl-contact-open')) {
+      track('kontakt_oppnad', { plats: section() });
+      return;
+    }
+    if (el.matches('a[href="markusmaleri.html"],a[href="nordvvs.html"]')) {
+      track('foretagsdemo_oppnad', { demo: el.getAttribute('href').replace('.html', '') });
+      return;
+    }
+    if (el.closest('#catalog-results') && el.closest('a,button')) {
+      var action = el.closest('a,button');
+      track('funktionsval', { funktion: (action.getAttribute('data-go') || action.getAttribute('href') || action.textContent || '').trim().slice(0, 90) });
+      return;
+    }
+    if (el.closest('.fl-viken') || el.closest('[class*="viken"]')) {
+      var label = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 65);
+      if (label && /^(2-sits|3-sits|Fåtölj|Sand|Marinblå|Salvia|Terrakotta)/i.test(label)) {
+        track('soffval', { val: label });
+      }
+    }
+  });
+  document.addEventListener('submit', function (event) {
+    if (event.target.id === 'fl-contact-form') track('kontakt_skickforsok');
+    if (event.target.id === 'idea-form') track('forslag_skickforsok');
+  });
+  window.addEventListener('hashchange', function () {
+    var value = section();
+    if (value && value !== 'hem' && value !== 'verktyg') track('funktion_visad', { funktion: value });
+  });
+  window.flTrackUmami = track;
+})();
+</script>
+</body></html>
