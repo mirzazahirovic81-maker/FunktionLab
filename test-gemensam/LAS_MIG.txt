@@ -1,0 +1,8 @@
+TESTVERSION. Ersätt inte de publicerade filerna förrän testet är klart.
+
+Filer: demomaleri.html, testmaleri.html, maleri-core.js, maleri-admin.js.
+Båda HTML-filerna använder samma JS-filer. Kund-ID och företagsuppgifter ligger i respektive HTML. Prislistor hämtas från Supabase.
+
+Testa båda sidor via webbserver/GitHub Pages: prisvisning, inloggning, spara priser, PDF, mobil, iframe och att TestMåleri inte kan ändra DemoMåleri.
+
+OBS: företagsuppgifter ligger ännu i respektive HTML, inte i Supabase. RLS måste verifieras separat på servern.
