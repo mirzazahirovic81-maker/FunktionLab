@@ -56,7 +56,7 @@ body{background:linear-gradient(180deg,#edf5f3 0,#f5f7f7 360px,#f5f7f7 100%)}
 .photo-choice img{display:block;width:100%;height:138px;object-fit:cover;object-position:center}
 .photo-choice span{display:block;width:100%;padding:12px 14px;font-size:14px;font-weight:750}
 @media(max-width:520px){.photo-choices{gap:9px}.photo-choice img{height:100px}.photo-choice span{padding:10px;font-size:12px}}
-</style></head><body>
+</style><style>.request-panel{margin:18px 26px;padding:22px;border:1px solid #dbe8e5;border-radius:15px;background:#fff}.request-panel h3{margin:0 0 8px;font-size:18px;color:#174c4c}.request-panel p{font-size:12px;color:#58716e;line-height:1.6;margin:0 0 15px}.request-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.request-grid label{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:700;color:#183d3d}.request-grid input,.request-grid textarea{box-sizing:border-box;width:100%;min-width:0;border:1px solid #cbded9;border-radius:9px;padding:12px;font:inherit;font-weight:400;color:#183d3d;background:#fff}.request-grid input[type=file]{font-size:12px}.request-full{grid-column:1/-1}@media(max-width:620px){.request-panel{margin:16px 22px;padding:17px}.request-grid{grid-template-columns:1fr}}</style></head><body>
 <header><div class="wrap head"><div class="brand-block"><div class="logo" aria-label="Företagslogotyp"><div class="logo-icon" id="logoIcon">D</div><span class="logo-text" id="brandName">DemoMåleri</span></div></div><a class="back-to-lab" href="https://funktionlab.se/" aria-label="Till FunktionLab.se"><span aria-hidden="true">←</span> Till FunktionLab.se</a></div></header>
 <main class="wrap"><div class="hero"><div class="eyebrow">PRISKALKYLATOR FÖR MÅLERI</div><h1>Vad kostar ditt<br>måleriprojekt?</h1><p>Få en preliminär prisindikation som underlättar kontakten med målerifirman. Ange mått och förutsättningar och spara underlaget inför en offertförfrågan.</p><div class="trust-row"><span>Direkt prisuppskattning</span><span>Inga förpliktelser</span><span>Underlag som PDF</span></div></div>
 <div class="layout"><section class="card"><div class="card-body"><div class="section-head"><div class="step">1</div><div><h2>Vad vill du måla?</h2><p>Välj vilken typ av arbete det gäller.</p></div></div>
@@ -73,7 +73,7 @@ body{background:linear-gradient(180deg,#edf5f3 0,#f5f7f7 360px,#f5f7f7 100%)}
 <div class="divider"></div><div class="section-head"><div class="step">3</div><div><h2>Tillägg och förutsättningar</h2><p>Välj det som är aktuellt för ditt projekt.</p></div></div>
 <label class="checkline"><input type="checkbox" id="cover" checked> Skyddstäckning och maskering behövs</label><label class="checkline"><input type="checkbox" id="paintIncluded" checked> Färg och normalt förbrukningsmaterial ska ingå</label><label class="checkline"><input type="checkbox" id="rot"> Visa illustrativt ROT-avdrag (förutsätter att villkoren är uppfyllda)</label><p class="hint">Kalkylatorn ger en schablonberäkning. Slutpris, materialåtgång och eventuellt ROT-avdrag fastställs av målerifirman.</p></div></section>
 <aside class="card summary"><div class="summary-top"><div class="small">Din preliminära prisindikation</div><div class="price" id="price">0 kr</div><p id="priceNote">Inklusive moms, före eventuellt ROT-avdrag</p></div><div class="summary-content"><h3>Din sammanställning</h3><div class="lineitem"><span>Arbete</span><strong id="jobName">Väggmålning</strong></div><div class="lineitem"><span>Målningsyta</span><strong id="areaText">40 m²</strong></div><div class="lineitem"><span>Arbete och förarbete</span><strong id="laborText">0 kr</strong></div><div class="lineitem"><span>Material och tillägg</span><strong id="extraText">0 kr</strong></div><div class="lineitem"><span>Moms 25 %</span><strong id="vatText">0 kr</strong></div><div class="lineitem" id="rotLine" hidden><span>Illustrativt ROT-avdrag</span><strong id="rotText">0 kr</strong></div><div class="total"><span id="totalLabel">Uppskattat totalpris</span><span id="finalText">0 kr</span></div><div class="notice">Prisindikationen är ett underlag som underlättar kontakten med målerifirman. Det är ingen bindande offert. Slutpriset fastställs efter bedömning av arbetet.</div><button class="primary" id="printBtn" type="button">Visa och spara prisunderlag (PDF)</button></div>
-<section class="pdf-guide" aria-label="Så använder du prisunderlaget"><div class="pdf-guide-heading"><span class="pdf-guide-icon" aria-hidden="true">✓</span><div><h3>Ta nästa steg med ditt prisunderlag</h3><p>Du har redan gjort en första uppskattning av arbetet. Spara PDF-filen som exempel på hur ett prisunderlag kan se ut.</p></div></div><div class="pdf-guide-benefit"><strong>Enklare för dig. Smidigare för oss.</strong><p>Underlaget samlar dina val, mått och det preliminära priset. Då kan vi snabbare förstå ditt projekt och återkomma med rätt frågor inför en offert.</p></div><p class="pdf-guide-tip">På mobilen kan du öppna PDF-filen och dela den via din mejlapp. På datorn kan du bifoga den i ett mejl.</p></section><section class="contact-card" aria-label="Kontakta DemoMåleri"><h3>Kontakta DemoMåleri</h3><div class="contact-line"><span>Telefon</span><a href="tel:0700000000">070-000 00 00</a></div><div class="contact-line"><span>E-post</span><a href="mailto:exempel@demomaleri.se">exempel@demomaleri.se</a></div><div class="contact-line"><span>Webb</span><a href="https://demomaleri.exempel.se" target="_blank" rel="noopener noreferrer">demomaleri.exempel.se</a></div></section></aside></div></main>
+<section class="pdf-guide" aria-label="Så använder du prisunderlaget"><div class="pdf-guide-heading"><span class="pdf-guide-icon" aria-hidden="true">✓</span><div><h3>Ta nästa steg med ditt prisunderlag</h3><p>Du har redan gjort en första uppskattning av arbetet. Spara PDF-filen som exempel på hur ett prisunderlag kan se ut.</p></div></div><div class="pdf-guide-benefit"><strong>Enklare för dig. Smidigare för oss.</strong><p>Underlaget samlar dina val, mått och det preliminära priset. Då kan vi snabbare förstå ditt projekt och återkomma med rätt frågor inför en offert.</p></div><p class="pdf-guide-tip">På mobilen kan du öppna PDF-filen och dela den via din mejlapp. På datorn kan du bifoga den i ett mejl.</p></section><section class="request-panel" aria-label="Förbered din förfrågan"><h3>Förbered din förfrågan</h3><p>Dina uppgifter följer med i PDF-underlaget. Inga uppgifter skickas från denna demo.</p><div class="request-grid"><label>Namn<input id="requestName" autocomplete="name" placeholder="För- och efternamn"></label><label>E-post<input id="requestEmail" type="email" autocomplete="email" placeholder="namn@exempel.se"></label><label>Postnummer<input id="requestZip" inputmode="numeric" autocomplete="postal-code" placeholder="123 45"></label><label class="request-full">Övriga uppgifter<textarea id="requestMessage" rows="4" placeholder="Beskriv gärna särskilda förutsättningar"></textarea></label><label class="request-full">Bilder på arbetet (valfritt)<input id="requestPhotos" type="file" accept="image/*" multiple></label></div><p>Valda bilder bifogas som egna sidor i PDF-filen. Ingenting skickas till någon server.</p></section><section class="contact-card" aria-label="Kontakta DemoMåleri"><h3>Kontakta DemoMåleri</h3><div class="contact-line"><span>Telefon</span><a href="tel:0700000000">070-000 00 00</a></div><div class="contact-line"><span>E-post</span><a href="mailto:exempel@demomaleri.se">exempel@demomaleri.se</a></div><div class="contact-line"><span>Webb</span><a href="https://demomaleri.exempel.se" target="_blank" rel="noopener noreferrer">demomaleri.exempel.se</a></div></section></aside></div></main>
 <footer><div class="wrap foot"><span>© <span id="year"></span> <strong id="footerBrand">DemoMåleri</strong>. Prisberäkningen är preliminär.</span><span>Demoversion från FunktionLab.se. Företagsuppgifter och priser är exempel.</span></div></footer>
 <section class="print-sheet" id="printSheet" aria-hidden="true"><div class="pdf-top"><div class="pdf-logo"><div class="pdf-mark" id="pdfMark">D</div><div class="pdf-company" id="pdfBrand">DemoMåleri</div></div><div class="pdf-ref">PRISINDIKATION<br><span id="pdfDate"></span></div></div><div class="pdf-eyebrow">DITT MÅLERIPROJEKT</div><h1 class="pdf-title">Din prisuppskattning</h1><p class="pdf-lead">Ett överskådligt underlag för det måleriarbete du planerar. Beräkningen bygger på de uppgifter du har angett.</p><div class="pdf-price-panel"><div><div class="pdf-label">Preliminärt pris inklusive moms</div><div class="pdf-big" id="pdfPrice">0 kr</div><div class="pdf-sub" id="pdfPriceNote">Före eventuellt ROT-avdrag</div></div><div class="pdf-icon">◈</div></div><h2 class="pdf-heading">Sammanställning</h2><table class="pdf-table"><tbody><tr><td>Typ av arbete</td><td id="pdfJob"></td></tr><tr id="pdfDimensionsRow"><td>Mått</td><td id="pdfDimensions"></td></tr><tr id="pdfOpeningsRow"><td>Öppningar</td><td id="pdfOpenings"></td></tr><tr><td>Målningsyta</td><td id="pdfArea"></td></tr><tr><td>Underlagets skick</td><td id="pdfCondition"></td></tr><tr><td>Antal strykningar</td><td id="pdfCoats"></td></tr><tr><td>Åtkomlighet</td><td id="pdfAccess"></td></tr><tr><td>Skyddstäckning</td><td id="pdfCover"></td></tr><tr><td>Färg och förbrukningsmaterial</td><td id="pdfMaterial"></td></tr><tr><td>Arbete och förarbete, exkl. moms</td><td id="pdfLabor"></td></tr><tr><td>Material och tillägg, exkl. moms</td><td id="pdfExtras"></td></tr><tr><td>Moms</td><td id="pdfVat"></td></tr><tr id="pdfRotRow"><td>Illustrativt ROT-avdrag</td><td id="pdfRot"></td></tr><tr class="pdf-total"><td>Uppskattat belopp att betala</td><td id="pdfFinal"></td></tr></tbody></table><div class="pdf-note"><strong>Observera</strong><br>Detta dokument är en preliminär prisindikation och utgör inte en bindande offert. Faktiskt pris beror på arbetsplatsens förutsättningar och målerifirmans bedömning. Eventuellt ROT-avdrag förutsätter att samtliga villkor är uppfyllda.</div><div class="pdf-footer"><span><strong id="pdfFooterBrand">DemoMåleri</strong> · Prisindikation</span><span>Skapad med FunktionLab</span></div></section>
 <script>
@@ -328,7 +328,7 @@ function updatePrintSheet(){
 }
 // Självständig PDF-generering utan externa bibliotek eller nätverksanrop.
 // PDF använder inbyggda Helvetica och WinAnsiEncoding (svenska tecken stöds).
-function makePricePdf(v){
+async function makePricePdf(v){
  const esc=t=>String(t).replace(/[^\x20-\x7e\xa0-\xff]/g,c=>({'\u2013':'-','\u2014':'-','\u2019':"'",'\u2212':'-','\u00d7':'x','\u00b2':'2'}[c]||'?')).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
  const cmds=[];
  const color=(r,g,b)=>`${(r/255).toFixed(3)} ${(g/255).toFixed(3)} ${(b/255).toFixed(3)}`;
@@ -375,31 +375,82 @@ function makePricePdf(v){
  line(45,805,550,805);
  txt(COMPANY.website.replace(/^https?:\/\//,''),47,822,8,false,[90,110,115]);
  txt('Skapad med FunktionLab',418,822,8,false,[90,110,115]);
- const content=cmds.join('\n')+'\n';
- // PDF-byteformat: bygg offset-tabell från faktiska bytes, inte JS-stränglängd.
+ const streams=[cmds.join('\n')+'\n'];
+ // Kunduppgifter läggs på en separat A4-sida, utan att prisuppställningen ändras.
+ const info=[['Namn',$('requestName').value.trim()],['E-post',$('requestEmail').value.trim()],['Postnummer',$('requestZip').value.trim()],['Övriga uppgifter',$('requestMessage').value.trim()]];
+ const extra=[];
+ const extraTxt=(value,x,y,size=11,bold=false)=>extra.push(`BT /${bold?'F2':'F1'} ${size} Tf 0.09 0.20 0.25 rg 1 0 0 1 ${x} ${842-y} Tm (${esc(value)}) Tj ET`);
+ extra.push(`${color(23,108,112)} rg 45 ${842-106} 505 61 re f`);
+ extra.push(`BT /F2 20 Tf 1 1 1 rg 1 0 0 1 61 ${842-83} Tm (${esc(COMPANY.name)}) Tj ET`);
+ extraTxt('FÖRBEREDD FÖRFRÅGAN',47,152,15,true);
+ let iy=195;
+ const splitText=(value,max=78)=>{
+   const lines=[];for(const paragraph of String(value||'Ej angivet').split(/\r?\n/)){
+     let line='';for(const word of paragraph.split(/\s+/)){
+       if((line+' '+word).trim().length>max&&line){lines.push(line);line=word;}else line=(line+' '+word).trim();
+     }lines.push(line||' ');
+   }return lines;
+ };
+ for(const [label,value] of info){
+   extraTxt(label,49,iy,11,true);iy+=20;
+   for(const line of splitText(value,77).slice(0,12)){extraTxt(line,49,iy,10);iy+=16;}
+   iy+=17;
+ }
+ extraTxt('Uppgifterna är endast avsedda som underlag för en förfrågan.',49,765,9);
+ extraTxt('Demoversion från FunktionLab. Ingen information har skickats.',49,786,9);
+ streams.push(extra.join('\n')+'\n');
  const encoder=new TextEncoder();
  const bytesLatin1=str=>Uint8Array.from(Array.from(str,c=>c.charCodeAt(0)&255));
- const parts=[],offsets=[0];let length=0;
- const append=bytes=>{parts.push(bytes);length+=bytes.length;};
+ const pages=streams.map(x=>({type:'text',bytes:bytesLatin1(x)}));
+ const imageFiles=Array.from($('requestPhotos').files||[]).filter(f=>f.type.startsWith('image/'));
+ for(const file of imageFiles){
+   const image=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=reject;reader.onload=()=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=reader.result;};reader.readAsDataURL(file);});
+   const cv=document.createElement('canvas');cv.width=1000;cv.height=1414;
+   const cx=cv.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,1000,1414);
+   cx.fillStyle='#176c70';cx.fillRect(0,0,1000,140);cx.fillStyle='#fff';cx.font='bold 30px Arial';cx.fillText('DemoMåleri | Fotobilaga',65,85);
+   const scale=Math.min(870/image.naturalWidth,1110/image.naturalHeight);
+   const w=image.naturalWidth*scale,h=image.naturalHeight*scale;
+   cx.drawImage(image,(1000-w)/2,185+(1110-h)/2,w,h);
+   const data=cv.toDataURL('image/jpeg',.82).split(',')[1];const raw=atob(data);const jpg=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)jpg[i]=raw.charCodeAt(i);
+   pages.push({type:'image',bytes:jpg,width:1000,height:1414});
+ }
+ const objects=[null,null]; // katalog och sidträd
+ const add=body=>{objects.push(body);return objects.length;};
+ const pageIds=[];
+ const font1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+ const font2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+ for(const p of pages){
+   if(p.type==='text'){
+     const streamId=add({dict:`<< /Length ${p.bytes.length} >>`,bytes:p.bytes});
+     pageIds.push(add(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${font1} 0 R /F2 ${font2} 0 R >> >> /Contents ${streamId} 0 R >>`));
+   }else{
+     const imgId=add({dict:`<< /Type /XObject /Subtype /Image /Width ${p.width} /Height ${p.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${p.bytes.length} >>`,bytes:p.bytes});
+     const data=bytesLatin1('q 595 0 0 842 0 0 cm /Im0 Do Q');
+     const contentId=add({dict:`<< /Length ${data.length} >>`,bytes:data});
+     pageIds.push(add(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /XObject << /Im0 ${imgId} 0 R >> >> /Contents ${contentId} 0 R >>`));
+   }
+ }
+ objects[0]='<< /Type /Catalog /Pages 2 0 R >>';
+ objects[1]=`<< /Type /Pages /Kids [${pageIds.map(id=>id+' 0 R').join(' ')}] /Count ${pageIds.length} >>`;
+ const chunks=[],offsets=[0];let length=0;
+ const append=bytes=>{chunks.push(bytes);length+=bytes.length;};
  append(bytesLatin1('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n'));
- const addObj=(id,body)=>{offsets[id]=length;append(bytesLatin1(`${id} 0 obj\n${body}\nendobj\n`));};
- addObj(1,'<< /Type /Catalog /Pages 2 0 R >>');
- addObj(2,'<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
- addObj(3,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>');
- addObj(4,'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
- addObj(5,'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
- const stream=bytesLatin1(content);offsets[6]=length;
- append(bytesLatin1(`6 0 obj\n<< /Length ${stream.length} >>\nstream\n`));append(stream);append(bytesLatin1('endstream\nendobj\n'));
- const xref=length;append(bytesLatin1('xref\n0 7\n0000000000 65535 f \n'));
- for(let i=1;i<=6;i++)append(bytesLatin1(`${String(offsets[i]).padStart(10,'0')} 00000 n \n`));
- append(bytesLatin1(`trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`));
- return new Blob(parts,{type:'application/pdf'});
+ for(let i=0;i<objects.length;i++){
+   offsets.push(length);append(bytesLatin1(`${i+1} 0 obj\n`));
+   const o=objects[i];if(typeof o==='string')append(bytesLatin1(o+'\n'));
+   else{append(bytesLatin1(o.dict+'\nstream\n'));append(o.bytes);append(bytesLatin1('\nendstream\n'));}
+   append(bytesLatin1('endobj\n'));
+ }
+ const xref=length;append(bytesLatin1(`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`));
+ for(let i=1;i<offsets.length;i++)append(bytesLatin1(`${String(offsets[i]).padStart(10,'0')} 00000 n \n`));
+ append(bytesLatin1(`trailer\n<< /Size ${objects.length+1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`));
+ return new Blob(chunks,{type:'application/pdf'});
 }
-$('printBtn').addEventListener('click',()=>{
+$('printBtn').addEventListener('click',async()=>{
  const btn=$('printBtn');btn.disabled=true;
  try{
   if(!latest)calculate();
-  const blob=makePricePdf(latest),url=URL.createObjectURL(blob);
+  const blob=await makePricePdf(latest),url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download='DemoMaleri_prisunderlag.pdf';a.style.display='none';document.body.appendChild(a);
   a.click();a.remove();
   // Behåll objekt-URL tillräckligt länge för att mobilens delnings-/filvy ska hinna läsa den.
