@@ -473,7 +473,7 @@ body{position:relative}#flAdminLink{position:absolute;right:12px;bottom:8px;z-in
 <button id="flAdminLink" type="button" aria-label="Öppna administration">Admin (test)</button>
 <div id="flAdminOverlay" hidden><section id="flAdminPanel" role="dialog" aria-modal="true" aria-labelledby="flAdminTitle">
 <h2 id="flAdminTitle">Prisadministration</h2><p>DemoMåleri. Ändra kalkylatorns schablonpriser. Priserna hämtas från FunktionLabs databas. Logga in för att ändra dem.</p>
-<form id="flAdminLogin" style="display:grid;gap:9px;margin-bottom:15px"><input id="flAdminEmail" type="email" autocomplete="username" placeholder="E-postadress" required><input id="flAdminPassword" type="password" autocomplete="current-password" placeholder="Lösenord" required><button type="submit">Logga in</button></form><button id="flAdminLogout" type="button" hidden>Logga ut</button><form id="flAdminForm" hidden><div id="flAdminGrid"></div><div class="fl-actions"><button class="fl-save" type="submit">Spara priser</button><button id="flAdminReset" type="button">Återställ grundpriser</button><button id="flAdminClose" type="button">Stäng</button></div><div id="flAdminStatus" role="status"></div></form></section></div>
+<form id="flAdminLogin" style="display:grid;gap:9px;margin-bottom:15px"><input id="flAdminEmail" type="email" autocomplete="username" placeholder="E-postadress" required><input id="flAdminPassword" type="password" autocomplete="current-password" placeholder="Lösenord" required><button type="submit">Logga in</button></form><button id="flAdminLogout" type="button" hidden>Logga ut</button><form id="flAdminForm" hidden><div id="flAdminGrid"></div><div class="fl-actions"><button class="fl-save" type="submit">Spara priser</button><button id="flAdminReset" type="button">Återställ grundpriser</button><button id="flAdminClose" type="button">Stäng</button></div></form><div id="flAdminStatus" role="status" style="margin-top:12px;white-space:pre-wrap"></div></section></div>
 <script>
 (()=>{
 'use strict';
@@ -482,7 +482,7 @@ const key='sb_publishable_UaKyDk59piS0HTTkir5BQA_wBM22m1b';
 const customerId='demomaleri';
 let token=null;
 const request=async(path,options={})=>{
- const response=await fetch(url+path,{...options,headers:{apikey:key,Authorization:'Bearer '+(token||key),'Content-Type':'application/json',...(options.headers||{})}});
+ const response=await fetch(url+path,{...options,headers:{apikey:key,...(token?{Authorization:'Bearer '+token}:{}),'Content-Type':'application/json',...(options.headers||{})}});
  if(!response.ok){const detail=await response.text();throw Error('HTTP '+response.status+': '+detail.slice(0,250))}
  return response.status===204?null:response.json();
 };
