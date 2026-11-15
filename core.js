@@ -75,7 +75,7 @@ function show(view){
   $('home-view').style.display=home?'block':'none';
   $('catalog-view').classList.toggle('visible',['verktyg','kategori'].includes(view));
   tools.forEach(t=>$(t.id+'-view')?.classList.toggle('visible',view===t.id));
-  if(view==='verktyg'){activeFilter='Alla';$('catalog-title').textContent='Alla funktioner';$('search').value='';render()}
+  if(view==='verktyg'){activeFilter='Alla';$('catalog-title').textContent='Utforska verktygslådan';$('search').value='';render()}
   if(view==='kategori')render();
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.go===view||(view==='kategori'&&b.dataset.cat===activeFilter)));
   closeMenu();
