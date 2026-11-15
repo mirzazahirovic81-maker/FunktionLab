@@ -462,4 +462,83 @@ $('printBtn').addEventListener('click',async()=>{
 window.addEventListener('beforeprint',updatePrintSheet);
 
 calculate();
-</script></body></html>
+</script>
+<style>
+body{position:relative}#flAdminLink{position:absolute;right:12px;bottom:8px;z-index:1000;border:0;background:rgba(255,255,255,.94);color:#647582;font:12px Inter,system-ui,sans-serif;padding:5px 8px;border-radius:5px;cursor:pointer}
+#flAdminOverlay[hidden]{display:none!important}#flAdminOverlay{position:fixed;inset:0;z-index:2000;background:rgba(10,30,37,.64);display:grid;place-items:center;padding:15px}
+#flAdminPanel{background:#fff;color:#152b39;border-radius:16px;width:min(650px,100%);max-height:92vh;overflow:auto;padding:24px;box-shadow:0 16px 60px #0003;font:14px Inter,system-ui,sans-serif}
+#flAdminPanel h2{margin:0 0 7px;font-size:23px}#flAdminPanel p{color:#647582;line-height:1.5;margin:0 0 17px}#flAdminGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}#flAdminGrid label{font-size:12px;font-weight:650;margin:0}#flAdminGrid input{width:100%;height:39px;margin-top:5px;border:1px solid #cfdad7;border-radius:7px;padding:7px 10px;font:inherit}#flAdminLogin input{width:100%;height:39px;border:1px solid #cfdad7;border-radius:7px;padding:7px 10px}#flAdminLogin button,#flAdminLogout{padding:10px;border:1px solid #cfdad7;border-radius:8px;cursor:pointer}#flAdminPanel .fl-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}#flAdminPanel .fl-actions button{border:1px solid #cfdad7;border-radius:8px;padding:10px 14px;background:#fff;color:#152b39;font-weight:700}#flAdminPanel .fl-actions button.fl-save{background:#176c70;color:#fff;border-color:#176c70}#flAdminStatus{font-size:12px;margin-top:12px;color:#176c70}@media(max-width:520px){#flAdminGrid{grid-template-columns:1fr}#flAdminPanel{padding:18px}}
+@media print{#flAdminLink,#flAdminOverlay{display:none!important}}
+</style>
+<button id="flAdminLink" type="button" aria-label="Öppna administration">Admin (test)</button>
+<div id="flAdminOverlay" hidden><section id="flAdminPanel" role="dialog" aria-modal="true" aria-labelledby="flAdminTitle">
+<h2 id="flAdminTitle">Prisadministration</h2><p>DemoMåleri. Ändra kalkylatorns schablonpriser. Priserna hämtas från FunktionLabs databas. Logga in för att ändra dem.</p>
+<form id="flAdminLogin" style="display:grid;gap:9px;margin-bottom:15px"><input id="flAdminEmail" type="email" autocomplete="username" placeholder="E-postadress" required><input id="flAdminPassword" type="password" autocomplete="current-password" placeholder="Lösenord" required><button type="submit">Logga in</button></form><button id="flAdminLogout" type="button" hidden>Logga ut</button><form id="flAdminForm" hidden><div id="flAdminGrid"></div><div class="fl-actions"><button class="fl-save" type="submit">Spara priser</button><button id="flAdminReset" type="button">Återställ grundpriser</button><button id="flAdminClose" type="button">Stäng</button></div><div id="flAdminStatus" role="status"></div></form></section></div>
+<script>
+(()=>{
+'use strict';
+const url='https://txkiuefjxzhhlkpvenlv.supabase.co';
+const key='sb_publishable_UaKyDk59piS0HTTkir5BQA_wBM22m1b';
+const customerId='demomaleri';
+let token=null;
+const request=async(path,options={})=>{
+ const response=await fetch(url+path,{...options,headers:{apikey:key,Authorization:'Bearer '+(token||key),'Content-Type':'application/json',...(options.headers||{})}});
+ if(!response.ok){const detail=await response.text();throw Error('HTTP '+response.status+': '+detail.slice(0,250))}
+ return response.status===204?null:response.json();
+};
+const fields=[
+['walls.laborPerM2','Väggar, arbete (kr/m²)'],['walls.materialPerM2','Väggar, material (kr/m²)'],
+['ceiling.laborPerM2','Tak, arbete (kr/m²)'],['ceiling.materialPerM2','Tak, material (kr/m²)'],
+['facade.laborPerM2','Fasad, arbete (kr/m²)'],['facade.materialPerM2','Fasad, material (kr/m²)'],
+['preparationMultiplier.good','Bra underlag (faktor)'],['preparationMultiplier.medium','Normalt underlag (faktor)'],['preparationMultiplier.poor','Dåligt underlag (faktor)'],
+['coatsMultiplier.1','1 strykning (faktor)'],['coatsMultiplier.2','2 strykningar (faktor)'],['coatsMultiplier.3','3 strykningar (faktor)'],
+['difficultAccessMultiplier','Svår åtkomst (faktor)'],['coverFixed','Skyddstäckning (kr)'],['minPriceExVat','Minimipris exkl. moms (kr)'],
+['vatRate','Moms (andel, t.ex. 0,25)'],['rotIllustrationRate','ROT, illustrativ andel (t.ex. 0,30)']
+];
+const rules=COMPANY.priceRules;
+const get=(path)=>path.split('.').reduce((obj,key)=>obj[key],rules);
+const set=(path,value)=>{const keys=path.split('.');let obj=rules;for(let i=0;i<keys.length-1;i++)obj=obj[keys[i]];obj[keys[keys.length-1]]=value};
+const defaults=Object.fromEntries(fields.map(([key])=>[key,get(key)]));
+const apply=(values)=>{for(const [key] of fields){const v=values[key];if(typeof v==='number'&&Number.isFinite(v)&&v>=0)set(key,v)}};
+const load=async()=>{
+ const rows=await request('/rest/v1/fl_price_settings?customer_id=eq.'+encodeURIComponent(customerId)+'&select=settings');
+ if(rows.length&&rows[0].settings){apply(rows[0].settings);calculate()}
+};
+const overlay=document.getElementById('flAdminOverlay'),grid=document.getElementById('flAdminGrid'),status=document.getElementById('flAdminStatus');
+for(const [key,label] of fields){const l=document.createElement('label');l.textContent=label;const input=document.createElement('input');input.type='number';input.step='any';input.min='0';input.required=true;input.dataset.priceKey=key;l.appendChild(input);grid.appendChild(l)}
+const populate=()=>{for(const input of grid.querySelectorAll('input'))input.value=get(input.dataset.priceKey)};
+const login=document.getElementById('flAdminLogin'),form=document.getElementById('flAdminForm'),logout=document.getElementById('flAdminLogout');
+const open=()=>{populate();status.textContent='';overlay.hidden=false};
+const close=()=>{overlay.hidden=true};
+const authUI=()=>{login.hidden=!!token;login.style.display=token?'none':'grid';form.hidden=!token;logout.hidden=!token};
+authUI();
+document.getElementById('flAdminLink').addEventListener('click',open);
+document.getElementById('flAdminClose').addEventListener('click',close);
+overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.hidden)close()});
+login.addEventListener('submit',async e=>{
+ e.preventDefault();status.textContent='Loggar in…';
+ try{
+  const auth=await request('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email:document.getElementById('flAdminEmail').value,password:document.getElementById('flAdminPassword').value})});
+  token=auth.access_token;
+  const access=await request('/rest/v1/fl_admin_access?select=role,customer_id');
+  if(!access.some(a=>a.role==='owner'||(a.role==='customer_admin'&&a.customer_id===customerId)))throw Error('Kontot saknar behörighet till denna kund.');
+  document.getElementById('flAdminPassword').value='';authUI();status.textContent='Inloggad.';
+ }catch(err){token=null;authUI();status.textContent='Inloggningen misslyckades: '+err.message}
+});
+logout.addEventListener('click',()=>{token=null;authUI();status.textContent='Utloggad.'});
+form.addEventListener('submit',async e=>{
+ e.preventDefault();const values={};for(const input of grid.querySelectorAll('input')){const v=Number(input.value);if(!Number.isFinite(v)||v<0){status.textContent='Kontrollera värdena.';return}values[input.dataset.priceKey]=v}
+ status.textContent='Sparar…';
+ try{
+  const updated=await request('/rest/v1/fl_price_settings?customer_id=eq.'+encodeURIComponent(customerId),{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify({settings:values,updated_at:new Date().toISOString()})});
+  if(!Array.isArray(updated)||updated.length!==1)throw Error('Ingen rad uppdaterades. Kontrollera RLS-behörigheten.');
+  apply(values);calculate();status.textContent='Priserna har sparats i Supabase.';
+ }catch(err){status.textContent='Kunde inte spara: '+err.message}
+});
+document.getElementById('flAdminReset').addEventListener('click',()=>{apply(defaults);populate();calculate();status.textContent='Grundpriserna visas. Klicka Spara priser för att lagra dem.'});
+load().catch(err=>{console.warn('Kunde inte hämta priser',err);status.textContent='Kunde inte hämta priser från Supabase. Kontrollera läsbehörighet.'});
+calculate();
+})();
+</script>
+</body></html>
