@@ -54,7 +54,21 @@ function flBuildNavigation(){
 }
 flBuildNavigation();
 // P1: Navigation och sökning utan föråldrade kalkylatorer eller favoritlagring.
-const flIcon=name=>`<svg class="fl-line-icon" aria-hidden="true"><use href="#fl-icon-${name}"/></svg>`;
+// Egna, enhetliga linjeikoner för Verktygslådans kort. Övriga ikoner påverkas inte.
+const flCatalogIconPaths={
+  savings:'<path d="M4 18h16M6 15V9m4 6V5m4 10v-4m4 4V7"/><path d="m5 7 4-3 5 4 5-5"/>',
+  period:'<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 15l4-4 3 2 4-5M7 17h11"/>',
+  anomaly:'<path d="M3 12h4l3-7 4 14 3-7h4"/><circle cx="18" cy="5" r="2"/>',
+  chart:'<path d="M4 20V5m0 15h16"/><rect x="7" y="12" width="3" height="5" rx=".7"/><rect x="12" y="8" width="3" height="9" rx=".7"/><rect x="17" y="5" width="3" height="12" rx=".7"/>',
+  peak:'<path d="M3 19h18M5 15l4-4 3 2 6-8"/><path d="M14 5h4v4"/><path d="M5 18v-3m5 3v-4m5 4v-7m5 7V8"/>',
+  invest:'<rect x="3" y="5" width="8" height="14" rx="2"/><rect x="13" y="5" width="8" height="14" rx="2"/><path d="m6 13 2-3 1 2m7 1 2-3m-2 7h3"/>',
+  scenario:'<path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2" fill="white"/><circle cx="16" cy="12" r="2" fill="white"/><circle cx="11" cy="17" r="2" fill="white"/>',
+  workflow:'<rect x="3" y="3" width="7" height="6" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/><path d="M6.5 9v5h11v1M17.5 15V9M14 9h7"/>',
+  aterbruk:'<path d="m8 4 2-2 3 5-2 2M8 4H5l-3 5 3 2M3 15l-1 3 6 3 2-3M13 21h5l4-6-3-2M20 10l2-2-4-5-3 2"/>',
+  forandringar:'<rect x="3" y="4" width="8" height="16" rx="2"/><rect x="13" y="4" width="8" height="16" rx="2"/><path d="M6 9h2m-2 4h2m8-4h2m-2 4h2m-2 4h2"/>'
+};
+const flCatalogIcon=id=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${flCatalogIconPaths[id]||flCatalogIconPaths.chart}</svg>`;
+
 const $=id=>document.getElementById(id);
 let activeFilter='Alla';
 const routes=new Set(['hem','verktyg','om','forslag','kategori',...tools.map(t=>t.id)]);
@@ -62,7 +76,7 @@ function render(){
   document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('selected',b.dataset.filter===activeFilter));
   const q=($('search')?.value||'').toLocaleLowerCase('sv-SE').trim();
   const found=tools.filter(t=>(activeFilter==='Alla'||t.category===activeFilter||(activeFilter==='Ekonomi & beslut'&&t.category==='Ekonomi'))&&[t.name,t.category,t.description,t.keywords].join(' ').toLocaleLowerCase('sv-SE').includes(q));
-  $('catalog-results').innerHTML=found.map(t=>`<article class="tool-card"><div class="tool-icon">${flIcon(t.icon)}</div><h3>${t.name}</h3><p>${t.description}</p><div class="card-foot"><span class="tag">● Gratis</span><a class="open-tool" data-go="${t.id}" href="#${t.id}">Öppna ↗</a></div></article>`).join('')||'<div class="empty">Inga publicerade verktyg matchar urvalet ännu. Föreslå gärna en funktion som saknas.</div>';
+  $('catalog-results').innerHTML=found.map(t=>`<article class="tool-card"><div class="tool-icon">${flCatalogIcon(t.id)}</div><h3>${t.name}</h3><p>${t.description}</p><div class="card-foot"><a class="open-tool" data-go="${t.id}" href="#${t.id}">Öppna ↗</a></div></article>`).join('')||'<div class="empty">Inga publicerade verktyg matchar urvalet ännu. Föreslå gärna en funktion som saknas.</div>';
 }
 function closeMenu(){
   $('sidebar')?.classList.remove('open');$('overlay')?.classList.remove('on');
