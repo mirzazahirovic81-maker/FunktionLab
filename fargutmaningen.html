@@ -1,83 +1,119 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Färgstudion | FunktionLab</title><style>
+<!DOCTYPE html>
+<html lang="sv"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Färgstudion | FunktionLab</title><style>
 :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:#16313c;background:#f5f8f8}*{box-sizing:border-box}body{margin:0}.shell{max-width:1050px;margin:auto;padding:22px 16px 60px}header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:26px}.brand{font-size:22px;font-weight:850;letter-spacing:-.7px;color:#102b48}.brand span{color:#089ca2}.demo{font-size:12px;background:#e2f4f1;color:#087b78;border-radius:30px;padding:8px 12px;font-weight:700}.intro{margin-bottom:20px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.4px;color:#008a90;text-transform:uppercase}h1{font-size:clamp(28px,5vw,44px);letter-spacing:-1.3px;line-height:1.1;margin:9px 0}p{line-height:1.55;color:#58717a;margin:8px 0}.layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(290px,.7fr);gap:18px}.panel{background:white;border:1px solid #e0e9e9;border-radius:20px;box-shadow:0 8px 28px #1739440a;overflow:hidden}.scene-top{padding:17px 20px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}.tag{font-size:12px;font-weight:700;color:#047f83;background:#e9f8f5;border-radius:20px;padding:7px 10px}.room{width:100%;display:block;background:#e8e4dd}.scene-foot{padding:14px 20px 20px}.scene-foot small{color:#738891}.control{padding:20px}.control h2{font-size:20px;margin:0 0 8px}.challenge{padding:15px;background:#f0f8f7;border:1px solid #d9edeb;border-radius:14px;margin:14px 0 18px}.challenge strong{font-size:15px}.challenge p{font-size:13px;margin-bottom:0}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.choice{border:2px solid #e2e9e9;background:white;border-radius:13px;text-align:left;padding:10px;cursor:pointer;min-height:100px;transition:.18s}.choice:hover{border-color:#8fc9c4}.choice[aria-pressed=true]{border-color:#008d8a;background:#f0faf8;box-shadow:0 0 0 2px #008d8a18}.swatch{display:block;height:34px;border-radius:8px;margin-bottom:8px;border:1px solid #0000000a}.choice strong{display:block;font-size:13px}.choice small{display:block;color:#6b7e84;font-size:11px;margin-top:4px}.product{border-top:1px solid #e6eeee;margin-top:18px;padding-top:15px}.product h3{margin:0 0 7px;font-size:16px}.product p{font-size:13px}.stat{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.stat span{font-size:12px;background:#f2f5f6;border-radius:7px;padding:7px 9px}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}button.action{border:0;border-radius:11px;padding:12px 16px;background:#008d8a;color:white;font-weight:750;cursor:pointer;font-size:14px}button.secondary{background:#edf3f3;color:#17444b}.result{margin-top:14px;padding:15px;background:#f1f8f7;border-radius:12px;display:none}.result.show{display:block}.result h3{margin:0 0 7px;font-size:17px}.result p{font-size:13px}.fine{font-size:12px;margin-top:22px;color:#82949a}.notice{background:#fff7e9;border-radius:10px;padding:10px 12px;font-size:12px;color:#795b29;margin-top:12px}@media(max-width:780px){.layout{grid-template-columns:1fr}.shell{padding:16px 12px 45px}.control{padding:17px}.scene-top{padding:14px 15px 0}.scene-foot{padding:10px 15px 17px}}@media(prefers-reduced-motion:no-preference){#wall,#sidewall{transition:fill .4s ease}.choice{transition:border-color .2s,background .2s}}
 </style><style id="fl-enhancements">
 .extra{margin-top:16px;padding:16px;border:1px solid #dbe7e7;border-radius:16px;background:#f7fbfa}.extra h3{margin:0 0 7px;font-size:17px}.extra p{font-size:13px}.extra label{font-size:13px;font-weight:700;display:block;margin:12px 0 5px;color:#183b44}.extra select,.extra input{width:100%;padding:11px;border:1px solid #cbdcde;border-radius:10px;background:white;color:#193842;font:inherit}.extra .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.extra .mini{font-size:12px;color:#536a70}.extra .calc{padding:13px;background:#e7f4f1;border-radius:12px;margin-top:12px;line-height:1.55;color:#163a42}.extra .calc strong{font-size:20px}.extra .note{color:#405f66;font-size:12px}.room{transition:filter .35s ease}.extra button{cursor:pointer}.extra .smallbutton{border:1px solid #0b888a;color:#087c7e;border-radius:9px;background:white;padding:9px 12px;font-weight:700;margin-top:8px}.extra .summary{white-space:pre-line;font-size:13px;line-height:1.55}.extra .status{font-weight:700;color:#126f67}@media(max-width:520px){.extra .two{grid-template-columns:1fr}}
 header .back-home{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b9d9d8;border-radius:30px;padding:9px 13px;color:#087b78;background:#fff;font-weight:750;font-size:12px;white-space:nowrap}header .back-home:hover{background:#e2f4f1}header .header-links{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}@media(max-width:540px){header{align-items:flex-start}header .header-links{flex-direction:column;align-items:flex-end;gap:7px}header .back-home{font-size:12px;padding:8px 10px}}
-.studio-intro{color:#526b75;line-height:1.55;margin:0 0 18px;font-size:14px}</style></head><body><main class="shell"><header><div class="brand">Funktion<span>Lab</span></div><div class="header-links"><span class="demo">Fristående konceptdemo</span><a class="back-home" href="https://funktionlab.se/">Till FunktionLab.se</a></div></header><div class="intro"><div class="eyebrow">DemoMåleri · Produktupplevelse</div><h1>Färgstudion</h1><p>Prova olika väggkulörer i ett möblerat rum, jämför ljusförhållanden och hitta en färgprodukt som passar dina behov.</p></div><div class="layout"><section class="panel" aria-label="Interaktiv rumsvy"><div class="scene-top"><strong>Vardagsrummet</strong><span class="tag" id="mood">Ditt färgval</span></div><svg class="room" viewBox="0 0 700 510" role="img" aria-label="Modernt illustrerat vardagsrum där väggfärgen ändras efter ditt val">
+.studio-intro{color:#526b75;line-height:1.55;margin:0 0 18px;font-size:14px}</style><style id="fl-layout-fix">
+/* Färgstudion: balanserad tvådelad arbetsyta utan tom vänsterspalt. */
+.shell{max-width:1180px;padding-bottom:34px}
+header{margin-bottom:18px}.intro{margin-bottom:18px}
+.layout{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:16px;align-items:start}
+.layout>.panel{min-width:0}
+.scene-top{padding:14px 18px 8px}
+.scene-foot{padding:12px 18px 16px}
+.scene-foot p{font-size:13px;line-height:1.45;margin:6px 0}
+.control{padding:18px}
+.control h2{margin-bottom:5px}
+.studio-intro{margin-bottom:12px;font-size:13px}
+.choices{gap:9px}
+.choice{min-height:83px;padding:9px}
+.swatch{height:25px;margin-bottom:6px}
+.product{margin-top:14px;padding-top:12px}
+.product p{line-height:1.45}
+.notice{margin-top:9px}
+.studio-tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}
+.studio-tools>.extra{margin:0;padding:18px;background:#fff;border:1px solid #e0e9e9;border-radius:20px;box-shadow:0 8px 28px #1739440a}
+.studio-tools .extra h3{font-size:18px}
+.studio-tools .extra p{line-height:1.45}
+.studio-tools .extra label{margin-top:10px}
+.studio-tools .extra .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.studio-output{margin-top:12px}
+.studio-output .actions{margin-top:0}
+.studio-output .result{margin-top:12px}
+.fine{margin-top:18px}
+@media(max-width:780px){
+ .layout,.studio-tools{grid-template-columns:1fr}
+ .studio-tools{gap:12px;margin-top:12px}
+ .studio-tools>.extra{padding:17px}
+ .studio-tools .extra .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:420px){.studio-tools .extra .two{grid-template-columns:1fr}}
+</style></head><body><main class="shell"><header><div class="brand">Funktion<span>Lab</span></div><div class="header-links"><span class="demo">Fristående konceptdemo</span><a class="back-home" href="https://funktionlab.se/">Till FunktionLab.se</a></div></header><div class="intro"><div class="eyebrow">DemoMåleri · Produktupplevelse</div><h1>Färgstudion</h1><p>Prova olika väggkulörer i ett möblerat rum, jämför ljusförhållanden och hitta en färgprodukt som passar dina behov.</p></div><div class="layout"><section aria-label="Interaktiv rumsvy" class="panel"><div class="scene-top"><strong>Vardagsrummet</strong><span class="tag" id="mood">Ditt färgval</span></div><svg aria-label="Modernt illustrerat vardagsrum där väggfärgen ändras efter ditt val" class="room" role="img" viewbox="0 0 700 510">
 <defs>
- <linearGradient id="wallLight" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#ffffff" stop-opacity=".18"/><stop offset=".65" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity=".10"/></linearGradient>
- <linearGradient id="oakFloor" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#d6b894"/><stop offset="1" stop-color="#ae8762"/></linearGradient>
- <linearGradient id="sofaFront" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f8f4ed"/><stop offset="1" stop-color="#d8d0c4"/></linearGradient>
- <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b8d9e5"/><stop offset="1" stop-color="#f2f1df"/></linearGradient>
- <linearGradient id="sunbeam" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffbe4" stop-opacity=".52"/><stop offset="1" stop-color="#fffbe4" stop-opacity="0"/></linearGradient>
- <radialGradient id="rug"><stop stop-color="#eee7da"/><stop offset="1" stop-color="#d6cbbd"/></radialGradient>
- <filter id="softShadow"><feGaussianBlur stdDeviation="9"/></filter>
- <filter id="softGlow"><feGaussianBlur stdDeviation="18"/></filter>
- <pattern id="woodgrain" width="64" height="18" patternUnits="userSpaceOnUse"><path d="M0 7q23-5 64 0M0 14q30 3 64 0" fill="none" stroke="#8c6545" stroke-opacity=".10" stroke-width="1"/></pattern>
+<lineargradient id="wallLight" x1="0" x2="1" y1="0" y2=".3"><stop stop-color="#ffffff" stop-opacity=".18"></stop><stop offset=".65" stop-color="#ffffff" stop-opacity="0"></stop><stop offset="1" stop-color="#000000" stop-opacity=".10"></stop></lineargradient>
+<lineargradient id="oakFloor" x1="0" x2=".3" y1="0" y2="1"><stop stop-color="#d6b894"></stop><stop offset="1" stop-color="#ae8762"></stop></lineargradient>
+<lineargradient id="sofaFront" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#f8f4ed"></stop><stop offset="1" stop-color="#d8d0c4"></stop></lineargradient>
+<lineargradient id="sky" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#b8d9e5"></stop><stop offset="1" stop-color="#f2f1df"></stop></lineargradient>
+<lineargradient id="sunbeam" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fffbe4" stop-opacity=".52"></stop><stop offset="1" stop-color="#fffbe4" stop-opacity="0"></stop></lineargradient>
+<radialgradient id="rug"><stop stop-color="#eee7da"></stop><stop offset="1" stop-color="#d6cbbd"></stop></radialgradient>
+<filter id="softShadow"><fegaussianblur stddeviation="9"></fegaussianblur></filter>
+<filter id="softGlow"><fegaussianblur stddeviation="18"></fegaussianblur></filter>
+<pattern height="18" id="woodgrain" patternunits="userSpaceOnUse" width="64"><path d="M0 7q23-5 64 0M0 14q30 3 64 0" fill="none" stroke="#8c6545" stroke-opacity=".10" stroke-width="1"></path></pattern>
 </defs>
 <!-- Architectural envelope: wall colors remain live -->
-<rect width="700" height="510" fill="#e9e7e1"/>
-<polygon id="wall" points="0,20 563,20 563,349 0,383" fill="#e4ded2"/>
-<polygon id="sidewall" points="563,20 700,0 700,386 563,349" fill="#d5cfc4"/>
-<polygon points="0,20 563,20 563,349 0,383" fill="url(#wallLight)" pointer-events="none"/>
-<polygon points="563,20 700,0 700,386 563,349" fill="#000" opacity=".055" pointer-events="none"/>
-<polygon points="0,383 563,349 700,386 700,510 0,510" fill="url(#oakFloor)"/>
-<polygon points="0,383 563,349 700,386 700,510 0,510" fill="url(#woodgrain)"/>
-<path d="M0 391L563 356L700 394" fill="none" stroke="#f7f2e9" stroke-width="9"/>
-<g opacity=".16" stroke="#715238" stroke-width="1.5"><path d="M0 430L590 363M0 482L653 378M145 510L700 408M390 510L700 447M550 510L700 475"/><path d="M85 385L160 510M230 373L310 510M390 361L465 510M555 350L620 510"/></g>
+<rect fill="#e9e7e1" height="510" width="700"></rect>
+<polygon fill="#e4ded2" id="wall" points="0,20 563,20 563,349 0,383"></polygon>
+<polygon fill="#d5cfc4" id="sidewall" points="563,20 700,0 700,386 563,349"></polygon>
+<polygon fill="url(#wallLight)" pointer-events="none" points="0,20 563,20 563,349 0,383"></polygon>
+<polygon fill="#000" opacity=".055" pointer-events="none" points="563,20 700,0 700,386 563,349"></polygon>
+<polygon fill="url(#oakFloor)" points="0,383 563,349 700,386 700,510 0,510"></polygon>
+<polygon fill="url(#woodgrain)" points="0,383 563,349 700,386 700,510 0,510"></polygon>
+<path d="M0 391L563 356L700 394" fill="none" stroke="#f7f2e9" stroke-width="9"></path>
+<g opacity=".16" stroke="#715238" stroke-width="1.5"><path d="M0 430L590 363M0 482L653 378M145 510L700 408M390 510L700 447M550 510L700 475"></path><path d="M85 385L160 510M230 373L310 510M390 361L465 510M555 350L620 510"></path></g>
 <!-- Full height black-framed architectural window -->
-<rect x="412" y="48" width="122" height="259" rx="2" fill="#f6f1e9"/>
-<rect x="420" y="56" width="106" height="244" fill="#292f30"/>
-<rect x="427" y="63" width="92" height="230" fill="url(#sky)"/>
-<path d="M427 242q24-23 45-15t47-22v88h-92" fill="#91b1a0" opacity=".55"/>
-<path d="M427 265q32-17 55-7t37-12v47h-92" fill="#708d79" opacity=".35"/>
-<path d="M472 62v231M427 182h92" stroke="#303739" stroke-width="6"/>
-<path d="M429 64l20 0-22 155" fill="#fff" opacity=".20"/>
-<path d="M432 300L540 300L682 510L530 510Z" fill="url(#sunbeam)"/>
+<rect fill="#f6f1e9" height="259" rx="2" width="122" x="412" y="48"></rect>
+<rect fill="#292f30" height="244" width="106" x="420" y="56"></rect>
+<rect fill="url(#sky)" height="230" width="92" x="427" y="63"></rect>
+<path d="M427 242q24-23 45-15t47-22v88h-92" fill="#91b1a0" opacity=".55"></path>
+<path d="M427 265q32-17 55-7t37-12v47h-92" fill="#708d79" opacity=".35"></path>
+<path d="M472 62v231M427 182h92" stroke="#303739" stroke-width="6"></path>
+<path d="M429 64l20 0-22 155" fill="#fff" opacity=".20"></path>
+<path d="M432 300L540 300L682 510L530 510Z" fill="url(#sunbeam)"></path>
 <!-- Art gallery with elegant walnut frames -->
-<rect x="95" y="77" width="112" height="143" rx="2" fill="#6c5344" opacity=".2" transform="translate(4 5)"/>
-<rect x="95" y="77" width="112" height="143" rx="2" fill="#a57e5e"/>
-<rect x="101" y="83" width="100" height="131" fill="#f5efe4"/>
-<rect x="111" y="94" width="80" height="109" fill="#e7d7c5"/>
-<circle cx="149" cy="138" r="27" fill="#b67e6c"/><path d="M112 187q24-58 79-35v51h-80" fill="#718e7d"/><path d="M118 108q45 26 67 1" fill="none" stroke="#f2e6d6" stroke-width="5" opacity=".65"/>
-<rect x="240" y="98" width="77" height="103" fill="#967b62"/>
-<rect x="246" y="104" width="65" height="91" fill="#f5f0e8"/>
-<circle cx="278" cy="142" r="22" fill="#d1b2a0"/><path d="M251 182q25-40 55-16v24h-55" fill="#a1b4aa"/>
+<rect fill="#6c5344" height="143" opacity=".2" rx="2" transform="translate(4 5)" width="112" x="95" y="77"></rect>
+<rect fill="#a57e5e" height="143" rx="2" width="112" x="95" y="77"></rect>
+<rect fill="#f5efe4" height="131" width="100" x="101" y="83"></rect>
+<rect fill="#e7d7c5" height="109" width="80" x="111" y="94"></rect>
+<circle cx="149" cy="138" fill="#b67e6c" r="27"></circle><path d="M112 187q24-58 79-35v51h-80" fill="#718e7d"></path><path d="M118 108q45 26 67 1" fill="none" opacity=".65" stroke="#f2e6d6" stroke-width="5"></path>
+<rect fill="#967b62" height="103" width="77" x="240" y="98"></rect>
+<rect fill="#f5f0e8" height="91" width="65" x="246" y="104"></rect>
+<circle cx="278" cy="142" fill="#d1b2a0" r="22"></circle><path d="M251 182q25-40 55-16v24h-55" fill="#a1b4aa"></path>
 <!-- Window-side floating console -->
-<ellipse cx="572" cy="394" rx="91" ry="14" fill="#34291f" opacity=".15" filter="url(#softShadow)"/>
-<path d="M559 343h112v13H559z" fill="#8b6950"/><path d="M573 355v54M657 355v54" stroke="#6b5343" stroke-width="6"/>
-<path d="M594 342v-51" stroke="#aa8768" stroke-width="2"/><ellipse cx="594" cy="286" rx="15" ry="10" fill="#efe3d4"/><path d="M586 286q8-28 16 0" fill="#f6ede0"/>
+<ellipse cx="572" cy="394" fill="#34291f" filter="url(#softShadow)" opacity=".15" rx="91" ry="14"></ellipse>
+<path d="M559 343h112v13H559z" fill="#8b6950"></path><path d="M573 355v54M657 355v54" stroke="#6b5343" stroke-width="6"></path>
+<path d="M594 342v-51" stroke="#aa8768" stroke-width="2"></path><ellipse cx="594" cy="286" fill="#efe3d4" rx="15" ry="10"></ellipse><path d="M586 286q8-28 16 0" fill="#f6ede0"></path>
 <!-- Big organic wool rug -->
-<ellipse cx="335" cy="449" rx="276" ry="62" fill="#2c2c2b" opacity=".12" filter="url(#softShadow)"/>
-<path d="M79 451q25-57 238-64t299 59q-10 55-283 59T79 451" fill="url(#rug)"/>
-<path d="M96 454q70-48 225-48t273 40" fill="none" stroke="#fffaf0" stroke-width="2" opacity=".45"/>
+<ellipse cx="335" cy="449" fill="#2c2c2b" filter="url(#softShadow)" opacity=".12" rx="276" ry="62"></ellipse>
+<path d="M79 451q25-57 238-64t299 59q-10 55-283 59T79 451" fill="url(#rug)"></path>
+<path d="M96 454q70-48 225-48t273 40" fill="none" opacity=".45" stroke="#fffaf0" stroke-width="2"></path>
 <!-- Contemporary modular sofa -->
-<ellipse cx="312" cy="427" rx="207" ry="25" fill="#3d342b" opacity=".16" filter="url(#softShadow)"/>
-<rect x="139" y="299" width="346" height="105" rx="31" fill="#e4ddd3" stroke="#c9bfb2" stroke-width="2"/>
-<rect x="150" y="308" width="324" height="70" rx="24" fill="#f2ede5"/>
-<path d="M155 350q4-22 33-22h254q28 0 30 22v36H155" fill="#e8e2d9"/>
-<rect x="122" y="356" width="380" height="69" rx="25" fill="url(#sofaFront)" stroke="#cfc7bb" stroke-width="2"/>
-<path d="M245 362q-8 30 0 58M374 362q8 31 0 58" stroke="#d5ccc1" stroke-width="3" fill="none"/>
-<rect x="117" y="332" width="54" height="89" rx="24" fill="#e9e3da" stroke="#d3cabe" stroke-width="2"/>
-<rect x="450" y="332" width="55" height="89" rx="24" fill="#e9e3da" stroke="#d3cabe" stroke-width="2"/>
-<rect x="159" y="420" width="18" height="15" rx="3" fill="#8b7967"/><rect x="450" y="420" width="18" height="15" rx="3" fill="#8b7967"/>
-<path d="M264 325q12-10 28 1l16 36-37 8-16-33z" fill="#a4b6a2"/><path d="M332 326q15-12 29 2l10 35-43 3-8-29z" fill="#c49c86"/>
+<ellipse cx="312" cy="427" fill="#3d342b" filter="url(#softShadow)" opacity=".16" rx="207" ry="25"></ellipse>
+<rect fill="#e4ddd3" height="105" rx="31" stroke="#c9bfb2" stroke-width="2" width="346" x="139" y="299"></rect>
+<rect fill="#f2ede5" height="70" rx="24" width="324" x="150" y="308"></rect>
+<path d="M155 350q4-22 33-22h254q28 0 30 22v36H155" fill="#e8e2d9"></path>
+<rect fill="url(#sofaFront)" height="69" rx="25" stroke="#cfc7bb" stroke-width="2" width="380" x="122" y="356"></rect>
+<path d="M245 362q-8 30 0 58M374 362q8 31 0 58" fill="none" stroke="#d5ccc1" stroke-width="3"></path>
+<rect fill="#e9e3da" height="89" rx="24" stroke="#d3cabe" stroke-width="2" width="54" x="117" y="332"></rect>
+<rect fill="#e9e3da" height="89" rx="24" stroke="#d3cabe" stroke-width="2" width="55" x="450" y="332"></rect>
+<rect fill="#8b7967" height="15" rx="3" width="18" x="159" y="420"></rect><rect fill="#8b7967" height="15" rx="3" width="18" x="450" y="420"></rect>
+<path d="M264 325q12-10 28 1l16 36-37 8-16-33z" fill="#a4b6a2"></path><path d="M332 326q15-12 29 2l10 35-43 3-8-29z" fill="#c49c86"></path>
 <!-- Travertine coffee table and styling -->
-<ellipse cx="344" cy="471" rx="104" ry="17" fill="#31251c" opacity=".18" filter="url(#softShadow)"/>
-<ellipse cx="341" cy="444" rx="94" ry="26" fill="#b6a18a"/><ellipse cx="341" cy="437" rx="94" ry="26" fill="#e5d7c6" stroke="#c9b7a2" stroke-width="2"/>
-<path d="M292 457v30M386 457v30" stroke="#a68d73" stroke-width="9"/>
-<ellipse cx="324" cy="432" rx="23" ry="7" fill="#b7a58e"/><ellipse cx="324" cy="429" rx="23" ry="6" fill="#e7d5bc"/>
-<rect x="317" y="418" width="13" height="11" rx="2" fill="#f4eee3"/><path d="M323 418q-13-12-8-21m8 21q10-20 15-19" stroke="#788d72" stroke-width="3" fill="none"/>
-<rect x="365" y="430" width="32" height="5" rx="1" fill="#b18a6c"/><rect x="368" y="426" width="30" height="5" rx="1" fill="#f4eee3"/>
+<ellipse cx="344" cy="471" fill="#31251c" filter="url(#softShadow)" opacity=".18" rx="104" ry="17"></ellipse>
+<ellipse cx="341" cy="444" fill="#b6a18a" rx="94" ry="26"></ellipse><ellipse cx="341" cy="437" fill="#e5d7c6" rx="94" ry="26" stroke="#c9b7a2" stroke-width="2"></ellipse>
+<path d="M292 457v30M386 457v30" stroke="#a68d73" stroke-width="9"></path>
+<ellipse cx="324" cy="432" fill="#b7a58e" rx="23" ry="7"></ellipse><ellipse cx="324" cy="429" fill="#e7d5bc" rx="23" ry="6"></ellipse>
+<rect fill="#f4eee3" height="11" rx="2" width="13" x="317" y="418"></rect><path d="M323 418q-13-12-8-21m8 21q10-20 15-19" fill="none" stroke="#788d72" stroke-width="3"></path>
+<rect fill="#b18a6c" height="5" rx="1" width="32" x="365" y="430"></rect><rect fill="#f4eee3" height="5" rx="1" width="30" x="368" y="426"></rect>
 <!-- Sculptural floor lamp -->
-<ellipse cx="66" cy="401" rx="34" ry="8" fill="#6a584b" opacity=".17"/>
-<path d="M65 394V234" stroke="#474a46" stroke-width="5"/><path d="M38 238q7-53 27-57t32 57" fill="#f5eee2" stroke="#d2c7b6" stroke-width="2"/><ellipse cx="67" cy="238" rx="30" ry="8" fill="#e7dac8"/>
+<ellipse cx="66" cy="401" fill="#6a584b" opacity=".17" rx="34" ry="8"></ellipse>
+<path d="M65 394V234" stroke="#474a46" stroke-width="5"></path><path d="M38 238q7-53 27-57t32 57" fill="#f5eee2" stroke="#d2c7b6" stroke-width="2"></path><ellipse cx="67" cy="238" fill="#e7dac8" rx="30" ry="8"></ellipse>
 <!-- Tall olive plant -->
-<ellipse cx="627" cy="445" rx="51" ry="11" fill="#352e24" opacity=".16" filter="url(#softShadow)"/>
-<path d="M602 382h51l-8 59h-34z" fill="#c6ab8e"/><path d="M603 382h49" stroke="#a88b71" stroke-width="5"/>
-<path d="M626 382q-4-69-9-151M626 354q-37-53-46-93M627 331q38-53 43-107M627 310q-26-59-29-104" fill="none" stroke="#6b7756" stroke-width="5" stroke-linecap="round"/>
-<g fill="#789576"><ellipse cx="598" cy="246" rx="26" ry="12" transform="rotate(-35 598 246)"/><ellipse cx="645" cy="264" rx="28" ry="12" transform="rotate(30 645 264)"/><ellipse cx="612" cy="213" rx="25" ry="11" transform="rotate(-28 612 213)"/><ellipse cx="663" cy="224" rx="25" ry="11" transform="rotate(34 663 224)"/><ellipse cx="580" cy="276" rx="24" ry="11" transform="rotate(27 580 276)"/><ellipse cx="641" cy="304" rx="23" ry="11" transform="rotate(-35 641 304)"/></g>
-</svg><div class="scene-foot"><strong id="selectedName">Sandbeige</strong><p id="sceneText">En varm, neutral grund som passar många inredningsstilar.</p><small>Illustrativ förhandsvisning. Färgåtergivning varierar mellan skärmar.</small></div></section><section class="panel"><div class="control"><h2>Välj väggkulör</h2><p class="studio-intro">Välj en kulör och se direkt hur den förändrar rummet. Jämför alternativen och läs mer om tillhörande färgprodukt.</p><strong>Prova väggfärg</strong><div class="choices" id="choices"></div><div class="product" aria-live="polite"><div class="eyebrow">Produktinformation</div><h3 id="productName"></h3><p id="productDescription"></p><div class="stat"><span id="finish"></span><span id="usage"></span></div><div class="notice">Produkterna och deras egenskaper är fiktiva i denna demo. Ingen verklig kulör- eller produktrekommendation.</div><div class="extra" id="paintLab"><h3>Anpassa efter rummet</h3><p>Jämför hur kulören upplevs i olika ljus och se vilka egenskaper som kan vara relevanta för rummets användning.</p><label for="lightMode">Ljus i rummet</label><select id="lightMode"><option value="day">Dagsljus</option><option value="evening">Varm kvällsbelysning</option><option value="shade">Svagt dagsljus</option></select><label for="roomUse">Hur används rummet?</label><select id="roomUse"><option value="living">Vardagsrum, normal användning</option><option value="hall">Hall, mycket slitage</option><option value="bed">Sovrum, lugn miljö</option></select><div class="calc" id="productAdvice" aria-live="polite"></div></div><div class="extra"><h3>Beräkna färgåtgång</h3><p>Fyll i rummets ungefärliga mått. Vi räknar på alla fyra väggarna och drar av öppningar.</p><div class="two"><div><label for="roomLength">Längd (m)</label><input id="roomLength" type="number" min="1" max="30" step="0.1" value="4"></div><div><label for="roomWidth">Bredd (m)</label><input id="roomWidth" type="number" min="1" max="30" step="0.1" value="3.5"></div><div><label for="roomHeight">Takhöjd (m)</label><input id="roomHeight" type="number" min="1.8" max="6" step="0.1" value="2.4"></div><div><label for="openings">Dörrar och fönster (m²)</label><input id="openings" type="number" min="0" max="100" step="0.5" value="4"></div></div><div class="calc" id="paintCalc" aria-live="polite"></div><p class="note">Demoantagande: 2 strykningar, 8 m²/liter och 10 % marginal. Verklig åtgång beror på vald produkt och underlag. Kontrollera produktblad före köp.</p><button type="button" class="smallbutton" id="copyBrief">Kopiera färgunderlag</button><p id="copyStatus" class="status" role="status"></p></div><div class="actions"><button class="action" id="save">Visa sammanställning</button></div><div id="result" class="result" aria-live="polite"><h3>Ditt färgval</h3><p id="resultText"></p><button class="action secondary" id="copy">Kopiera produktval</button></div></div></div></section></div><p class="fine">Konceptprototyp för FunktionLab. Ingen produktkatalog, prisberäkning eller leverantörsintegration ingår.</p></main><script>
+<ellipse cx="627" cy="445" fill="#352e24" filter="url(#softShadow)" opacity=".16" rx="51" ry="11"></ellipse>
+<path d="M602 382h51l-8 59h-34z" fill="#c6ab8e"></path><path d="M603 382h49" stroke="#a88b71" stroke-width="5"></path>
+<path d="M626 382q-4-69-9-151M626 354q-37-53-46-93M627 331q38-53 43-107M627 310q-26-59-29-104" fill="none" stroke="#6b7756" stroke-linecap="round" stroke-width="5"></path>
+<g fill="#789576"><ellipse cx="598" cy="246" rx="26" ry="12" transform="rotate(-35 598 246)"></ellipse><ellipse cx="645" cy="264" rx="28" ry="12" transform="rotate(30 645 264)"></ellipse><ellipse cx="612" cy="213" rx="25" ry="11" transform="rotate(-28 612 213)"></ellipse><ellipse cx="663" cy="224" rx="25" ry="11" transform="rotate(34 663 224)"></ellipse><ellipse cx="580" cy="276" rx="24" ry="11" transform="rotate(27 580 276)"></ellipse><ellipse cx="641" cy="304" rx="23" ry="11" transform="rotate(-35 641 304)"></ellipse></g>
+</svg><div class="scene-foot"><strong id="selectedName">Sandbeige</strong><p id="sceneText">En varm, neutral grund som passar många inredningsstilar.</p><small>Illustrativ förhandsvisning. Färgåtergivning varierar mellan skärmar.</small></div></section><section class="panel"><div class="control"><h2>Välj väggkulör</h2><p class="studio-intro">Välj en kulör och se direkt hur den förändrar rummet. Jämför alternativen och läs mer om tillhörande färgprodukt.</p><strong>Prova väggfärg</strong><div class="choices" id="choices"></div><div aria-live="polite" class="product"><div class="eyebrow">Produktinformation</div><h3 id="productName"></h3><p id="productDescription"></p><div class="stat"><span id="finish"></span><span id="usage"></span></div><div class="notice">Produkterna och deras egenskaper är fiktiva i denna demo. Ingen verklig kulör- eller produktrekommendation.</div></div></div></section></div><section aria-label="Anpassning och färgåtgång" class="studio-tools"><div class="extra" id="paintLab"><h3>Anpassa efter rummet</h3><p>Jämför hur kulören upplevs i olika ljus och se vilka egenskaper som kan vara relevanta för rummets användning.</p><label for="lightMode">Ljus i rummet</label><select id="lightMode"><option value="day">Dagsljus</option><option value="evening">Varm kvällsbelysning</option><option value="shade">Svagt dagsljus</option></select><label for="roomUse">Hur används rummet?</label><select id="roomUse"><option value="living">Vardagsrum, normal användning</option><option value="hall">Hall, mycket slitage</option><option value="bed">Sovrum, lugn miljö</option></select><div aria-live="polite" class="calc" id="productAdvice"></div></div><div class="extra"><h3>Beräkna färgåtgång</h3><p>Fyll i rummets ungefärliga mått. Vi räknar på alla fyra väggarna och drar av öppningar.</p><div class="two"><div><label for="roomLength">Längd (m)</label><input id="roomLength" max="30" min="1" step="0.1" type="number" value="4"/></div><div><label for="roomWidth">Bredd (m)</label><input id="roomWidth" max="30" min="1" step="0.1" type="number" value="3.5"/></div><div><label for="roomHeight">Takhöjd (m)</label><input id="roomHeight" max="6" min="1.8" step="0.1" type="number" value="2.4"/></div><div><label for="openings">Dörrar och fönster (m²)</label><input id="openings" max="100" min="0" step="0.5" type="number" value="4"/></div></div><div aria-live="polite" class="calc" id="paintCalc"></div><p class="note">Demoantagande: 2 strykningar, 8 m²/liter och 10 % marginal. Verklig åtgång beror på vald produkt och underlag. Kontrollera produktblad före köp.</p><button class="smallbutton" id="copyBrief" type="button">Kopiera färgunderlag</button><p class="status" id="copyStatus" role="status"></p></div></section><div class="studio-output"><div class="actions"><button class="action" id="save">Visa sammanställning</button></div><div aria-live="polite" class="result" id="result"><h3>Ditt färgval</h3><p id="resultText"></p><button class="action secondary" id="copy">Kopiera produktval</button></div></div><p class="fine">Konceptprototyp för FunktionLab. Ingen produktkatalog, prisberäkning eller leverantörsintegration ingår.</p></main><script>
 const colors=[{id:'sand',name:'Sandbeige',hex:'#e4ded2',side:'#d5cfc4',mood:'Varmt & balanserat',product:'DemoMåleri Väggfärg Sand 01',desc:'En mjuk beige kulör som skapar en lugn och välkomnande känsla. Passar fint till naturmaterial och ljusa möbler.',finish:'Matt yta',usage:'Exempel: 8 m²/liter'},{id:'sage',name:'Salviagrön',hex:'#aab9a5',side:'#91a38f',mood:'Naturnära & lugnt',product:'DemoMåleri Väggfärg Salvia 02',desc:'En dämpad grön ton som ger rummet en naturnära karaktär och fungerar väl med trä och varma textilier.',finish:'Matt yta',usage:'Exempel: 8 m²/liter'},{id:'clay',name:'Terrakotta',hex:'#c58c78',side:'#a97565',mood:'Varmt & uttrycksfullt',product:'DemoMåleri Väggfärg Lera 03',desc:'En jordnära, varm kulör som gör rummet mer uttrycksfullt. Kan fungera som fondvägg eller på alla väggar.',finish:'Matt yta',usage:'Exempel: 8 m²/liter'},{id:'blue',name:'Dimblå',hex:'#aabfcb',side:'#8da8b7',mood:'Svalt & harmoniskt',product:'DemoMåleri Väggfärg Dimma 04',desc:'En mild blågrå kulör som ger en svalare, stillsam känsla och kontrasterar fint mot varma träslag.',finish:'Matt yta',usage:'Exempel: 8 m²/liter'}];let current=colors[0];const $=id=>document.getElementById(id);const choices=$('choices');colors.forEach(c=>{const b=document.createElement('button');b.className='choice';b.type='button';b.dataset.id=c.id;b.setAttribute('aria-pressed',String(c.id===current.id));b.innerHTML=`<span class="swatch" style="background:${c.hex}"></span><strong>${c.name}</strong><small>${c.mood}</small>`;b.addEventListener('click',()=>select(c));choices.append(b)});function select(c){current=c;$('wall').setAttribute('fill',c.hex);$('sidewall').setAttribute('fill',c.side);$('mood').textContent=c.mood;$('selectedName').textContent=c.name;$('sceneText').textContent=c.desc;$('productName').textContent=c.product;$('productDescription').textContent=c.desc;$('finish').textContent=c.finish;$('usage').textContent=c.usage;choices.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===c.id)));$('result').classList.remove('show')}$('save').addEventListener('click',()=>{$('resultText').textContent=`Du valde ${current.name}. Produkt i denna demo: ${current.product}. Kulörbeskrivning: ${current.mood}.`; $('result').classList.add('show');$('result').scrollIntoView({behavior:'smooth',block:'nearest'})});$('copy').addEventListener('click',async()=>{const t=`Färgstudion – DemoMåleri\nKulör: ${current.name}\nProdukt: ${current.product}\nKulörbeskrivning: ${current.mood}\nObs: Fiktiv demoprodukt.`;try{await navigator.clipboard.writeText(t);$('copy').textContent='Kopierat!';setTimeout(()=>$('copy').textContent='Kopiera produktval',1800)}catch(e){window.prompt('Kopiera texten:',t)}});select(colors[0]);
 </script><script id="fl-enhancements-js">
 (()=>{const el=id=>document.getElementById(id);let latest='';const f=n=>Number(n).toLocaleString('sv-SE',{maximumFractionDigits:1});function update(){const mode=el('lightMode').value, use=el('roomUse').value;el('wall').closest('svg').style.filter=mode==='evening'?'sepia(.23) brightness(.86)':mode==='shade'?'brightness(.82) saturate(.84)':'none';const usage=use==='hall'?'För en hall med mycket slitage bör företaget föreslå en färg med dokumenterad tvättbarhet och lämplig slitstyrka.':use==='bed'?'För sovrum kan en matt yta vara intressant. Kontrollera produktens rekommenderade användningsområde.':'För vardagsrum kan en matt, avtorkningsbar väggfärg vara ett alternativ.';el('productAdvice').textContent=usage+' Ljusläget är en illustration och ersätter inte ett riktigt färgprov.';const l=+el('roomLength').value,w=+el('roomWidth').value,h=+el('roomHeight').value,o=+el('openings').value;let valid=[l,w,h,o].every(Number.isFinite)&&l>=1&&w>=1&&h>=1.8&&o>=0&&l<=30&&w<=30&&h<=6;const area=2*(l+w)*h-o;if(!valid||area<=0){el('paintCalc').textContent='Kontrollera rummets mått. Öppningarnas yta måste vara mindre än väggytan.';latest='';return;}const liters=area*2/8*1.1;el('paintCalc').innerHTML='<span>Beräknad väggyta: <b>'+f(area)+' m²</b></span><div>Ungefärlig färgåtgång: <strong>'+f(liters)+' liter</strong></div><span class="mini">Inkluderar två strykningar och 10 % marginal.</span>';const c=document.querySelector('#choices button[aria-pressed="true"]');const name=c?.querySelector('strong')?.textContent||'Vald kulör';latest='DemoMåleri | Färgstudion\nKulör: '+name+'\nRum: '+el('roomUse').selectedOptions[0].text+'\nLjusvisning: '+el('lightMode').selectedOptions[0].text+'\nRummets mått: '+l+' × '+w+' × '+h+' m\nÖppningar: '+o+' m²\nVäggyta: '+f(area)+' m²\nUppskattad färgåtgång: '+f(liters)+' liter (2 strykningar, 8 m²/l, 10 % marginal)\nAlla produkter och värden är demoexempel. Bekräfta val och åtgång med leverantör.';}document.querySelectorAll('#paintLab select,#roomLength,#roomWidth,#roomHeight,#openings').forEach(x=>x.addEventListener('input',update));document.querySelectorAll('#choices button').forEach(x=>x.addEventListener('click',update));el('copyBrief').addEventListener('click',async()=>{if(!latest)return;try{await navigator.clipboard.writeText(latest);el('copyStatus').textContent='Underlaget kopierat.';}catch(e){const t=document.createElement('textarea');t.value=latest;document.body.append(t);t.select();document.execCommand('copy');t.remove();el('copyStatus').textContent='Underlaget kopierat (om webbläsaren tillåter).';}});update();})();
