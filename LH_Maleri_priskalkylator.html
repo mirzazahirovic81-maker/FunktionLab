@@ -111,7 +111,8 @@ header{background:#fff!important;border-bottom:1px solid #dce5f3!important}
 .pdf-company{font-size:15px!important}
 @media(max-width:600px){.logo img{width:min(220px,55vw)!important}.head{min-height:96px!important}.pdf-mark{width:110px!important;height:50px!important}}
 @media print{header{background:#fff!important}.pdf-mark{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
-</style></head><body>
+</style><script defer src="https://cloud.umami.is/script.js" data-website-id="d0cf884b-054e-4b60-b0ca-188d1ccf62aa"></script>
+</head><body>
 <header><div class="wrap head"><div class="brand-block"><div class="logo" aria-label="Företagslogotyp"><div class="logo-icon" id="logoIcon">N</div><span class="logo-text" id="brandName">LH Måleri</span></div></div><a class="back-to-lab" href="https://funktionlab.se/" aria-label="Till FunktionLab.se"><span aria-hidden="true">←</span> Till FunktionLab.se</a></div></header>
 <main class="wrap"><div class="hero"><div class="eyebrow">PRISKALKYLATOR FÖR MÅLERI</div><h1>Vad kostar ditt<br>måleriprojekt?</h1><p>Välj vad du vill måla, ange dina mått och se priset uppdateras direkt. Spara sedan ett underlag inför din offertförfrågan.</p><div class="trust-row"><span>Direkt prisuppskattning</span><span>Inga förpliktelser</span><span>Underlag som PDF</span></div></div>
 <div class="layout"><section class="card"><div class="card-body"><div class="section-head"><div class="step">1</div><div><h2>Vad vill du måla?</h2><p>Välj vilken typ av arbete det gäller.</p></div></div>
@@ -508,6 +509,7 @@ $('printBtn').addEventListener('click',async()=>{
   const blob=await makePricePdf(latest),url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download='DemoMaleri_prisunderlag.pdf';a.style.display='none';document.body.appendChild(a);
   a.click();a.remove();
+  if(window.umami && typeof window.umami.track === 'function') window.umami.track('pdf_skapad', {demo: 'lh'});
   // Behåll objekt-URL tillräckligt länge för att mobilens delnings-/filvy ska hinna läsa den.
   setTimeout(()=>URL.revokeObjectURL(url),300000);
  }catch(e){console.error('PDF-fel:',e);alert('Det gick inte att skapa PDF-filen. Försök igen.');}
